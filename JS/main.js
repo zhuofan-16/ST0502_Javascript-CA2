@@ -12,7 +12,18 @@ function times(){
     var time=new Date();
     console.log("            "+time.toUTCString()+"\n");
 }
-
+class Customer{
+    constructor(first_name,last_name,sex,contact,member_no,order_record) {
+        this.firstname=first_name;
+        this.lastname=last_name;
+        this.sex=sex;
+        this.contact=contact;
+        this.memberno=member_no;
+        this.order_record=order_record;
+    }
+}
+var customer=new Array();
+var i=0;
 function start_up(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n");
@@ -87,21 +98,27 @@ function about_program(){
 function guest_login(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
-    console.log("Your First Name");
+    console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-    var guest_firstname=input.question("Your input: ");
+    var guest_firstname=input.question("Your First Name: ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
-    console.log("Your Last Name");
+    console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-    var guest_lastname=input.question("Your input: ");
+    var guest_lastname=input.question("Your Last Name: ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
-    console.log("Your Contact Number:");
+    console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-    var guest_phone=input.question("Your input: ");
+    var guest_sex=input.question("Your Sex: (M/F) ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Guest System        ");
+    console.log("*****************************************************\n")
+    var guest_phone=input.question("Your Contact Number: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("Estimated Time Of Waiting: "+(Math.round(Math.random()*11+10)) + " Minutes");
     console.log("*****************************************************\n")
     function guest_confirmation_prompt() {
@@ -118,6 +135,58 @@ function guest_login(){
     guest_confirmation_prompt();
 
 }
+function customer_register(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Registration System        ");
+    console.log("    Become a member of The NiceMeal Restaurant today     \n");
+    console.log("*****************************************************\n")
+    var temp_firstname=input.question("Your First Name: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Registration System        ");
+    console.log("    Become a member of The NiceMeal Restaurant today     \n");
+    console.log("*****************************************************\n")
+    var temp_lastname=input.question("Your Last Name: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Registration System        ");
+    console.log("    Become a member of The NiceMeal Restaurant today     \n");
+    console.log("*****************************************************\n")
+    var temp_sex=input.question("Your Sex: (M/F) ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Registration System        ");
+    console.log("    Become a member of The NiceMeal Restaurant today     \n");
+    console.log("*****************************************************\n")
+    var temp_contact=input.question("Your Contact Number: ");
+    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,600000+(Math.round(Math.random()*100001)),0);
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Registration System    \n    ");
+    console.log("       Processing your registration,please wait...     \n");
+    console.log("*****************************************************\n")
+    wait(2000);
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Registration System    \n    ");
+    console.log("            Your Registration is successful!     \n");
+    console.log("                Thank you ,"+determind_call(i)+" " +customer[i].lastname);
+    console.log("            Your membership no. is "+customer[i].memberno);
+    console.log("New user coupon have been credited into your account")
+    console.log("*****************************************************\n");
+    wait(2000);
+    customer_login();
+
+}
+function determind_call(l){
+    if (customer[l].sex==="M"){
+        return "Mr"
+    }
+    if (customer[l].sex==="F"){
+        return "Mrs"
+    }
+}
 function main_screen(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -128,7 +197,7 @@ function main_screen(){
     console.log("[3] Customer Registration      [4] Current Promotions");
     console.log("[5] Our Menu                       [6] Track An Order");
     console.log("[7] Admin Login                               [8]Help");
-    console.log("[9] Exit                            [8] About Program\n");
+    console.log("[9] Exit                           [10] About Program\n");
     console.log("*****************************************************\n")
     function user_selection(){
     var choice=input.questionInt("Your Choice: ");
