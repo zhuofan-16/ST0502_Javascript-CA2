@@ -10,21 +10,21 @@ function wait(ms)
 
 function times(){
     var time=new Date();
-    console.log(time.toUTCString()+"\n");
+    console.log("            "+time.toUTCString()+"\n");
 }
 
 function start_up(){
     process.stdout.write('\033c')
-    console.log("*****************************************************\n")
-    console.log("The NiceMeal Restaurant Ordering System");
-    console.log("Quality you can taste.\n")
+    console.log("*****************************************************\n");
+    console.log("      The NiceMeal Restaurant Ordering System          ");
+    console.log("              Quality you can taste.\n                 ");
     times();
-    console.log("System loading,please wait...\n")
-    console.log("*****************************************************\n")
+    console.log("           System loading,please wait...\n             ");
+    console.log("*****************************************************\n");
     wait(2000);
 
 }
-function aboutprogrampage2(){
+function about_program_page2(){
     process.stdout.write('\033c')
     console.log("*****************************************************")
     console.log("Project Name:The NiceMeal Restaurant Ordering System\n");
@@ -35,7 +35,7 @@ function aboutprogrampage2(){
     console.log("or may not have a list of options to customise order\n")
     console.log("       [1] Back to main menu     [2] Exit         \n ")
     console.log("*****************************************************")
-    function aboutuseroption2(){
+    function about_useroption2(){
         var choice=input.questionInt("Your Choice: ");
         switch (choice){
             case 1:
@@ -45,14 +45,14 @@ function aboutprogrampage2(){
                 process.exit(0);
                 break;
             default:
-                aboutuseroption2();
+                about_useroption2();
                 break;
 
         }
     }
-    aboutuseroption2()
+    about_useroption2()
 }
-function aboutprogram(){
+function about_program(){
 
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -64,11 +64,11 @@ function aboutprogram(){
     console.log("          Program Language: Javascript\n")
     console.log(" [1] Next page    [2] Back to main menu     [3] Exit\n")
     console.log("*****************************************************")
-    function aboutuseroption(){
+    function about_useroption(){
         var choice=input.questionInt("Your Choice: ");
         switch (choice){
             case 1:
-                aboutprogrampage2();
+                about_program_page2();
                 break;
             case 2:
                 main_screen();
@@ -77,45 +77,90 @@ function aboutprogram(){
                 process.exit(0);
                 break;
             default:
-                aboutuseroption();
+                about_useroption();
                 break;
 
         }
     }
-    aboutuseroption()
+    about_useroption()
+}
+function guest_login(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("Your First Name");
+    console.log("*****************************************************\n")
+    var guest_firstname=input.question("Your input: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("Your Last Name");
+    console.log("*****************************************************\n")
+    var guest_lastname=input.question("Your input: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("Your Contact Number:");
+    console.log("*****************************************************\n")
+    var guest_phone=input.question("Your input: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("Estimated Time Of Waiting: "+(Math.round(Math.random()*11+10)) + " Minutes");
+    console.log("*****************************************************\n")
+    function guest_confirmation_prompt() {
+        var guest_confirmation = input.question("Continue to order? (Y/N): ");
+        if (guest_confirmation === "Y") {
+            common_order();
+        } else if (guest_confirmation === "N") {
+            main_screen();
+        } else {
+            console.log("Invalid Option");
+            guest_confirmation_prompt();
+        }
+    }
+    guest_confirmation_prompt();
+
 }
 function main_screen(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
-    console.log("The NiceMeal Restaurant Ordering System");
-    console.log("Quality you can taste.")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
     times();
-    console.log("1.Customer Login                        2.Guest Login");
-    console.log("3.Customer Registration          4.Current Promotions");
-    console.log("5.Our Menu                           6.Track An Order");
-    console.log("5.Admin Login                                  6.Help");
-    console.log("7.Exit                                8.About Program\n");
+    console.log("[1] Customer Login                    [2] Guest Login");
+    console.log("[3] Customer Registration      [4] Current Promotions");
+    console.log("[5] Our Menu                       [6] Track An Order");
+    console.log("[7] Admin Login                               [8]Help");
+    console.log("[9] Exit                            [8] About Program\n");
     console.log("*****************************************************\n")
-    function userselection(){
+    function user_selection(){
     var choice=input.questionInt("Your Choice: ");
     switch (choice){
-        case 1:break;
-        case 2:break;
-        case 3:break;
-        case 4:break;
-        case 5:break;
-        case 6:break;
+        case 1:
+            customer_login();
+            break;
+        case 2:
+            guest_login();
+            break;
+        case 3:
+            customer_register();
+            break;
+        case 4:
+            new_promotion();
+            break;
+        case 5:
+            main_menu();
+            break;
+        case 6:
+            break;
         case 7:
             process.exit(0);
             break;
         case 8:
-            aboutprogram();
+            about_program();
             break;
-        default: userselection();break;
+        default: user_selection();break;
     }
 
     }
-    userselection();
+    user_selection();
 }
 
 start_up();
