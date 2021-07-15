@@ -1,0 +1,7 @@
+{
+  "name": "ST0502_Javascript-CA2",
+  "version": "1.0.0",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
