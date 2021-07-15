@@ -1,40 +1,42 @@
 var input =require('readline-sync');
-
-function progress_bar() {
-    for (let i = 0; i <= 50; i++) {
-        const progress = ">".repeat(i)
-        const left = 50 - i
-        const empty = " ".repeat(left)
-        process.stdout.write(`\r[${progress}${empty}] ${i * 2}%`)
-
-    }
-
+function wait(ms)
+{
+    var d = new Date();
+    var d2 = null;
+    do { d2 = new Date(); }
+    while(d2-d < ms);
 }
+
+
 function times(){
     var time=new Date();
-    console.log(time.toUTCString());
+    console.log(time.toUTCString()+"\n");
 }
 
 function start_up(){
-    console.log("***************************************************\n")
+    console.log('\x1Bc')
+    console.log("*****************************************************\n")
     console.log("The NiceMeal Restaurant Ordering System");
     console.log("Quality you can taste.\n")
     times();
     console.log("System loading,please wait...\n")
-    console.log("***************************************************\n")
+    console.log("*****************************************************\n")
+    wait(2000);
 
 }
 function main_screen(){
-    console.log("***************************************************\n")
+    console.log('\x1Bc')
+    console.log("*****************************************************\n")
     console.log("The NiceMeal Restaurant Ordering System");
-    console.log("Quality you can taste.\n")
+    console.log("Quality you can taste.")
+    times();
     console.log("1.Customer Login                        2.Guest Login");
     console.log("3.Customer Registration          4.Current Promotions");
     console.log("5.Our Menu                           6.Track An Order");
     console.log("5.Admin Login                                  6.Help");
     console.log("7.Exit                                8.About Program");
-    console.log("***************************************************\n")
-    var choice=input.questionInt("Your Choice")
+    console.log("*****************************************************\n")
+    var choice=input.questionInt("Your Choice: ")
 }
 
 start_up();
