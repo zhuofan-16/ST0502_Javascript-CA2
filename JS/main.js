@@ -14,7 +14,7 @@ function times(){
 }
 
 function start_up(){
-    console.log('\x1Bc')
+    process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("The NiceMeal Restaurant Ordering System");
     console.log("Quality you can taste.\n")
@@ -24,20 +24,68 @@ function start_up(){
     wait(2000);
 
 }
+function aboutprogrampage2(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************")
+    console.log("Project Name:The NiceMeal Restaurant Ordering System\n");
+    console.log("Description:A command prompt texted-based application")
+    console.log("application to digitalize their food menu to allow ")
+    console.log("their customers to make order. The restaurant ")
+    console.log("organises their items in categories and each item may")
+    console.log("or may not have a list of options to customise order\n")
+    console.log("       [1] Back to main menu     [2] Exit         \n ")
+    console.log("*****************************************************")
+    function aboutuseroption2(){
+        var choice=input.questionInt("Your Choice: ");
+        switch (choice){
+            case 1:
+                main_screen();
+                break;
+            case 2:
+                process.exit(0);
+                break;
+            default:
+                aboutuseroption2();
+                break;
+
+        }
+    }
+    aboutuseroption2()
+}
 function aboutprogram(){
-    console.log('\x1Bc')
+
+    process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("Project Name:The NiceMeal Restaurant Ordering System");
     console.log(" Module Name: ST0502 : Fundamentals Of Programming ")
     console.log("          Module Lecturer: Ms Junie Tan ")
     console.log("Student Name: CHEN ZHUOFAN |  Singapore Polytechnic")
     console.log("             Student ID: P2100746")
-    console.log("          Program Language: Javascript")
+    console.log("          Program Language: Javascript\n")
     console.log(" [1] Next page    [2] Back to main menu     [3] Exit\n")
     console.log("*****************************************************")
+    function aboutuseroption(){
+        var choice=input.questionInt("Your Choice: ");
+        switch (choice){
+            case 1:
+                aboutprogrampage2();
+                break;
+            case 2:
+                main_screen();
+                break;
+            case 3:
+                process.exit(0);
+                break;
+            default:
+                aboutuseroption();
+                break;
+
+        }
+    }
+    aboutuseroption()
 }
 function main_screen(){
-    console.log('\x1Bc')
+    process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("The NiceMeal Restaurant Ordering System");
     console.log("Quality you can taste.")
@@ -58,7 +106,7 @@ function main_screen(){
         case 5:break;
         case 6:break;
         case 7:
-            process.exit(0)
+            process.exit(0);
             break;
         case 8:
             aboutprogram();
