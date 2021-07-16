@@ -40,16 +40,33 @@ class Admin{
     }
 }
 class item{
-    constructor(item_name,item_code,item_price,item_description,item_type,item_expire) {
+    constructor(item_name,item_catogory,item_code,item_price,item_description,item_type,item_expire,item_dry,item_spicy) {
         this.item_name=item_name;
+        this.item_caterogory=item_catogory
         this.item_code=item_code;
         this.item_description=item_description;
         this.item_type=item_type;
+        this.item_spicy=item_spicy;
+        this.item_dry=item_dry;
         this.item_price=item_price;
         this.item_expire=item_expire;
     }
 }
 var food=new Array();
+food[0]=new Array();
+food[1]=new Array();
+food[2]=new Array();
+food[3]=new Array();
+food[4]=new Array()
+food[0][0]=new item("Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true)
+food[0][1]=new item("Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true)
+food[0][2]=new item("Curry Noodle","N","n003",8.4,"Noodle with amazing XXX","F",0,false,false)
+food[1][0]=new item("Fried Rice with Prawn","R","r001",6.8,"Rice with amazing XXX","F",0,false,true)
+food[1][1]=new item("Fried Mix Grain Rice in Hot Stone Pot","R","r002",8.4,"Rice with amazing XXX","F",0,false,true)
+food[1][2]=new item("Fried Rice with White Bait, Fish Meat and Egg White","R","r003",8.4,"Rice with amazing XXX","F",0,false,true)
+food[2][0]=new item("Pepsi","D","d001",1.4,"NA","F",0,false,false)
+food[2][1]=new item("7—UP","D","d002",1.4,"NA","F",0,false,false)
+food[4][0]=new item("National Day Promotion: Fried Rice with Prawn 2x ,Curry Noodle 2x ,Pepsi 4x","S","sb001",20.0,"NA","L",20210810,false,false)
 
 class coupon{
     constructor(coupon_name,coupon_code,coupon_type,coupon_price) {
