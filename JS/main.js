@@ -27,15 +27,37 @@ class Customer{
     }
 }
 class Admin{
-    constructor(first_name,last_name,sex,contact,staff_no) {
+    constructor(first_name,last_name,sex,contact,staff_no,password) {
         this.firstname=first_name;
         this.lastname=last_name;
         this.sex=sex;
         this.contact=contact;
         this.staffid=staff_no;
+        this.password=password;
+    }
+}
+class item{
+    constructor(item_name,item_code,item_price,item_description,item_type,item_expire) {
+        this.item_name=item_name;
+        this.item_code=item_code;
+        this.item_description=item_description;
+        this.item_type=item_type;
+        this.item_price=item_price;
+        this.item_expire=item_expire;
+    }
+}
+
+class coupon{
+    constructor(coupon_name,coupon_code,coupon_type,coupon_price) {
+        this.coupon_name=coupon_name;
+        this.coupon_code=coupon_code;
+        this.coupon_type=coupon_type
+        this.coupon_price=coupon_price;
     }
 }
 var customer=new Array();
+var admin=new Array();
+admin[0]=new Admin("admin","admin","","",10001,"admin")
 var i=0;
 function start_up(){
     process.stdout.write('\033c')
@@ -148,6 +170,51 @@ function guest_login(){
     guest_confirmation_prompt();
 
 }
+var temp_admin_login;
+var temp_admin_password;
+var adminlogin;
+var adminloginstatus;
+function admin_login() {
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n");
+    console.log("    The NiceMeal Restaurant Admin Management System    ");
+    times();
+    console.log("*****************************************************\n");
+    temp_admin_login = input.questionInt("Admin ID: ");
+    for (var l = 0; l < admin.length; l++){
+        if(admin[l].staffid === temp_admin_login){
+
+            adminlogin = l;
+            adminloginstatus=true;
+
+        }
+
+    }
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n");
+    console.log("    The NiceMeal Restaurant Admin Management System    ");
+    times();
+    console.log("*****************************************************\n");
+    temp_admin_password= input.question("Password: ");
+    if (adminloginstatus!==true){
+        console.log("Wrong admin ID or password,going back to main menu");
+        wait(3000)
+        main_screen();
+    }
+    if (temp_admin_password===admin[adminlogin].password){
+        admin_control();
+    }else {
+        console.log("Wrong admin ID or password,going back to main menu");
+        wait(3000)
+        main_screen();
+    }
+
+
+
+
+
+}
+
 function customer_register(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -236,6 +303,8 @@ function determind_call(l){
         return "Mrs"
     }
 }
+var customerloginstatus;
+var notfound_choice;
 function customer_login(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -247,6 +316,32 @@ function customer_login(){
    for (var k=0;k<customer.length;k++){
        if (temploginid===customer[k].memberno || temploginid===customer[k].contact ){
            currentlogin=k;
+           customerloginstatus=true;
+       }
+   }
+   if (customerloginstatus!==true){
+       process.stdout.write('\033c')
+       console.log("*****************************************************\n")
+       console.log("         The NiceMeal Restaurant Login System        ");
+       console.log("                Quality you can taste.               ");
+       console.log("               User not found in system ")
+       console.log("           [1] Retry [2] Back to main menu")
+       console.log("*****************************************************\n");
+       function question_notfound(){
+        notfound_choice=input.questionInt("Choice: ")
+       };
+       question_notfound();
+       switch (notfound_choice){
+           case 1:
+               customer_login();
+               break;
+           case 2:
+               main_screen();
+               break;
+           default:
+               console.log("Invalid option")
+               question_notfound();
+               break;
        }
    }
     loginattempt_above3()
