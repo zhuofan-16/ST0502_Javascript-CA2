@@ -24,6 +24,8 @@ class Customer{
         this.password=password;
         this.order_record=order_record;
         this.wrongpassword_attempt=0;
+        this.coupon=new Array();
+
     }
 }
 class Admin{
@@ -34,6 +36,7 @@ class Admin{
         this.contact=contact;
         this.staffid=staff_no;
         this.password=password;
+
     }
 }
 class item{
@@ -46,6 +49,7 @@ class item{
         this.item_expire=item_expire;
     }
 }
+var food=new Array();
 
 class coupon{
     constructor(coupon_name,coupon_code,coupon_type,coupon_price) {
@@ -291,6 +295,7 @@ function customer_register(){
     console.log("New user coupon have been credited into your account")
     console.log("*****************************************************\n");
     wait(2000);
+    customer[i].coupon[0]=new coupon("New User Welcome Gift",10001,"S",8)
     i++;
     customer_login();
 
