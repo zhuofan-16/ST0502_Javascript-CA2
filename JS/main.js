@@ -1,4 +1,5 @@
 var input =require('readline-sync');
+var currentlogin=0;
 function wait(ms)
 {
     var d = new Date();
@@ -7,10 +8,10 @@ function wait(ms)
     while(d2-d < ms);
 }
 
-
+var time=new Date();
 function times(){
-    var time=new Date();
-    console.log("            "+time.toUTCString()+"\n");
+
+    console.log("               "+time.toLocaleString("en-sg")+"\n");
 }
 class Customer{
     constructor(first_name,last_name,sex,contact,member_no,order_record) {
@@ -20,6 +21,7 @@ class Customer{
         this.contact=contact;
         this.memberno=member_no;
         this.order_record=order_record;
+        this.wrongpassword_attempt=0;
     }
 }
 var customer=new Array();
@@ -152,15 +154,25 @@ function customer_register(){
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System        ");
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
-    console.log("*****************************************************\n")
-    var temp_sex=input.question("Your Sex: (M/F) ");
+    console.log("*****************************************************\n");
+    function registersex(){
+    temp_sex=input.question("Your Sex: (M/F): ");
+    if (temp_sex!=="M"&&temp_sex!=="F")
+    {
+        console.log("Invalid gender,please retry");
+        registersex()
+    }
+
+    }
+    registersex();
+
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System        ");
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
     console.log("*****************************************************\n")
     var temp_contact=input.question("Your Contact Number: ");
-    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,600000+(Math.round(Math.random()*100001)),0);
+    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,600000+i,0);
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System    \n    ");
@@ -171,11 +183,12 @@ function customer_register(){
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System    \n    ");
     console.log("            Your Registration is successful!     \n");
-    console.log("                Thank you ,"+determind_call(i)+" " +customer[i].lastname);
+    console.log("                  Thank you ,"+determind_call(i)+" " +customer[i].lastname);
     console.log("            Your membership no. is "+customer[i].memberno);
     console.log("New user coupon have been credited into your account")
     console.log("*****************************************************\n");
     wait(2000);
+    i++;
     customer_login();
 
 }
@@ -185,6 +198,93 @@ function determind_call(l){
     }
     if (customer[l].sex==="F"){
         return "Mrs"
+    }
+}
+function customer_login(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("         The NiceMeal Restaurant Login System        ");
+    console.log("                Quality you can taste.               ");
+    times();
+    console.log("*****************************************************\n");
+   var temploginid= input.questionInt("Please enter your contact Number or membership No.: ");
+   for (var k=0;k<customer.length;k++){
+       if (temploginid===customer[k].memberno || temploginid===customer[k].contact ){
+           currentlogin=k;
+       }
+   }
+    loginattempt_above3()
+   function loginattempt_above3(){
+   if (customer[currentlogin].wrongpassword_attempt>3){
+       process.stdout.write('\033c')
+       console.log("*****************************************************\n")
+       console.log("         The NiceMeal Restaurant Login System        ");
+       console.log("                Quality you can taste.           \n    ");
+       console.log("Password attempt above limit,please approach our staff ")
+       console.log("*****************************************************\n");
+       wait(3000);
+       main_screen();
+   }}
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("         The NiceMeal Restaurant Login System        ");
+    console.log("                Quality you can taste.               ");
+    times();
+    console.log("               "+time_identify()+" " +determind_call(currentlogin)+" " +customer[currentlogin].lastname)
+    console.log("*****************************************************\n");
+    var temploginpassword;
+    function verify_password(){
+        loginattempt_above3()
+        temploginpassword= input.question("Please enter your password: ");
+        if (temploginpassword===customer[currentlogin].password){
+            customer[currentlogin].wrongpassword_attempt=0;
+            order_screen();
+        }
+        else {
+            customer[currentlogin].wrongpassword_attempt++;
+            loginattempt_above3()
+            process.stdout.write('\033c')
+            console.log("*****************************************************\n")
+            console.log("         The NiceMeal Restaurant Login System        ");
+            console.log("                Quality you can taste.               ");
+            console.log("                 Sorry,wrong password                ")
+            console.log("Your account will be locked if there is more than 3  ")
+            console.log("                      attempts")
+            console.log("             Current Attempt: "+customer[currentlogin].wrongpassword_attempt+"\n")
+            console.log("[1] Retry [2] Forgot Password [3] Back to previous menu")
+            console.log("*****************************************************\n");
+            var wrongattemptchoice=input.questionInt("Choice: ");
+            switch (wrongattemptchoice){
+                case 1:
+
+                    verify_password();
+                    break;
+                case 2:
+                    reset_password();
+                    break;
+                case 3:
+                    temploginid=0;
+                    temploginpassword=0;
+                    main_screen();
+                    break;
+            }
+        }
+    }
+
+verify_password()
+}
+function time_identify(){
+    if (time.getHours()<12){
+        return "Good Morning!"
+    }
+    if (time.getHours()>=12&&time.getHours()<18){
+        return "Good Afternoon!"
+    }
+    if (time.getHours()>=18&&time.getHours()<=19){
+        return "Good Evening!"
+    }
+    if (time.getHours()>19){
+        return "Good Night!"
     }
 }
 function main_screen(){
@@ -220,9 +320,13 @@ function main_screen(){
         case 6:
             break;
         case 7:
-            process.exit(0);
             break;
         case 8:
+            break;
+        case 9:
+            process.exit(0);
+            break;
+        case 10:
             about_program();
             break;
         default: user_selection();break;
