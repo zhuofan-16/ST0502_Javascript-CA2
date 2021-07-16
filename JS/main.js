@@ -1,5 +1,6 @@
 var input =require('readline-sync');
 var currentlogin=0;
+const passwordrequire=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
 function wait(ms)
 {
     var d = new Date();
@@ -14,14 +15,24 @@ function times(){
     console.log("               "+time.toLocaleString("en-sg")+"\n");
 }
 class Customer{
-    constructor(first_name,last_name,sex,contact,member_no,order_record) {
+    constructor(first_name,last_name,sex,contact,password,member_no,order_record) {
         this.firstname=first_name;
         this.lastname=last_name;
         this.sex=sex;
         this.contact=contact;
         this.memberno=member_no;
+        this.password=password;
         this.order_record=order_record;
         this.wrongpassword_attempt=0;
+    }
+}
+class Admin{
+    constructor(first_name,last_name,sex,contact,staff_no) {
+        this.firstname=first_name;
+        this.lastname=last_name;
+        this.sex=sex;
+        this.contact=contact;
+        this.staffid=staff_no;
     }
 }
 var customer=new Array();
@@ -172,7 +183,32 @@ function customer_register(){
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
     console.log("*****************************************************\n")
     var temp_contact=input.question("Your Contact Number: ");
-    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,600000+i,0);
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Registration System        ");
+    console.log("    Become a member of The NiceMeal Restaurant today     \n");
+    console.log("*****************************************************\n");
+    console.log("Requirement:1.Contain at least 8 characters")
+    console.log("            2.Contain at least 1 number")
+    console.log("            3.Contain at least 1 lowercase character (a-z)")
+    console.log("            4.Contain at least 1 uppercase character (a-z)")
+    function passwordtype(){
+     temp_password=input.question("Create a password:  ");
+     if (passwordrequire.test(temp_password)){
+     confirm_password =input.question("Confirm your password: ");
+        if (temp_password!==confirm_password){
+            console.log("Passwords does not match");
+            passwordtype();
+        }
+     }else{
+         console.log("Passwords does not meet requirement");
+         passwordtype()
+     }
+    }
+    passwordtype();
+
+
+    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,temp_password,600000+i,0);
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System    \n    ");
@@ -320,8 +356,10 @@ function main_screen(){
         case 6:
             break;
         case 7:
+            admin_login();
             break;
         case 8:
+            help();
             break;
         case 9:
             process.exit(0);
