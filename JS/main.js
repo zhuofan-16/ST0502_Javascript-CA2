@@ -58,6 +58,7 @@ food[1]=new Array();
 food[2]=new Array();
 food[3]=new Array();
 food[4]=new Array()
+
 food[0][0]=new item("Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true)
 food[0][1]=new item("Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true)
 food[0][2]=new item("Curry Noodle","N","n003",8.4,"Noodle with amazing XXX","F",0,false,false)
@@ -66,7 +67,7 @@ food[1][1]=new item("Fried Mix Grain Rice in Hot Stone Pot","R","r002",8.4,"Rice
 food[1][2]=new item("Fried Rice with White Bait, Fish Meat and Egg White","R","r003",8.4,"Rice with amazing XXX","F",0,false,true)
 food[2][0]=new item("Pepsi","D","d001",1.4,"NA","F",0,false,false)
 food[2][1]=new item("7—UP","D","d002",1.4,"NA","F",0,false,false)
-food[4][0]=new item("National Day Promotion: Fried Rice with Prawn 2x ,Curry Noodle 2x ,Pepsi 4x","S","sb001",20.0,"NA","L",20210810,false,false)
+food[4][0]=new item("National Day Promotion: Fried Rice with Prawn 2x ,Curry Noodle 2x ,Pepsi 4x","S","sb001",20.00,"NA","L",20210810,false,false)
 
 class coupon{
     constructor(coupon_name,coupon_code,coupon_type,coupon_price) {
@@ -118,6 +119,55 @@ function about_program_page2(){
         }
     }
     about_useroption2()
+}
+function new_promotion(){
+        process.stdout.write('\033c')
+        console.log("*****************************************************\n");
+        console.log("      The NiceMeal Restaurant Ordering System          ");
+        console.log("              Quality you can taste.\n                 ");
+        console.log("                 Promotion Items:")
+   for (var m=0;m<food[4].length;m++){
+       console.log(m+". "+food[4][m].item_code+ ". "+food[4][m].item_name+"==>"+"$ "+ food[4][m].item_price.toFixed(2))
+   }
+   console.log('\n');
+       console.log("[1] View an item's description [2]Back to previous screen")
+       console.log("*****************************************************\n");
+       function itemoverviewchoice(){
+        var itemoverview=input.questionInt("Choice: ")
+    switch(itemoverview){
+        case 1:
+            var customeroverview=input.questionInt("Which item do you want to see?: ");
+            process.stdout.write('\033c')
+            console.log("*****************************************************\n");
+            console.log("      The NiceMeal Restaurant Ordering System          ");
+            console.log("              Quality you can taste.\n                 ");
+            console.log("Item description for "+food[4][customeroverview].item_name +":")   ;
+            console.log(food[4][customeroverview].item_description+"\n");
+            console.log("            [1]Back to previous screen ");
+            backto();
+            function backto(){
+            var backtooption=input.questionInt("Choice: ");
+            switch (backtooption){
+                case 1:
+                    main_screen();
+                break;
+                default:
+                    console.log("Invalid option");
+                    backto();
+                    break;
+            }}
+            break;
+        case 2:
+            main_screen();
+            break
+        default:
+            console.log("Invalid option");
+             itemoverviewchoice();
+             break;
+
+    }  }
+    itemoverviewchoice();
+
 }
 function about_program(){
 
