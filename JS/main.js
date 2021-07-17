@@ -122,6 +122,7 @@ function about_program_page2(){
     console.log("their customers to make order. The restaurant ")
     console.log("organises their items in categories and each item may")
     console.log("or may not have a list of options to customise order\n")
+    console.log("      Default admin ID:10001 Password:admin\n")
     console.log("       [1] Back to main menu     [2] Exit         \n ")
     console.log("*****************************************************")
     function about_useroption2(){
@@ -1044,6 +1045,22 @@ function food_menu(){
 
         }
     }
+}
+function help(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Help System        ");
+    console.log("             Always here to help you       \n          ");
+    console.log(" Email zhuofan.21@ichat.sp.edu.sg for more assistant\n")
+    console.log("          [1]Return back to main menu")
+    console.log("*****************************************************\n")
+    callback();
+    function callback(){
+    var choice=input.questionInt("Choice:")
+    switch (choice){
+        case 1: main_screen();break
+        default:console.log("Invalid Option");callback();break;
+    }}
 }
 function main_screen(){
     process.stdout.write('\033c')
