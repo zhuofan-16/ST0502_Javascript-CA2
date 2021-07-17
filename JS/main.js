@@ -58,6 +58,7 @@ class order_status{
     constructor(order_number,status) {
         this.number=order_number;
         this.status=status;
+        this.item=new Array();
     }
 }
 var food=new Array();
@@ -69,6 +70,15 @@ food[4]=new Array();
 var order=new Array();
 order[0]=new Array()
 order[1]=new Array()
+order[0][0]=new order_status(100001,"Delivered");
+order[1][0]=new order_status(100002,"Processing")
+order[1][0].item[0]="Fried Egg & Chicken Meat Noodle"
+order[1][0].item[0]="Fried Rice with Prawn"
+order[1][0].item[0]="7—UP"
+order[0][0].item[0]="Fried Egg & Chicken Meat Noodle"
+order[0][0].item[0]="Fried Rice with Prawn"
+order[0][0].item[0]="7—UP"
+
 
 food[0][0]=new item("Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true)
 food[0][1]=new item("Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true)
@@ -619,6 +629,7 @@ function category_item(){
         }
     }
 }
+var temporder=0;
 function trackorderguest(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -627,20 +638,93 @@ function trackorderguest(){
     times();
     console.log("           [1] Return back to main menu")
     console.log("*****************************************************\n");
-     trackfun=input.questionInt("Enter your phone number or tracking number: ");
+     trackfun=input.questionInt("Enter your phone number (only for active order) or tracking number: ");
     if (trackfun===1){
         main_screen();
     }
+
     checkstatus();
     function checkstatus(){
         for (var t=0;t<customer.length;t++){
-            if (trackfun===customer[t].phone||trackfun===customer[t].order_active||trackfun===order[0]){
-
+            if (trackfun===customer[t].phone){
+            if (customer[t].order_active!==0){
+                temporder=customer[t].order_active;
+            }
+            else {temporder=0;}
             }
         }
+
+        for (var call=0;call<order.length;call++) {
+            for (var o = 0; o < order[0].length; o++) {
+                if (trackfun === order[call][o].number || temporder === order[call][o].number) {
+                finalcall=call;
+                finalorder=o;
+                }
+            }
+
+        }
+        if (finalcall===0&&finalorder===0&&temporder===0) {
+            process.stdout.write('\033c')
+            console.log("*****************************************************\n")
+            console.log("       The NiceMeal Restaurant Tracking System        ");
+            console.log("               Quality you can taste.                 ");
+            times();
+            console.log("                 Order not found!\n")
+            console.log("          [1] Retry [2] Back to main menu")
+            console.log("*****************************************************\n");
+
+            notfound404();
+
+            function notfound404() {
+                var choice = input.questionInt("Choice: ");
+                switch (choice) {
+                    case 1:
+                        trackorderguest();
+                        break
+                    case 2:
+                        main_screen();
+                        break;
+                    default:
+                        console.log("Invalid Option");
+                        notfound404();
+
+                }
+            }
+        }
+        else
+            {
+
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("       The NiceMeal Restaurant Tracking System        ");
+                console.log("               Quality you can taste.                 ");
+                times();
+                console.log("    Order Number:"+order[finalcall][finalorder].number)
+                console.log("    Order Number:"+order[finalcall][finalorder].status+"\n")
+                console.log("              [1] Back to main menu")
+                console.log("*****************************************************\n")
+                choiceback();
+                function choiceback() {
+                    var choices = input.questionInt("Choice: ")
+                    switch (choices){
+                        case 1:
+                            main_screen();
+                            break;
+                        default:
+                            console.log("Invalid Option")
+                            choiceback()
+                    }
+                }
+            }
+
+
+
+
     }
 
 }
+finalcall=0;
+finalorder=0;
 function food_menu(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
