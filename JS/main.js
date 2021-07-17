@@ -1,3 +1,9 @@
+/*
+This program is written by CHEN ZHUOFAN | P2100746 | Singapore Polytechnic
+Used for ST0502 Fundamental of Programming CA2 Assignment
+All commits can be found at https://github.com/zhuofan-16/ST0502_Javascript-CA2
+Shall you have any question about this program ,please email me at zhuofan.21@ichat.sp.edu.sg
+ */
 var input =require('readline-sync');
 var currentlogin=0;
 const passwordrequire=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
