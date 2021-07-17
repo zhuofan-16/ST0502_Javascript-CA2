@@ -557,7 +557,13 @@ var category_number=0;
 var seeitem;
 function viewitemdescription(){
     category_number=0;
-    seeitem=input.questionInt("Which item do you want to see: ")
+    foodcountcheck()
+    function foodcountcheck(){
+    seeitem=input.questionInt("Which item do you want to see: ");
+    if (seeitem<0||seeitem>=foodcount){
+        console.log("Invalid Option")
+        foodcountcheck()
+    }
     if (seeitem>=a){
         seeitem -= a;
         category_number++;
@@ -569,6 +575,7 @@ function viewitemdescription(){
                 category_number++;
             }
         }
+    }
     }
     process.stdout.write('\033c')
     console.log("*****************************************************\n");
@@ -621,12 +628,245 @@ function category_item(){
             case 4:
                 othercategory();
                 break;
-            case 5:
+            case 5 :main_screen();break;
             default:
                 console.log("Invalid option");
                 categorychoice();
                 break;
         }
+    }
+}
+function ricecategory(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
+    console.log("                    Rice Category\n")
+    for (var r=0;r<food[1].length;r++){
+        console.log(r+". "+food[1][r].item_code+". " + food[1][r].item_name+"==>"+"$ "+food[1][r].item_price.toFixed(2))
+    }
+    console.log("\n")
+    console.log("[1] View an item's description [2]Back to previous screen ");
+    console.log("*****************************************************\n")
+    itemchoiceview1();
+    function itemchoiceview1() {
+        var itemchoicedes = input.questionInt("Choice: ")
+        switch (itemchoicedes) {
+            case 1:viewricedescription();break;
+            case 2:category_item();break;
+            default:
+                console.log("Invalid Option");
+                itemchoiceview1()
+        }
+    }
+}
+function viewricedescription(){
+    retryrice();
+    function retryrice() {
+        seeitem1 = input.questionInt("Which item do you want to see: ");
+        if (seeitem1>food[1].length-1 || seeitem1<0){
+            console.log("Invalid Option");
+            retryrice();
+
+        }
+
+        process.stdout.write('\033c')
+        console.log("*****************************************************\n");
+        console.log("      The NiceMeal Restaurant Ordering System          ");
+        console.log("              Quality you can taste.\n                 ");
+        console.log("Item description for "+food[1][seeitem1].item_name +":")   ;
+        console.log(food[1][seeitem1].item_description+"\n");
+        console.log("            [1]Back to previous screen ");
+        console.log("*****************************************************\n");
+        backto();
+        function backto(){
+            var choice=input.questionInt("Choice: ")
+            switch (choice){
+                case 1:
+                    ricecategory();
+                    break
+                default:
+                    console.log("Invalid Option");
+                    backto();
+                    break;
+            }
+        }
+
+    }
+}
+function noodlecategory(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
+    console.log("                    Noodle Category\n")
+    for (var r=0;r<food[0].length;r++){
+        console.log(r+". "+food[0][r].item_code+". " + food[0][r].item_name+"==>"+"$ "+food[0][r].item_price.toFixed(2))
+    }
+    console.log("\n")
+    console.log("[1] View an item's description [2]Back to previous screen ");
+    console.log("*****************************************************\n")
+    itemchoiceview1();
+    function itemchoiceview1() {
+        var itemchoicedes = input.questionInt("Choice: ")
+        switch (itemchoicedes) {
+            case 1:viewnoodledescription();break;
+            case 2:category_item();break;
+            default:
+                console.log("Invalid Option");
+                itemchoiceview1()
+        }
+    }
+}
+function viewnoodledescription(){
+    retrynoodle();
+    function retrynoodle() {
+        seeitem2 = input.questionInt("Which item do you want to see: ");
+        if (seeitem2>food[0].length-1 || seeitem2<0){
+            console.log("Invalid Option");
+            retrynoodle();
+
+        }
+
+        process.stdout.write('\033c')
+        console.log("*****************************************************\n");
+        console.log("      The NiceMeal Restaurant Ordering System          ");
+        console.log("              Quality you can taste.\n                 ");
+        console.log("Item description for "+food[0][seeitem2].item_name +":")   ;
+        console.log(food[0][seeitem2].item_description+"\n");
+        console.log("            [1]Back to previous screen ");
+        console.log("*****************************************************\n");
+        backto();
+        function backto(){
+            var choice=input.questionInt("Choice: ")
+            switch (choice){
+                case 1:
+                    noodlecategory();
+                    break
+                default:
+                    console.log("Invalid Option");
+                    backto();
+                    break;
+            }
+        }
+
+    }
+
+}
+function drinkcategory(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
+    console.log("                    Drink Category\n")
+    for (var r=0;r<food[2].length;r++){
+        console.log(r+". "+food[2][r].item_code+". " + food[2][r].item_name+"==>"+"$ "+food[2][r].item_price.toFixed(2))
+    }
+    console.log("\n")
+    console.log("[1] View an item's description [2]Back to previous screen ");
+    console.log("*****************************************************\n")
+    itemchoiceview1();
+    function itemchoiceview1() {
+        var itemchoicedes = input.questionInt("Choice: ")
+        switch (itemchoicedes) {
+            case 1:viewdrinkdescription();break;
+            case 2:category_item();break;
+            default:
+                console.log("Invalid Option");
+                itemchoiceview1()
+        }
+    }
+}
+function viewdrinkdescription(){
+    retrydrink();
+    function retrydrink() {
+        seeitem4 = input.questionInt("Which item do you want to see: ");
+        if (seeitem4>food[0].length-1 || seeitem4<0){
+            console.log("Invalid Option");
+            retrydrink();
+
+        }
+
+        process.stdout.write('\033c')
+        console.log("*****************************************************\n");
+        console.log("      The NiceMeal Restaurant Ordering System          ");
+        console.log("              Quality you can taste.\n                 ");
+        console.log("Item description for "+food[2][seeitem4].item_name +":")   ;
+        console.log(food[2][seeitem4].item_description+"\n");
+        console.log("            [1]Back to previous screen ");
+        console.log("*****************************************************\n");
+        backto();
+        function backto(){
+            var choice=input.questionInt("Choice: ")
+            switch (choice){
+                case 1:
+                    noodlecategory();
+                    break
+                default:
+                    console.log("Invalid Option");
+                    backto();
+                    break;
+            }
+        }
+
+    }
+}
+function othercategory(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
+    console.log("                    Other Category\n")
+    for (var r=0;r<food[3].length;r++){
+        console.log(r+". "+food[3][r].item_code+". " + food[3][r].item_name+"==>"+"$ "+food[3][r].item_price.toFixed(2))
+    }
+    console.log("\n")
+    console.log("[1] View an item's description [2]Back to previous screen ");
+    console.log("*****************************************************\n")
+    itemchoiceview1();
+    function itemchoiceview1() {
+        var itemchoicedes = input.questionInt("Choice: ")
+        switch (itemchoicedes) {
+            case 1:viewotherdescription();break;
+            case 2:category_item();break;
+            default:
+                console.log("Invalid Option");
+                itemchoiceview1()
+        }
+    }
+}
+function viewotherdescription(){
+    retryother();
+    function retryother() {
+        seeitem3 = input.questionInt("Which item do you want to see: ");
+        if (seeitem3>food[0].length-1 || seeitem3<0){
+            console.log("Invalid Option");
+            retryother();
+
+        }
+
+        process.stdout.write('\033c')
+        console.log("*****************************************************\n");
+        console.log("      The NiceMeal Restaurant Ordering System          ");
+        console.log("              Quality you can taste.\n                 ");
+        console.log("Item description for "+food[3][seeitem3].item_name +":")   ;
+        console.log(food[3][seeitem3].item_description+"\n");
+        console.log("            [1]Back to previous screen ");
+        console.log("*****************************************************\n");
+        backto();
+        function backto(){
+            var choice=input.questionInt("Choice: ")
+            switch (choice){
+                case 1:
+                    othercategory();
+                    break
+                default:
+                    console.log("Invalid Option");
+                    backto();
+                    break;
+            }
+        }
+
     }
 }
 var temporder=false;
@@ -796,6 +1036,7 @@ function food_menu(){
             case 2:category_item();break;
             case 3:search_item();break;
             case 4:main_screen();break;
+
             default:
                 console.log("Invalid Option");
                 foodmenuoption();
