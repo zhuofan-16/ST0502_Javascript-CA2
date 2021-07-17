@@ -230,27 +230,37 @@ function about_program(){
     }
     about_useroption()
 }
+
 function guest_login(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-    var guest_firstname=input.question("Your First Name: ");
+    guest_firstname=input.question("Your First Name: ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-    var guest_lastname=input.question("Your Last Name: ");
+     guest_lastname=input.question("Your Last Name: ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-    var guest_sex=input.question("Your Sex: (M/F) ");
+    function registerguestsex(){
+        guest_sex=input.question("Your Sex: (M/F) :");
+        if (guest_sex!=="M"&&guest_sex!=="F")
+        {
+            console.log("Invalid gender,please retry");
+            registerguestsex()
+        }
+
+    }
+    registerguestsex();
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-    var guest_phone=input.question("Your Contact Number: ");
+     guest_phone=input.question("Your Contact Number: ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
@@ -259,7 +269,9 @@ function guest_login(){
     function guest_confirmation_prompt() {
         var guest_confirmation = input.question("Continue to order? (Y/N): ");
         if (guest_confirmation === "Y") {
-            common_order();
+            guestlogin=true;
+            order_screen();
+
         } else if (guest_confirmation === "N") {
             main_screen();
         } else {
@@ -314,6 +326,20 @@ function admin_login() {
 
 
 }
+function admin_control(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("            "+time_identify()+"Admin"+admin[adminlogin].lastname+"\n");
+    console.log("      [1] User control (View,Edit,Add,Remove)   ")
+    console.log("      [2] User password reset   ")
+    console.log("      [3] Menu Control (View,Edit,Add,Remove)  ")
+    console.log("      [4] Coupon Control (View,Edit,Distribute)  ")
+    console.log("      [5] Add new admin   [6] Update particulars ")
+    console.log("      [6] Today's Sale    [7] Logout ")
+    console.log("                    [8]Exit")
+
+}
 
 function customer_register(){
     process.stdout.write('\033c')
@@ -349,7 +375,7 @@ function customer_register(){
     console.log("      The NiceMeal Restaurant Registration System        ");
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
     console.log("*****************************************************\n")
-    var temp_contact=input.question("Your Contact Number: ");
+    var temp_contact=input.questionInt("Your Contact Number: ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System        ");
@@ -413,7 +439,7 @@ function customer_login(){
     console.log("                Quality you can taste.               ");
     times();
     console.log("*****************************************************\n");
-   var temploginid= input.questionInt("Please enter your contact Number or membership No.: ");
+   var temploginid= input.questionInt("Please enter your contact number or membership No.: ");
    for (var k=0;k<customer.length;k++){
        if (temploginid===customer[k].memberno || temploginid===customer[k].contact ){
            currentlogin=k;
@@ -430,7 +456,7 @@ function customer_login(){
        console.log("*****************************************************\n");
        function question_notfound(){
         notfound_choice=input.questionInt("Choice: ")
-       };
+       }
        question_notfound();
        switch (notfound_choice){
            case 1:
@@ -504,6 +530,31 @@ function customer_login(){
     }
 
 verify_password()
+}
+
+function order_screen(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("         The NiceMeal Restaurant Order System        ");
+    if (guestlogin===false){
+    console.log("                  "+time_identify()+" "+determind_call(currentlogin)+" " +customer[currentlogin].lastname);
+    if (customer[currentlogin].coupon.length>0){
+    console.log("   Currently you have "+customer[currentlogin].coupon.length+ " coupon that can be used" );
+    }
+    }
+    else {
+    console.log("                 "+time_identify()+" " +"Guest "+guest_lastname)
+    console.log("    Do consider to be our member for exclusive deals")
+
+    }
+    console.log("       What would you like to order today :)\n")
+    console.log("           [1] Start order  [2] View Cart")
+    console.log("           [3] Order History  [4] Track an order")
+    console.log("           [5] View Coupon  [6] Change of account detail\n")
+    console.log("           [7] Logout        [8] Exit")
+    console.log("*****************************************************\n")
+
+
 }
 function time_identify(){
     if (time.getHours()<12){
@@ -1068,7 +1119,10 @@ function help(){
         default:console.log("Invalid Option");callback();break;
     }}
 }
+var guestlogin;
 function main_screen(){
+    guestlogin=false;
+    currentlogin=false;
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("       The NiceMeal Restaurant Ordering System        ");
