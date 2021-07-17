@@ -73,11 +73,11 @@ order[1]=new Array()
 order[0][0]=new order_status(100001,"Delivered");
 order[1][0]=new order_status(100002,"Processing")
 order[1][0].item[0]="Fried Egg & Chicken Meat Noodle"
-order[1][0].item[0]="Fried Rice with Prawn"
-order[1][0].item[0]="7—UP"
+order[1][0].item[1]="Fried Rice with Prawn"
+order[1][0].item[2]="7—UP"
 order[0][0].item[0]="Fried Egg & Chicken Meat Noodle"
-order[0][0].item[0]="Fried Rice with Prawn"
-order[0][0].item[0]="7—UP"
+order[0][0].item[1]="Fried Rice with Prawn"
+order[0][0].item[2]="7—UP"
 
 
 food[0][0]=new item("Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true)
@@ -629,8 +629,13 @@ function category_item(){
         }
     }
 }
-var temporder=0;
+var temporder=false;
+var finalcall=false
+var finalorder=false
 function trackorderguest(){
+     temporder=false;
+    finalcall=false
+    finalorder=false
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("       The NiceMeal Restaurant Tracking System        ");
@@ -650,12 +655,12 @@ function trackorderguest(){
             if (customer[t].order_active!==0){
                 temporder=customer[t].order_active;
             }
-            else {temporder=0;}
+            else {temporder=false;}
             }
         }
 
         for (var call=0;call<order.length;call++) {
-            for (var o = 0; o < order[0].length; o++) {
+            for (var o = 0; o < order[call].length; o++) {
                 if (trackfun === order[call][o].number || temporder === order[call][o].number) {
                 finalcall=call;
                 finalorder=o;
@@ -663,7 +668,7 @@ function trackorderguest(){
             }
 
         }
-        if (finalcall===0&&finalorder===0&&temporder===0) {
+        if (finalcall===false&&finalorder===false&&temporder===false) {
             process.stdout.write('\033c')
             console.log("*****************************************************\n")
             console.log("       The NiceMeal Restaurant Tracking System        ");
@@ -701,6 +706,10 @@ function trackorderguest(){
                 times();
                 console.log("    Order Number:"+order[finalcall][finalorder].number)
                 console.log("    Order Number:"+order[finalcall][finalorder].status+"\n")
+                console.log("    Order Item:")
+                for ( var y=0;y<order[finalcall][finalorder].item.length;y++){
+                console.log("     "+order[finalcall][finalorder].item[y])
+                }
                 console.log("              [1] Back to main menu")
                 console.log("*****************************************************\n")
                 choiceback();
@@ -723,8 +732,6 @@ function trackorderguest(){
     }
 
 }
-finalcall=0;
-finalorder=0;
 function food_menu(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
