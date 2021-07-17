@@ -23,8 +23,10 @@ class Customer{
         this.memberno=member_no;
         this.password=password;
         this.order_record=order_record;
+        this.order_active=0;
         this.wrongpassword_attempt=0;
         this.coupon=new Array();
+
 
     }
 }
@@ -52,12 +54,21 @@ class item{
         this.item_expire=item_expire;
     }
 }
+class order_status{
+    constructor(order_number,status) {
+        this.number=order_number;
+        this.status=status;
+    }
+}
 var food=new Array();
 food[0]=new Array();
 food[1]=new Array();
 food[2]=new Array();
 food[3]=new Array();
-food[4]=new Array()
+food[4]=new Array();
+var order=new Array();
+order[0]=new Array()
+order[1]=new Array()
 
 food[0][0]=new item("Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true)
 food[0][1]=new item("Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true)
@@ -572,6 +583,64 @@ function viewitemdescription(){
     }
 
 }
+function category_item(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
+    console.log("                    Food Category")
+    console.log("                     [1] Rice")
+    console.log("                     [2] Noodles")
+    console.log("                     [3] Drinks")
+    console.log("                     [4] Others                       ")
+    console.log("                     [5] Go back to previous menu                       ")
+    console.log("*****************************************************\n")
+    categorychoice();
+    function categorychoice() {
+        var choice = input.questionInt("Choice :");
+        switch (choice){
+            case 1:
+                ricecategory()
+                break;
+            case 2:
+                noodlecategory();
+                break;
+            case 3:
+                drinkcategory();
+                break;
+            case 4:
+                othercategory();
+                break;
+            case 5:
+            default:
+                console.log("Invalid option");
+                categorychoice();
+                break;
+        }
+    }
+}
+function trackorderguest(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Tracking System        ");
+    console.log("               Quality you can taste.                 ");
+    times();
+    console.log("           [1] Return back to main menu")
+    console.log("*****************************************************\n");
+     trackfun=input.questionInt("Enter your phone number or tracking number: ");
+    if (trackfun===1){
+        main_screen();
+    }
+    checkstatus();
+    function checkstatus(){
+        for (var t=0;t<customer.length;t++){
+            if (trackfun===customer[t].phone||trackfun===customer[t].order_active||trackfun===order[0]){
+
+            }
+        }
+    }
+
+}
 function food_menu(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -588,8 +657,8 @@ function food_menu(){
         var foodmenuchoice = input.questionInt("Choice: ");
         switch (foodmenuchoice){
             case 1:view_all();break
-            case 2:category();break;
-            case 3:search();break;
+            case 2:category_item();break;
+            case 3:search_item();break;
             case 4:main_screen();break;
             default:
                 console.log("Invalid Option");
@@ -630,7 +699,7 @@ function main_screen(){
             food_menu();
             break;
         case 6:
-            trackorder();
+            trackorderguest();
             break;
         case 7:
             admin_login();
