@@ -80,15 +80,15 @@ order[0][0].item[1]="Fried Rice with Prawn"
 order[0][0].item[2]="7—UP"
 
 
-food[0][0]=new item("Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true)
-food[0][1]=new item("Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true)
-food[0][2]=new item("Curry Noodle","N","n003",8.4,"Noodle with amazing XXX","F",0,false,false)
-food[1][0]=new item("Fried Rice with Prawn","R","r001",6.8,"Rice with amazing XXX","F",0,false,true)
-food[1][1]=new item("Fried Mix Grain Rice in Hot Stone Pot","R","r002",8.4,"Rice with amazing XXX","F",0,false,true)
-food[1][2]=new item("Fried Rice with White Bait, Fish Meat and Egg White","R","r003",8.4,"Rice with amazing XXX","F",0,false,true)
-food[2][0]=new item("Pepsi","D","d001",1.4,"NA","F",0,false,false)
-food[2][1]=new item("7—UP","D","d002",1.4,"NA","F",0,false,false)
-food[4][0]=new item("National Day Promotion: Fried Rice with Prawn 2x ,Curry Noodle 2x ,Pepsi 4x","S","sb001",20.00,"NA","L",20210810,false,false)
+food[0][0]=new item(" Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true)
+food[0][1]=new item(" Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true)
+food[0][2]=new item(" Curry Noodle","N","n003",8.4,"Noodle with amazing XXX","F",0,false,false)
+food[1][0]=new item(" Fried Rice with Prawn","R","r001",6.8,"Rice with amazing XXX","F",0,false,true)
+food[1][1]=new item(" Fried Mix Grain Rice in Hot Stone Pot","R","r002",8.4,"Rice with amazing XXX","F",0,false,true)
+food[1][2]=new item(" Fried Rice with White Bait, Fish Meat and Egg White","R","r003",8.4,"Rice with amazing XXX","F",0,false,true)
+food[2][0]=new item(" Pepsi","D","d001",1.4,"NA","F",0,false,false)
+food[2][1]=new item(" 7—UP","D","d002",1.4,"NA","F",0,false,false)
+food[4][0]=new item(" National Day Promotion: Fried Rice with Prawn 2x ,Curry Noodle 2x ,Pepsi 4x","S","sb001",20.00,"NA","L",20210810,false,false)
 
 class coupon{
     constructor(coupon_name,coupon_code,coupon_type,coupon_price) {
@@ -731,6 +731,51 @@ function trackorderguest(){
 
     }
 
+}
+var foundsearch=false;
+function search_item(){
+    foundsearch=false;
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
+    console.log("                     Fuzzy Search\n")
+    console.log("*****************************************************\n");
+    var search=input.question("Search: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 \n");
+    for (var s=0;s<food.length;s++){
+        for (var v=0;v<food[s].length;v++){
+            if (food[s][v].item_name.indexOf(search)>0){
+                foundsearch=true;
+                console.log(food[s][v].item_code+". "+food[s][v].item_name+"==>"+"$"+food[s][v].item_price.toFixed(2))
+            }
+        }
+    }
+    console.log("\n")
+    if (foundsearch===false){
+    console.log("                    Not Found\n");
+
+    }
+    console.log("    [1] Another search [2] Return back to main\n")
+    console.log("*****************************************************\n")
+    retrysearch();
+    function retrysearch(){
+    var choice=input.questionInt("Choice: ");
+    switch(choice){
+        case 1:
+            search_item();
+            break;
+        case 2:
+            main_screen();break
+        default:
+            retrysearch();
+            break;
+    }
+
+    }
 }
 function food_menu(){
     process.stdout.write('\033c')
