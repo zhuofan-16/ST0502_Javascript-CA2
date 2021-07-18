@@ -50,7 +50,7 @@ class Admin{
     }
 }
 class item{
-    constructor(item_name,item_catogory,item_code,item_price,item_description,item_type,item_expire,item_dry,item_spicy) {
+    constructor(item_name,item_catogory,item_code,item_price,item_description,item_type,item_expire,item_dry,item_spicy,item_ice) {
         this.item_name=item_name;
         this.item_caterogory=item_catogory
         this.item_code=item_code;
@@ -58,6 +58,7 @@ class item{
         this.item_type=item_type;
         this.item_spicy=item_spicy;
         this.item_dry=item_dry;
+        this.item_ice=item_ice;
         this.item_dry_level;
         this.item_spicy_level;
         this.item_ice_level;
@@ -67,10 +68,11 @@ class item{
     }
 }
 class order_status{
-    constructor(order_number,status) {
+    constructor(order_number,status,cost) {
         this.number=order_number;
         this.status=status;
         this.item=new Array();
+        this.cost=cost
     }
 }
 var food=new Array();
@@ -84,23 +86,17 @@ order[0]=new Array()
 order[1]=new Array()
 order[0][0]=new order_status(100001,"Delivered");
 order[1][0]=new order_status(100002,"Processing")
-order[1][0].item[0]="Fried Egg & Chicken Meat Noodle"
-order[1][0].item[1]="Fried Rice with Prawn"
-order[1][0].item[2]="7—UP"
-order[0][0].item[0]="Fried Egg & Chicken Meat Noodle"
-order[0][0].item[1]="Fried Rice with Prawn"
-order[0][0].item[2]="7—UP"
 
 
-food[0][0]=new item(" Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true)
-food[0][1]=new item(" Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true)
-food[0][2]=new item(" Curry Noodle","N","n003",8.4,"Noodle with amazing XXX","F",0,false,false)
-food[1][0]=new item(" Fried Rice with Prawn","R","r001",6.8,"Rice with amazing XXX","F",0,false,true)
-food[1][1]=new item(" Fried Mix Grain Rice in Hot Stone Pot","R","r002",8.4,"Rice with amazing XXX","F",0,false,true)
-food[1][2]=new item(" Fried Rice with White Bait, Fish Meat and Egg White","R","r003",8.4,"Rice with amazing XXX","F",0,false,true)
-food[2][0]=new item(" Pepsi","D","d001",1.4,"NA","F",0,false,false)
-food[2][1]=new item(" 7—UP","D","d002",1.4,"NA","F",0,false,false)
-food[4][0]=new item(" National Day Promotion: Fried Rice with Prawn 2x ,Curry Noodle 2x ,Pepsi 4x","S","sb001",20.00,"NA","L",20210810,false,false)
+food[0][0]=new item(" Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true,false)
+food[0][1]=new item(" Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true,false)
+food[0][2]=new item(" Curry Noodle","N","n003",8.4,"Noodle with amazing XXX","F",0,false,false,false)
+food[1][0]=new item(" Fried Rice with Prawn","R","r001",6.8,"Rice with amazing XXX","F",0,false,true,false)
+food[1][1]=new item(" Fried Mix Grain Rice in Hot Stone Pot","R","r002",8.4,"Rice with amazing XXX","F",0,false,true,false)
+food[1][2]=new item(" Fried Rice with White Bait, Fish Meat and Egg White","R","r003",8.4,"Rice with amazing XXX","F",0,false,true,false)
+food[2][0]=new item(" Pepsi","D","d001",1.4,"NA","F",0,false,false,true)
+food[2][1]=new item(" 7—UP","D","d002",1.4,"NA","F",0,false,false,true)
+food[4][0]=new item(" National Day Promotion: Fried Rice with Prawn 2x ,Curry Noodle 2x ,Pepsi 4x","S","sb001",20.00,"NA","L",20210810,true,true,true)
 
 class coupon{
     constructor(coupon_name,coupon_code,coupon_type,coupon_price) {
@@ -554,11 +550,14 @@ verify_password()
 }
 
 function order_screen(){
+    totalcost=0;
+    usecoupon=false;
+    thismenu=0;
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("         The NiceMeal Restaurant Order System        ");
     if (guestlogin===false){
-    console.log("                  "+time_identify()+" "+determind_call(currentlogin)+" " +customer[currentlogin].lastname);
+    console.log("                "+time_identify()+" "+determind_call(currentlogin)+" " +customer[currentlogin].lastname);
     if (customer[currentlogin].coupon.length>0){
     console.log("   Currently you have "+customer[currentlogin].coupon.length+ " coupon that can be used" );
     }
@@ -592,7 +591,11 @@ function order_screen(){
         }
     }
 }
+var totalcost=0;
+var usecoupon=false;
+var thismenu=0;
 function view_cart(){
+     totalcost=0;
     if (customer[currentlogin].cart.length<1){
         console.log("*****************************************************\n")
         console.log("         The NiceMeal Restaurant Order System        ");
@@ -616,6 +619,7 @@ function view_cart(){
     console.log("                       My cart:")
     for (var v=0;v<customer[currentlogin].cart.length;v++){
         console.log(v+". "+customer[currentlogin].cart[v].item_name+" "+customer[currentlogin].cart[v].item_quantity +"x"+"==>"+"$"+((customer[currentlogin].cart[v].item_quantity)*customer[currentlogin].cart[v].item_price).toFixed(2))
+       totalcost=((customer[currentlogin].cart[v].item_quantity)*customer[currentlogin].cart[v].item_price)+totalcost
         console.log("------")
         if (customer[currentlogin].cart[v].item_spicy===true){
             console.log(customer[currentlogin].cart[v].item_spicy_level)
@@ -628,8 +632,113 @@ function view_cart(){
         }
         console.log("------")
     }
+    if (usecoupon!==false){
+        console.log("Using coupon:"+customer[currentlogin].coupon[choiceselectioncoupon].coupon_name);
+
+    }
+    if (usecoupon!==false&&thismenu===1){
+        totalcost=totalcost-customer[currentlogin].coupon[choiceselectioncoupon].coupon_price;
+    }
+    if (usecoupon===false){
+    console.log("          Total Cost: $"+totalcost.toFixed(2))}
+    if (usecoupon===false&&customer[currentlogin].coupon.length>0){
+        console.log("You have coupons that can be use")
+        console.log("Enter 6 if you want to use them")
+    }
     console.log("[1] Checkout [2] Delete Item [3] Back to previous menu\n")
-    console.log("*****************************************************\n")
+    console.log("*****************************************************\n");
+    choicecheckout()
+    function choicecheckout(){
+        var choice =input.questionInt("Choice: ");
+        switch (choice){
+            case 6:
+                console.log("*****************************************************\n");
+                console.log("         The NiceMeal Restaurant Order System        ");
+                console.log("               Select a coupon to use ")
+                console.log("                       [10]Go back")
+                for (var z=0;z<customer[currentlogin].coupon.length;z++){
+                    console.log(z+". "+customer[currentlogin].coupon[z].coupon_name+"==>"+"$ "+customer[currentlogin].coupon[z].coupon_price)
+                }
+    selectionchoice()
+                function selectionchoice(){
+                  selection=input.questionInt("Choice: ");
+                  if (selection===10){
+                      view_cart();
+
+                  }
+                if (selection>=customer[currentlogin].coupon.length){
+                    console.log("Invalid Option");
+                    selectionchoice();
+                }
+                choiceselectioncoupon=selection;
+                usecoupon=true;
+                thismenu++;
+                view_cart()
+                }
+                break;
+            case 1:
+                checkout();
+                function checkout(){
+                    var choice=input.question("Are you sure you want to checkout?(Y/N")
+                    switch (choice){
+                        case "Y":
+                            console.log("*****************************************************\n");
+                            console.log("         The NiceMeal Restaurant Order System  \n      ");
+                            console.log("                Payment in process...")
+                            console.log("*****************************************************\n");
+                            wait(6000);
+
+                            templength=order[1].length
+                            temporderno=100000+(order[0].length+order[1].length)
+                            order[1][templength]=new order_status(temporderno,"Processing",totalcost);
+                               order[1][templength].item=customer[currentlogin].cart.slice(0);
+                               customer[currentlogin].cart=[];
+                               customer[currentlogin].order_active=temporderno;
+                               customer[currentlogin].order_record[customer[currentlogin].order_record.length]=order[1].slice(templength,templength+1)
+
+
+
+
+
+                            break;
+                        case "N":if (thismenu>1){
+                            thismenu++;
+                        }
+                            view_cart();
+                        break;
+                        default:console.log("Invalid Option");checkout();
+                    }
+                }
+                break;
+            case 2:
+                var deleteitem=input.questionInt("Which item you would like to delete");
+                deletenow();
+                function deletenow() {
+                    var confirmationdelete = input.question("Are you sure you want to remove " + customer[currentlogin].cart[deleteitem].item_name + " ? (Y/N)");
+                    if (confirmationdelete === "Y") {
+                        cart.splice(deleteitem, 1);
+                        console.log("Item is deleted,going back ");
+                        wait(2000);
+                        if (thismenu>1){
+                            thismenu++;
+                        }
+                        view_cart();
+                    } else if (confirmationdelete === "N") {
+                        choicecheckout();
+                    } else {
+                        console.log("Invalid Option");
+                        deletenow();
+                    }
+                }
+
+                break;
+            case 3:if (thismenu>1){
+                thismenu++;
+            } order_screen();break;
+            default: console.log("Invalid Option");
+            choicecheckout();
+        }
+    }
 }
 function order_history(){
     if (guestlogin===true){
@@ -649,9 +758,9 @@ function order_history(){
     console.log("                 Order History:\n")
     if (customer[currentlogin].order_record.length>0) {
         for (var q = 0; q < customer[currentlogin].order_record.length; q++) {
-            console.log("        " + q + ". " + customer[currentlogin].order_record[q].number + "==>" + customer[currentlogin].order_record[q].status);
+            console.log("        " + q + ". " + customer[currentlogin].order_record[q].number + "==>" + customer[currentlogin].order_record[q].status+"==>"+"$ "+customer[currentlogin].order_record[q].cost.toFixed(2));
             for (var g = 0; g < customer[currentlogin].order_record[q].item.length; g++) {
-                console.log(customer[currentlogin].order_record[q].item[g])
+                console.log(customer[currentlogin].order_record[q].item[g].item_name)
             }
         }
         console.log("[1] Send a email receipt for a order [2] Go back")
@@ -1161,7 +1270,7 @@ function trackorderguest(){
                 console.log("    Order Number:"+order[finalcall][finalorder].status+"\n")
                 console.log("    Order Item:")
                 for ( var y=0;y<order[finalcall][finalorder].item.length;y++){
-                console.log("     "+order[finalcall][finalorder].item[y])
+                console.log("     "+order[finalcall][finalorder].item[y].item_name)
                 }
                 console.log("              [1] Back to main menu")
                 console.log("*****************************************************\n")
