@@ -550,12 +550,47 @@ function order_screen(){
     console.log("       What would you like to order today :)\n")
     console.log("           [1] Start order  [2] View Cart")
     console.log("           [3] Order History  [4] Track an order")
-    console.log("           [5] View Coupon  [6] Change of account detail\n")
-    console.log("           [7] Logout        [8] Exit")
+    console.log("           [5] View Coupon  [6] Change of account detail")
+    console.log("           [7] Logout        [8] Exit\n")
     console.log("*****************************************************\n")
+    order_screen_choice();
+    function order_screen_choice() {
+        var choice = input.questionInt("Choice: ");
+        switch (choice){
+            case 1: order_menu();break;
+            case 2: view_cart();break;
+            case 3: order_history();break;
+            case 4:trackorderguest();break;
+            case 5:coupon_view();break
+            case 6: change_particular();break
+            case 7:logout;break;
+            case 8:process.exit(0);break;
+            default:console.log("Invalid Option");
+            order_screen_choice();break;
 
-
+        }
+    }
 }
+function coupon_view(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("         The NiceMeal Restaurant Order System        ");
+    console.log("     You currently have "+customer[currentlogin].coupon.length+" coupon")
+    for (var h=0;h<customer[currentlogin].coupon.length;h++){
+    console.log("         "+h+". "+customer[currentlogin].coupon[h].coupon_name+" ==>"+"$ "+customer[currentlogin].coupon[h].coupon_price.toFixed(2))
+    }
+    console.log("             [1] Back to previous menu")
+    console.log("*****************************************************\n")
+    coupon_view_choice();
+    function coupon_view_choice(){
+        var choice =input.questionInt("Choice: ")
+        switch (choice){
+            case 1: order_screen();break
+            default:console.log("Invalid Option");coupon_view_choice()
+        }
+    }
+}
+
 function time_identify(){
     if (time.getHours()<12){
         return "Good Morning!"
