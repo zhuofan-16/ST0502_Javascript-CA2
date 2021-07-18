@@ -33,6 +33,7 @@ class Customer{
         this.order_active=0;
         this.wrongpassword_attempt=0;
         this.coupon=new Array();
+        this.cart=new Array();
 
 
     }
@@ -59,6 +60,7 @@ class item{
         this.item_dry=item_dry;
         this.item_price=item_price;
         this.item_expire=item_expire;
+        this.item_quantity;
     }
 }
 class order_status{
@@ -585,6 +587,15 @@ function order_screen(){
             order_screen_choice();break;
 
         }
+    }
+}
+function view_cart(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("         The NiceMeal Restaurant Order System        ");
+    console.log("                       My cart:")
+    for (var v=0;v<customer[currentlogin].cart.length;v++){
+        console.log(v+". "+customer[currentlogin].cart[v].item_name+" "+customer[currentlogin].cart[v].item_quantity +"x"+"==>"+"$"+((customer[currentlogin].cart[v].item_quantity)*customer[currentlogin].cart[v].item_price).toFixed(2))
     }
 }
 function order_history(){
