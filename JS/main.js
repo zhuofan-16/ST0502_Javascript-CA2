@@ -552,7 +552,7 @@ function customer_login(){
 
 verify_password()
 }
-
+ choiceselectioncoupon=10;
 function order_screen(){
     totalcost=0;
     usecoupon=false;
@@ -672,10 +672,12 @@ function view_cart(){
 
     }
     if (usecoupon!==false&&thismenu===1){
-        totalcost=totalcost-customer[currentlogin].coupon[choiceselectioncoupon].coupon_price;
-    }
 
-    console.log("          Total Cost: $"+totalcost.toFixed(2))
+
+        console.log("          Total Cost: $"+(totalcost-customer[currentlogin].coupon[choiceselectioncoupon].coupon_price).toFixed(2))
+    }
+if (usecoupon===false){
+    console.log("          Total Cost: $"+totalcost.toFixed(2))}
     if (usecoupon===false&&customer[currentlogin].coupon.length>0){
         console.log("You have coupons that can be use")
         console.log("Enter 6 if you want to use them")
@@ -692,7 +694,7 @@ function view_cart(){
                 console.log("               Select a coupon to use ")
                 console.log("                       [10]Go back")
                 for (var z=0;z<customer[currentlogin].coupon.length;z++){
-                    console.log(z+". "+customer[currentlogin].coupon[z].coupon_name+"==>"+"$ "+customer[currentlogin].coupon[z].coupon_price)
+                    console.log(z+". "+customer[currentlogin].coupon[z].coupon_name+"==>"+"$ "+customer[currentlogin].coupon[z].coupon_price.toFixed(2))
                 }
     selectionchoice()
                 function selectionchoice(){
@@ -722,6 +724,9 @@ function view_cart(){
                             console.log("                Payment in process...")
                             console.log("*****************************************************\n");
                             wait(6000);
+                            if (usecoupon===true){
+                                customer[currentlogin].coupon.splice(choiceselectioncoupon,1)
+                            }
 
                             templength=order[1].length
                             temporderno=100000+(order[0].length+order[1].length)
@@ -1424,7 +1429,7 @@ counterfind=0;
                             console.log("Level of spicy")
                             console.log("[1] No spicy")
                             console.log("[2] Abit Spicy")
-                            console.log("[2] Very Spicy")
+                            console.log("[3] Very Spicy")
                             console.log("============")
                             var spicylevel=input.questionInt("Choice:")
                             customer[currentlogin].cart[tempclass][0].item_spicy_level=spicylevel
