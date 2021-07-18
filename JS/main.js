@@ -438,8 +438,12 @@ function customer_login(){
     console.log("         The NiceMeal Restaurant Login System        ");
     console.log("                Quality you can taste.               ");
     times();
+    console.log("              [1] Back to previous menu")
     console.log("*****************************************************\n");
    var temploginid= input.questionInt("Please enter your contact number or membership No.: ");
+   if (temploginid===1){
+       main_screen()
+   }
    for (var k=0;k<customer.length;k++){
        if (temploginid===customer[k].memberno || temploginid===customer[k].contact ){
            currentlogin=k;
@@ -562,8 +566,8 @@ function order_screen(){
             case 3: order_history();break;
             case 4:trackorderguest();break;
             case 5:coupon_view();break
-            case 6: change_particular();break
-            case 7:logout;break;
+            case 6:change_particular();break
+            case 7:logout_now();break;
             case 8:process.exit(0);break;
             default:console.log("Invalid Option");
             order_screen_choice();break;
@@ -579,7 +583,7 @@ function coupon_view(){
     for (var h=0;h<customer[currentlogin].coupon.length;h++){
     console.log("         "+h+". "+customer[currentlogin].coupon[h].coupon_name+" ==>"+"$ "+customer[currentlogin].coupon[h].coupon_price.toFixed(2))
     }
-    console.log("             [1] Back to previous menu")
+    console.log("             [1] Back to previous menu\n")
     console.log("*****************************************************\n")
     coupon_view_choice();
     function coupon_view_choice(){
@@ -590,7 +594,16 @@ function coupon_view(){
         }
     }
 }
-
+function logout_now(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("         The NiceMeal Restaurant Order System        ");
+    console.log("                 Logout successful!\n")
+    console.log("*****************************************************\n")
+    wait(3000)
+    currentlogin=0;
+    main_screen();
+}
 function time_identify(){
     if (time.getHours()<12){
         return "Good Morning!"
@@ -1157,6 +1170,7 @@ function help(){
 var guestlogin;
 function main_screen(){
     guestlogin=false;
+    customerloginstatus=false;
     currentlogin=false;
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
