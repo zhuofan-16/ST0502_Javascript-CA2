@@ -58,6 +58,9 @@ class item{
         this.item_type=item_type;
         this.item_spicy=item_spicy;
         this.item_dry=item_dry;
+        this.item_dry_level;
+        this.item_spicy_level;
+        this.item_ice_level;
         this.item_price=item_price;
         this.item_expire=item_expire;
         this.item_quantity;
@@ -389,7 +392,7 @@ function customer_register(){
     console.log("      The NiceMeal Restaurant Registration System        ");
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
     console.log("*****************************************************\n")
-    var temp_email=input.questionInt("Your Email address ");
+    var temp_email=input.question("Your Email address :");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System        ");
@@ -590,13 +593,43 @@ function order_screen(){
     }
 }
 function view_cart(){
+    if (customer[currentlogin].cart.length<1){
+        console.log("*****************************************************\n")
+        console.log("         The NiceMeal Restaurant Order System        ");
+        console.log("                       My cart:")
+        console.log("              You have no item in cart :(\n")
+        console.log("              [1]Back to previous menu")
+        console.log("*****************************************************\n")
+        nocartitem();
+        function nocartitem(){
+            var choice=input.questionInt("Choice: ");
+            switch (choice){
+                case 1: order_screen();break
+                default:console.log("Invalid Choice");
+                nocartitem();
+            }
+        }
+    }
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("         The NiceMeal Restaurant Order System        ");
     console.log("                       My cart:")
     for (var v=0;v<customer[currentlogin].cart.length;v++){
         console.log(v+". "+customer[currentlogin].cart[v].item_name+" "+customer[currentlogin].cart[v].item_quantity +"x"+"==>"+"$"+((customer[currentlogin].cart[v].item_quantity)*customer[currentlogin].cart[v].item_price).toFixed(2))
+        console.log("------")
+        if (customer[currentlogin].cart[v].item_spicy===true){
+            console.log(customer[currentlogin].cart[v].item_spicy_level)
+        }
+        if (customer[currentlogin].cart[v].item_dry===true){
+            console.log(customer[currentlogin].cart[v].item_dry_level)
+        }
+        if (customer[currentlogin].cart[v].item_ice===true){
+            console.log(customer[currentlogin].cart[v].item_ice_level)
+        }
+        console.log("------")
     }
+    console.log("[1] Checkout [2] Delete Item [3] Back to previous menu\n")
+    console.log("*****************************************************\n")
 }
 function order_history(){
     if (guestlogin===true){
