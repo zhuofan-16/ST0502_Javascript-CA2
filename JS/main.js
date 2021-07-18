@@ -7,6 +7,7 @@ Shall you have any question about this program ,please email me at zhuofan.21@ic
 var input =require('readline-sync');
 var currentlogin=0;
 const passwordrequire=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+var search="NA"
 function wait(ms)
 {
     var d = new Date();
@@ -59,14 +60,15 @@ class item{
         this.item_spicy=item_spicy;
         this.item_dry=item_dry;
         this.item_ice=item_ice;
-        this.item_dry_level;
-        this.item_spicy_level;
-        this.item_ice_level;
+        this.item_dry_level=0;
+        this.item_spicy_level=0;
+        this.item_ice_level=0;
         this.item_price=item_price;
         this.item_expire=item_expire;
-        this.item_quantity;
+        this.item_quantity=0;
     }
 }
+var tempclass=0;
 class order_status{
     constructor(order_number,status,cost) {
         this.number=order_number;
@@ -232,7 +234,7 @@ function about_program(){
     }
     about_useroption()
 }
-
+var guest_cart=new Array();
 function guest_login(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -257,6 +259,7 @@ function guest_login(){
         }
 
     }
+
     registerguestsex();
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -468,7 +471,7 @@ function customer_login(){
        console.log("*****************************************************\n")
        console.log("         The NiceMeal Restaurant Login System        ");
        console.log("                Quality you can taste.               ");
-       console.log("               User not found in system ")
+       console.log("               User not found in system \n")
        console.log("           [1] Retry [2] Back to main menu")
        console.log("*****************************************************\n");
        function question_notfound(){
@@ -513,6 +516,7 @@ function customer_login(){
         temploginpassword= input.question("Please enter your password: ");
         if (temploginpassword===customer[currentlogin].password){
             customer[currentlogin].wrongpassword_attempt=0;
+            userlogin=true;
             order_screen();
         }
         else {
@@ -591,6 +595,37 @@ function order_screen(){
         }
     }
 }
+var temps=0
+var tempv=0;
+function order_menu(){
+    process.stdout.write('\033c')
+    counterfind=0;
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
+    console.log("                     Food Menu")
+    console.log("                [1] View all items")
+    console.log("                [2] View all category")
+    console.log("                [3] Search for an item")
+    console.log("                [4] Return to previous screen")
+    console.log("*****************************************************\n");
+    foodmenuoption()
+    function foodmenuoption() {
+        var foodmenuchoice = input.questionInt("Choice: ");
+        switch (foodmenuchoice){
+            case 1:view_all();break
+            case 2:category_item();break;
+            case 3:search_item();break;
+            case 4:order_screen();break;
+
+            default:
+                console.log("Invalid Option");
+                foodmenuoption();
+                break;
+
+        }
+    }
+}
 var totalcost=0;
 var usecoupon=false;
 var thismenu=0;
@@ -618,17 +653,17 @@ function view_cart(){
     console.log("         The NiceMeal Restaurant Order System        ");
     console.log("                       My cart:")
     for (var v=0;v<customer[currentlogin].cart.length;v++){
-        console.log(v+". "+customer[currentlogin].cart[v].item_name+" "+customer[currentlogin].cart[v].item_quantity +"x"+"==>"+"$"+((customer[currentlogin].cart[v].item_quantity)*customer[currentlogin].cart[v].item_price).toFixed(2))
-       totalcost=((customer[currentlogin].cart[v].item_quantity)*customer[currentlogin].cart[v].item_price)+totalcost
+        console.log(v+". "+customer[currentlogin].cart[v][0].item_name+" "+customer[currentlogin].cart[v][0].item_quantity +"x"+"==>"+"$"+((customer[currentlogin].cart[v][0].item_quantity)*customer[currentlogin].cart[v][0].item_price).toFixed(2))
+       totalcost=((customer[currentlogin].cart[v][0].item_quantity)*customer[currentlogin].cart[v][0].item_price)+totalcost
         console.log("------")
-        if (customer[currentlogin].cart[v].item_spicy===true){
-            console.log(customer[currentlogin].cart[v].item_spicy_level)
+        if (customer[currentlogin].cart[v][0].item_spicy===true){
+            console.log(customer[currentlogin].cart[v][0].item_spicy_level)
         }
-        if (customer[currentlogin].cart[v].item_dry===true){
-            console.log(customer[currentlogin].cart[v].item_dry_level)
+        if (customer[currentlogin].cart[v][0].item_dry===true){
+            console.log(customer[currentlogin].cart[v][0].item_dry_level)
         }
-        if (customer[currentlogin].cart[v].item_ice===true){
-            console.log(customer[currentlogin].cart[v].item_ice_level)
+        if (customer[currentlogin].cart[v][0].item_ice===true){
+            console.log(customer[currentlogin].cart[v][0].item_ice_level)
         }
         console.log("------")
     }
@@ -639,8 +674,8 @@ function view_cart(){
     if (usecoupon!==false&&thismenu===1){
         totalcost=totalcost-customer[currentlogin].coupon[choiceselectioncoupon].coupon_price;
     }
-    if (usecoupon===false){
-    console.log("          Total Cost: $"+totalcost.toFixed(2))}
+
+    console.log("          Total Cost: $"+totalcost.toFixed(2))
     if (usecoupon===false&&customer[currentlogin].coupon.length>0){
         console.log("You have coupons that can be use")
         console.log("Enter 6 if you want to use them")
@@ -679,7 +714,7 @@ function view_cart(){
             case 1:
                 checkout();
                 function checkout(){
-                    var choice=input.question("Are you sure you want to checkout?(Y/N")
+                    var choice=input.question("Are you sure you want to checkout?(Y/N): ")
                     switch (choice){
                         case "Y":
                             console.log("*****************************************************\n");
@@ -692,11 +727,18 @@ function view_cart(){
                             temporderno=100000+(order[0].length+order[1].length)
                             order[1][templength]=new order_status(temporderno,"Processing",totalcost);
                                order[1][templength].item=customer[currentlogin].cart.slice(0);
+                               //console.log(order[1][templength].item[0][0].item_name)
                                customer[currentlogin].cart=[];
                                customer[currentlogin].order_active=temporderno;
                                customer[currentlogin].order_record[customer[currentlogin].order_record.length]=order[1].slice(templength,templength+1)
-
-
+                            console.log("*****************************************************\n");
+                            console.log("         The NiceMeal Restaurant Order System  \n      ");
+                            console.log("                Payment is successful")
+                            console.log("             Your order number is "+temporderno)
+                            console.log("        A email receipt have been sent to you!")
+                            console.log("*****************************************************\n");
+                            wait(4000)
+                            order_screen();
 
 
 
@@ -711,18 +753,18 @@ function view_cart(){
                 }
                 break;
             case 2:
-                var deleteitem=input.questionInt("Which item you would like to delete");
+                var deleteitem=input.questionInt("Which item you would like to delete: ");
                 deletenow();
                 function deletenow() {
-                    var confirmationdelete = input.question("Are you sure you want to remove " + customer[currentlogin].cart[deleteitem].item_name + " ? (Y/N)");
+                    var confirmationdelete = input.question("Are you sure you want to remove " + customer[currentlogin].cart[deleteitem][0].item_name + " ? (Y/N): ");
                     if (confirmationdelete === "Y") {
-                        cart.splice(deleteitem, 1);
+                        customer[currentlogin].cart.splice(deleteitem, 1);
                         console.log("Item is deleted,going back ");
                         wait(2000);
                         if (thismenu>1){
                             thismenu++;
                         }
-                        view_cart();
+                        order_screen();
                     } else if (confirmationdelete === "N") {
                         choicecheckout();
                     } else {
@@ -758,11 +800,14 @@ function order_history(){
     console.log("                 Order History:\n")
     if (customer[currentlogin].order_record.length>0) {
         for (var q = 0; q < customer[currentlogin].order_record.length; q++) {
-            console.log("        " + q + ". " + customer[currentlogin].order_record[q].number + "==>" + customer[currentlogin].order_record[q].status+"==>"+"$ "+customer[currentlogin].order_record[q].cost.toFixed(2));
-            for (var g = 0; g < customer[currentlogin].order_record[q].item.length; g++) {
-                console.log(customer[currentlogin].order_record[q].item[g].item_name)
+            console.log("        " + q + ". " + customer[currentlogin].order_record[q][0].number + "==>" + customer[currentlogin].order_record[q][0].status+"==>"+"$ "+customer[currentlogin].order_record[q][0].cost.toFixed(2));
+            console.log("===========================================")
+            for (var g = 0; g < customer[currentlogin].order_record[q][0].item.length; g++) {
+                console.log("    "+customer[currentlogin].order_record[q][0].item[g][0].item_name)
             }
+            console.log("===========================================")
         }
+        console.log("\n")
         console.log("[1] Send a email receipt for a order [2] Go back")
         console.log("*****************************************************\n");
         tempc();
@@ -1249,8 +1294,12 @@ function trackorderguest(){
                         trackorderguest();
                         break
                     case 2:
+                        if (guestlogin===true||userlogin===true){
+                            order_screen();
+                            break;
+                        }else {
                         main_screen();
-                        break;
+                        break;}
                     default:
                         console.log("Invalid Option");
                         notfound404();
@@ -1270,7 +1319,7 @@ function trackorderguest(){
                 console.log("    Order Number:"+order[finalcall][finalorder].status+"\n")
                 console.log("    Order Item:")
                 for ( var y=0;y<order[finalcall][finalorder].item.length;y++){
-                console.log("     "+order[finalcall][finalorder].item[y].item_name)
+                console.log("     "+order[finalcall][finalorder].item[y][0].item_name)
                 }
                 console.log("              [1] Back to main menu")
                 console.log("*****************************************************\n")
@@ -1294,8 +1343,10 @@ function trackorderguest(){
     }
 
 }
+var counterfind=0;
 var foundsearch=false;
 function search_item(){
+counterfind=0;
     foundsearch=false;
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1303,7 +1354,7 @@ function search_item(){
     console.log("               Quality you can taste.                 ");
     console.log("                     Fuzzy Search\n")
     console.log("*****************************************************\n");
-    var search=input.question("Search: ");
+    search=input.question("Search: ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("       The NiceMeal Restaurant Ordering System        ");
@@ -1312,18 +1363,146 @@ function search_item(){
         for (var v=0;v<food[s].length;v++){
             if (food[s][v].item_name.indexOf(search)>0){
                 foundsearch=true;
-                console.log(food[s][v].item_code+". "+food[s][v].item_name+"==>"+"$"+food[s][v].item_price.toFixed(2))
+                counterfind++
+                console.log(counterfind-1+". " +food[s][v].item_code+". "+food[s][v].item_name+"==>"+"$"+food[s][v].item_price.toFixed(2))
             }
         }
     }
+
+
+    if (guestlogin===true||userlogin===true){
+        console.log("  [1]Add to cart [2] Another search [3] Return back \n")
+        console.log("*****************************************************\n")
+        addcartop();
+        function addcartop(){
+
+            var choice=input.questionInt("Choice :")
+            switch (choice){
+                case 1:
+
+                    var addtocrt=input.questionInt("Which one to add to cart: ")
+                    if (addtocrt>=counterfind ||addtocrt<0){
+                        console.log("Invalid Option")
+                        addcartop();
+                    }
+                    counterfind=0;
+                    for (var s=0;s<food.length;s++){
+                        for (var v=0;v<food[s].length;v++){
+                            if (food[s][v].item_name.indexOf(search)>0){
+                               if (counterfind===addtocrt){
+                                   temps=s;
+                                   tempv=v;
+
+
+                               }
+                                counterfind++
+                            }
+                        }
+                    }
+                    if (userlogin===true){
+
+                        customer[currentlogin].cart.push((food[temps].slice(tempv,tempv+1)))
+                        tempclass=customer[currentlogin].cart.length-1;
+                        quantityoforderuser();
+
+                    }
+                    if (guestlogin===true){
+                        guest_cart=food[temps].slice(tempv,tempv+1)
+                        quantityoforderguest()
+                    }
+
+
+                    function quantityoforderuser() {
+                        var quantity = input.questionInt("How many do you want: ");
+                        if (quantity<0){
+                            quantityoforderuser()
+                        }
+                        customer[currentlogin].cart[tempclass][0].item_quantity=quantity
+
+                        if (customer[currentlogin].cart[tempclass][0].item_spicy===true){
+                            console.log("============")
+                            console.log("Level of spicy")
+                            console.log("[1] No spicy")
+                            console.log("[2] Abit Spicy")
+                            console.log("[2] Very Spicy")
+                            console.log("============")
+                            var spicylevel=input.questionInt("Choice:")
+                            customer[currentlogin].cart[tempclass][0].item_spicy_level=spicylevel
+
+                        }
+
+
+
+                        if (customer[currentlogin].cart[tempclass][0].item_dry===true){
+                            console.log("============")
+                            console.log("Dry of with soup")
+                            console.log("[1] Dry")
+                            console.log("[2] Soup")
+                            console.log("============")
+                            var drylevel=input.questionInt("Choice:")
+                            customer[currentlogin].cart[tempclass][0].item_dry_level=drylevel
+
+                        }
+
+
+
+                        if (customer[currentlogin].cart[tempclass][0].item_ice===true){
+                            console.log("============")
+                            console.log("Level of ice")
+                            console.log("[1] No ice")
+                            console.log("[2] Abit ice")
+                            console.log("[3] Alot of ice")
+                            console.log("============")
+                            var icelevel=input.questionInt("Choice:")
+                            customer[currentlogin].cart[tempclass][0].item_ice_level=icelevel
+
+                        }
+
+                        console.log("Added to cart!!");
+                        wait(3000)
+                        counterfind=0;
+                        order_menu()
+
+
+                    }
+
+
+                function quantityoforderguest() {
+                    var quantity = input.questionInt("How many do you want");
+                    if (quantity<0){
+                        quantityoforderguest()
+                    }
+                    guest_cart[guest_cart.length].item_quantity=quantity
+
+                }
+
+
+
+                    break;
+                case 2:  search_item();
+                break;
+                case 3:order_menu();break;
+                default:
+                    console.log("Invalid Option")
+                    addcartop();
+            }
+
+        }
+    }
+
+
+
     console.log("\n")
     if (foundsearch===false){
     console.log("                    Not Found\n");
 
     }
+
+    if (guestlogin===false&&userlogin===false){
     console.log("    [1] Another search [2] Return back to main\n")
     console.log("*****************************************************\n")
-    retrysearch();
+    retrysearch();}
+
     function retrysearch(){
     var choice=input.questionInt("Choice: ");
     switch(choice){
@@ -1387,6 +1566,7 @@ var guestlogin;
 function main_screen(){
     guestlogin=false;
     customerloginstatus=false;
+    userlogin=false;
     currentlogin=false;
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
