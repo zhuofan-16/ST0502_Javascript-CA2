@@ -270,7 +270,7 @@ function guest_login(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
-    console.log("Estimated Time Of Waiting: "+(Math.round(Math.random()*11+10)) + " Minutes");
+    console.log("    Estimated Time Of Waiting: "+(Math.round(Math.random()*11+10)) + " Minutes");
     console.log("*****************************************************\n")
     function guest_confirmation_prompt() {
         var guest_confirmation = input.question("Continue to order? (Y/N): ");
@@ -588,6 +588,16 @@ function order_screen(){
     }
 }
 function order_history(){
+    if (guestlogin===true){
+        process.stdout.write('\033c')
+        console.log("*****************************************************\n");
+        console.log("      The NiceMeal Restaurant Ordering System          ");
+        console.log("              Quality you can taste.\n                 ");
+        console.log("           Guest cannot use this feature\n                 ");
+        console.log("*****************************************************\n");
+        wait(4000);
+        order_screen()
+    }
     process.stdout.write('\033c')
     console.log("*****************************************************\n");
     console.log("      The NiceMeal Restaurant Ordering System          ");
