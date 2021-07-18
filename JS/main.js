@@ -21,11 +21,12 @@ function times(){
     console.log("               "+time.toLocaleString("en-sg")+"\n");
 }
 class Customer{
-    constructor(first_name,last_name,sex,contact,password,member_no,order_record) {
+    constructor(first_name,last_name,sex,contact,password,member_no,email) {
         this.firstname=first_name;
         this.lastname=last_name;
         this.sex=sex;
         this.contact=contact;
+        this.email=email;
         this.memberno=member_no;
         this.password=password;
         this.order_record=new Array();
@@ -264,6 +265,11 @@ function guest_login(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
+    console.log("*****************************************************\n")
+    guest_email=input.question("Your Email: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("Estimated Time Of Waiting: "+(Math.round(Math.random()*11+10)) + " Minutes");
     console.log("*****************************************************\n")
     function guest_confirmation_prompt() {
@@ -380,6 +386,12 @@ function customer_register(){
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System        ");
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
+    console.log("*****************************************************\n")
+    var temp_email=input.questionInt("Your Email address ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Registration System        ");
+    console.log("    Become a member of The NiceMeal Restaurant today     \n");
     console.log("*****************************************************\n");
     console.log("Requirement:1.Contain at least 8 characters")
     console.log("            2.Contain at least 1 number")
@@ -401,7 +413,7 @@ function customer_register(){
     passwordtype();
 
 
-    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,temp_password,600000+i,0);
+    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,temp_password,600000+i,temp_email);
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System    \n    ");
