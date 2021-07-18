@@ -813,7 +813,7 @@ function order_history(){
         tempc();
         function tempc(){
             var tempchoice1=input.questionInt("Choice: ");
-            switch (temphoice){
+            switch (tempchoice1){
                 case 1:
                     console.log("Sending in progress..");break;
                 case 2: order_screen();break;
