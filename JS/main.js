@@ -28,7 +28,7 @@ class Customer{
         this.contact=contact;
         this.memberno=member_no;
         this.password=password;
-        this.order_record=order_record;
+        this.order_record=new Array();
         this.order_active=0;
         this.wrongpassword_attempt=0;
         this.coupon=new Array();
@@ -573,6 +573,47 @@ function order_screen(){
             order_screen_choice();break;
 
         }
+    }
+}
+function order_history(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n");
+    console.log("      The NiceMeal Restaurant Ordering System          ");
+    console.log("              Quality you can taste.\n                 ");
+    console.log("                 Order History:\n")
+    if (customer[currentlogin].order_record.length>0) {
+        for (var q = 0; q < customer[currentlogin].order_record.length; q++) {
+            console.log("        " + q + ". " + customer[currentlogin].order_record[q].number + "==>" + customer[currentlogin].order_record[q].status);
+            for (var g = 0; g < customer[currentlogin].order_record[q].item.length; g++) {
+                console.log(customer[currentlogin].order_record[q].item[g])
+            }
+        }
+        console.log("[1] Send a email receipt for a order [2] Go back")
+        console.log("*****************************************************\n");
+        tempc();
+        function tempc(){
+            var tempchoice1=input.questionInt("Choice: ");
+            switch (temphoice){
+                case 1:
+                    console.log("Sending in progress..");break;
+                case 2: order_screen();break;
+                default: console.log("Invalid option");
+                    tempc();break;
+            }
+        }
+    }
+    else {
+    console.log("                 No order found")
+    console.log("                  [1] Go back")
+        console.log("*****************************************************\n");
+    tempchoice();
+    function tempchoice(){
+        var tempchoice1=input.questionInt("Choice: ");
+        switch (tempchoice1){
+            case 1:order_screen();break;
+            default:console.log("Invalid Option");tempchoice();break;
+        }
+    }
     }
 }
 function coupon_view(){
