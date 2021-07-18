@@ -2,7 +2,7 @@
 * This program is written by CHEN ZHUOFAN | P2100746 | Singapore Polytechnic
 * Used for ST0502 Fundamental of Programming CA2 Assignment
 * All commits can be found at https://github.com/zhuofan-16/ST0502_Javascript-CA2
-* Shall you have any question about this program ,please email me at zhuofan.21@ichat.sp.edu.sg
+* Shall you have any question about this program ,please email me at zhuofan@jiahan16.onmicrosoft.com (Preferred) or zhuofan.21@ichat.sp.edu.sg
 
 
 ## Technical Specification/To be acheieved
