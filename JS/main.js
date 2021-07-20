@@ -885,7 +885,7 @@ function time_identify(){
     }
 }
 var foodcount=0;
-var a,b,c,d;
+var a,b,c,d,e;
 function view_all(){
     foodcount=0;
     process.stdout.write('\033c')
@@ -909,6 +909,10 @@ function view_all(){
             console.log(foodcount+". "+food[3][d].item_code+". "+food[3][d].item_name +"==>"+food[3][d].item_price)
             foodcount++;
         }
+    for (e=0;e<food[4].length;e++){
+        console.log(foodcount+". "+food[4][e].item_code+". "+food[4][e].item_name +"==>"+food[4][e].item_price)
+        foodcount++;
+    }
     console.log("\n");
 
         if (guestlogin===true||userlogin===true){
@@ -936,7 +940,10 @@ function view_all(){
                                 if (seeitem>=c){
                                     seeitem -= c;
                                     category_number=3;
-                                }
+                                if (seeitem>=d){
+                                    seeitem-=d;
+                                    category_number=4;
+                                }}
                             }
                         }
                         console.log(category_number+seeitem)
@@ -1047,7 +1054,10 @@ function viewitemdescription(){
             if (seeitem>=c){
                 seeitem -= c;
                 category_number++;
-            }
+            if (seeitem>=d){
+                seeitem-=d;
+                category_number=4;
+            }}
         }
     }
     }
@@ -1080,6 +1090,7 @@ function category_item(){
     console.log("       The NiceMeal Restaurant Ordering System        ");
     console.log("               Quality you can taste.                 ");
     console.log("                    Food Category")
+    console.log("                     [0] Promotion  ")
     console.log("                     [1] Rice")
     console.log("                     [2] Noodles")
     console.log("                     [3] Drinks")
@@ -1090,6 +1101,7 @@ function category_item(){
     function categorychoice() {
         var choice = input.questionInt("Choice :");
         switch (choice){
+            case 0: promotioncategory();break;
             case 1:
                 ricecategory()
                 break;
@@ -1102,7 +1114,11 @@ function category_item(){
             case 4:
                 othercategory();
                 break;
-            case 5 :main_screen();break;
+            case 5 :
+                if (userlogin===true||guestlogin===true){
+                    order_screen();break;
+                }if (userlogin===false&&guestlogin===false){
+                main_screen();break;}
             default:
                 console.log("Invalid option");
                 categorychoice();
@@ -1120,19 +1136,114 @@ function ricecategory(){
         console.log(r+". "+food[1][r].item_code+". " + food[1][r].item_name+"==>"+"$ "+food[1][r].item_price.toFixed(2))
     }
     console.log("\n")
-    console.log("[1] View an item's description [2]Back to previous screen ");
-    console.log("*****************************************************\n")
-    itemchoiceview1();
-    function itemchoiceview1() {
-        var itemchoicedes = input.questionInt("Choice: ")
-        switch (itemchoicedes) {
-            case 1:viewricedescription();break;
-            case 2:category_item();break;
-            default:
-                console.log("Invalid Option");
-                itemchoiceview1()
+    if (userlogin===true || guestlogin===true){
+        console.log("[1] View an item's description [2] Add to cart [3]Return back ");
+        console.log("*****************************************************\n")
+        addcartrc();
+        function addcartrc(){
+
+            var choice=input.questionInt("Choice :")
+            switch (choice){
+                case 1:   viewricedescription();
+                    break;
+                case 2:
+    var cartready=input.questionInt("Which one to add to cart: ")
+                    if (cartready<0||cartready>food[1].length-1){
+                        console.log("Invalid Option")
+                        addcartrc();
+                    }
+                    if (userlogin===true){
+
+                        customer[currentlogin].cart.push((food[1].slice(cartready,cartready+1)))
+                        tempclass=customer[currentlogin].cart.length-1;
+                        quantityoforderuser();
+
+                    }
+                    function quantityoforderuser(){
+                        var quantity = input.questionInt("How many do you want: ");
+                        if (quantity<0){
+                            quantityoforderuser()
+                        }
+                        customer[currentlogin].cart[tempclass][0].item_quantity=quantity
+
+                        if (customer[currentlogin].cart[tempclass][0].item_spicy===true){
+                            console.log("============")
+                            console.log("Level of spicy")
+                            console.log("[1] No spicy")
+                            console.log("[2] Abit Spicy")
+                            console.log("[3] Very Spicy")
+                            console.log("============")
+                            var spicylevel=input.questionInt("Choice:")
+                            customer[currentlogin].cart[tempclass][0].item_spicy_level=spicylevel
+
+                        }
+
+                        if (customer[currentlogin].cart[tempclass][0].item_dry===true){
+                            console.log("============")
+                            console.log("Dry of with soup")
+                            console.log("[1] Dry")
+                            console.log("[2] Soup")
+                            console.log("============")
+                            var drylevel=input.questionInt("Choice:")
+                            customer[currentlogin].cart[tempclass][0].item_dry_level=drylevel
+
+                        }
+
+
+
+                        if (customer[currentlogin].cart[tempclass][0].item_ice===true){
+                            console.log("============")
+                            console.log("Level of ice")
+                            console.log("[1] No ice")
+                            console.log("[2] Abit ice")
+                            console.log("[3] Alot of ice")
+                            console.log("============")
+                            var icelevel=input.questionInt("Choice:")
+                            customer[currentlogin].cart[tempclass][0].item_ice_level=icelevel
+
+                        }
+
+                        console.log("Added to cart!!");
+                        wait(3000)
+                        ricecategory();
+
+
+                    }
+
+                    break;
+                case 3:
+                    category_item();
+                    break
+                default:
+                    console.log("Invalid Option")
+                    addcartrc();
+
+            }
+
+
         }
     }
+    if (userlogin===false&&guestlogin===false) {
+        console.log("[1] View an item's description [2]Back to previous screen ");
+        console.log("*****************************************************\n")
+        itemchoiceview1();
+
+        function itemchoiceview1() {
+            var itemchoicedes = input.questionInt("Choice: ")
+            switch (itemchoicedes) {
+                case 1:
+                    viewricedescription();
+                    break;
+                case 2:
+                    category_item();
+                    break;
+                default:
+                    console.log("Invalid Option");
+                    itemchoiceview1()
+            }
+        }
+    }
+
 }
 function viewricedescription(){
     retryrice();
@@ -1178,6 +1289,94 @@ function noodlecategory(){
         console.log(r+". "+food[0][r].item_code+". " + food[0][r].item_name+"==>"+"$ "+food[0][r].item_price.toFixed(2))
     }
     console.log("\n")
+    if (userlogin===true || guestlogin===true){
+        console.log("[1] View an item's description [2] Add to cart [3]Return back ");
+        console.log("*****************************************************\n")
+        addcartrc();
+        function addcartrc(){
+
+            var choice=input.questionInt("Choice :")
+            switch (choice){
+                case 1:   viewnoodledescription();
+                    break;
+                case 2:
+                    var cartready=input.questionInt("Which one to add to cart: ")
+                    if (cartready<0||cartready>food[0].length-1){
+                        console.log("Invalid Option")
+                        addcartrc();
+                    }
+                    if (userlogin===true){
+
+                        customer[currentlogin].cart.push((food[0].slice(cartready,cartready+1)))
+                        tempclass=customer[currentlogin].cart.length-1;
+                        quantityoforderuser();
+
+                    }
+                function quantityoforderuser(){
+                    var quantity = input.questionInt("How many do you want: ");
+                    if (quantity<0){
+                        quantityoforderuser()
+                    }
+                    customer[currentlogin].cart[tempclass][0].item_quantity=quantity
+
+                    if (customer[currentlogin].cart[tempclass][0].item_spicy===true){
+                        console.log("============")
+                        console.log("Level of spicy")
+                        console.log("[1] No spicy")
+                        console.log("[2] Abit Spicy")
+                        console.log("[3] Very Spicy")
+                        console.log("============")
+                        var spicylevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_spicy_level=spicylevel
+
+                    }
+
+                    if (customer[currentlogin].cart[tempclass][0].item_dry===true){
+                        console.log("============")
+                        console.log("Dry of with soup")
+                        console.log("[1] Dry")
+                        console.log("[2] Soup")
+                        console.log("============")
+                        var drylevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_dry_level=drylevel
+
+                    }
+
+
+
+                    if (customer[currentlogin].cart[tempclass][0].item_ice===true){
+                        console.log("============")
+                        console.log("Level of ice")
+                        console.log("[1] No ice")
+                        console.log("[2] Abit ice")
+                        console.log("[3] Alot of ice")
+                        console.log("============")
+                        var icelevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_ice_level=icelevel
+
+                    }
+
+                    console.log("Added to cart!!");
+                    wait(3000)
+                    noodlecategory();
+
+
+                }
+
+                    break;
+                case 3:
+                    category_item();
+                    break
+                default:
+                    console.log("Invalid Option")
+                    addcartrc();
+
+            }
+
+
+        }
+    }
+    if (userlogin===false&&guestlogin===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
     itemchoiceview1();
@@ -1190,7 +1389,7 @@ function noodlecategory(){
                 console.log("Invalid Option");
                 itemchoiceview1()
         }
-    }
+    }}
 }
 function viewnoodledescription(){
     retrynoodle();
@@ -1237,6 +1436,94 @@ function drinkcategory(){
         console.log(r+". "+food[2][r].item_code+". " + food[2][r].item_name+"==>"+"$ "+food[2][r].item_price.toFixed(2))
     }
     console.log("\n")
+    if (userlogin===true || guestlogin===true){
+        console.log("[1] View an item's description [2] Add to cart [3]Return back ");
+        console.log("*****************************************************\n")
+        addcartrc();
+        function addcartrc(){
+
+            var choice=input.questionInt("Choice :")
+            switch (choice){
+                case 1:   viewdrinkdescription();
+                    break;
+                case 2:
+                    var cartready=input.questionInt("Which one to add to cart: ")
+                    if (cartready<0||cartready>food[2].length-1){
+                        console.log("Invalid Option")
+                        addcartrc();
+                    }
+                    if (userlogin===true){
+
+                        customer[currentlogin].cart.push((food[2].slice(cartready,cartready+1)))
+                        tempclass=customer[currentlogin].cart.length-1;
+                        quantityoforderuser();
+
+                    }
+                function quantityoforderuser(){
+                    var quantity = input.questionInt("How many do you want: ");
+                    if (quantity<0){
+                        quantityoforderuser()
+                    }
+                    customer[currentlogin].cart[tempclass][0].item_quantity=quantity
+
+                    if (customer[currentlogin].cart[tempclass][0].item_spicy===true){
+                        console.log("============")
+                        console.log("Level of spicy")
+                        console.log("[1] No spicy")
+                        console.log("[2] Abit Spicy")
+                        console.log("[3] Very Spicy")
+                        console.log("============")
+                        var spicylevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_spicy_level=spicylevel
+
+                    }
+
+                    if (customer[currentlogin].cart[tempclass][0].item_dry===true){
+                        console.log("============")
+                        console.log("Dry of with soup")
+                        console.log("[1] Dry")
+                        console.log("[2] Soup")
+                        console.log("============")
+                        var drylevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_dry_level=drylevel
+
+                    }
+
+
+
+                    if (customer[currentlogin].cart[tempclass][0].item_ice===true){
+                        console.log("============")
+                        console.log("Level of ice")
+                        console.log("[1] No ice")
+                        console.log("[2] Abit ice")
+                        console.log("[3] Alot of ice")
+                        console.log("============")
+                        var icelevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_ice_level=icelevel
+
+                    }
+
+                    console.log("Added to cart!!");
+                    wait(3000)
+                    drinkcategory();
+
+
+                }
+
+                    break;
+                case 3:
+                    category_item();
+                    break
+                default:
+                    console.log("Invalid Option")
+                    addcartrc();
+
+            }
+
+
+        }
+    }
+    if (userlogin===false&&guestlogin===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
     itemchoiceview1();
@@ -1249,7 +1536,10 @@ function drinkcategory(){
                 console.log("Invalid Option");
                 itemchoiceview1()
         }
-    }
+    }}
+
+
+
 }
 function viewdrinkdescription(){
     retrydrink();
@@ -1295,6 +1585,94 @@ function othercategory(){
         console.log(r+". "+food[3][r].item_code+". " + food[3][r].item_name+"==>"+"$ "+food[3][r].item_price.toFixed(2))
     }
     console.log("\n")
+    if (userlogin===true || guestlogin===true){
+        console.log("[1] View an item's description [2] Add to cart [3]Return back ");
+        console.log("*****************************************************\n")
+        addcartrc();
+        function addcartrc(){
+
+            var choice=input.questionInt("Choice :")
+            switch (choice){
+                case 1:   viewotherdescription();
+                    break;
+                case 2:
+                    var cartready=input.questionInt("Which one to add to cart: ")
+                    if (cartready<0||cartready>food[3].length-1){
+                        console.log("Invalid Option")
+                        addcartrc();
+                    }
+                    if (userlogin===true){
+
+                        customer[currentlogin].cart.push((food[3].slice(cartready,cartready+1)))
+                        tempclass=customer[currentlogin].cart.length-1;
+                        quantityoforderuser();
+
+                    }
+                function quantityoforderuser(){
+                    var quantity = input.questionInt("How many do you want: ");
+                    if (quantity<0){
+                        quantityoforderuser()
+                    }
+                    customer[currentlogin].cart[tempclass][0].item_quantity=quantity
+
+                    if (customer[currentlogin].cart[tempclass][0].item_spicy===true){
+                        console.log("============")
+                        console.log("Level of spicy")
+                        console.log("[1] No spicy")
+                        console.log("[2] Abit Spicy")
+                        console.log("[3] Very Spicy")
+                        console.log("============")
+                        var spicylevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_spicy_level=spicylevel
+
+                    }
+
+                    if (customer[currentlogin].cart[tempclass][0].item_dry===true){
+                        console.log("============")
+                        console.log("Dry of with soup")
+                        console.log("[1] Dry")
+                        console.log("[2] Soup")
+                        console.log("============")
+                        var drylevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_dry_level=drylevel
+
+                    }
+
+
+
+                    if (customer[currentlogin].cart[tempclass][0].item_ice===true){
+                        console.log("============")
+                        console.log("Level of ice")
+                        console.log("[1] No ice")
+                        console.log("[2] Abit ice")
+                        console.log("[3] Alot of ice")
+                        console.log("============")
+                        var icelevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_ice_level=icelevel
+
+                    }
+
+                    console.log("Added to cart!!");
+                    wait(3000)
+                    othercategory();
+
+
+                }
+
+                    break;
+                case 3:
+                    category_item();
+                    break
+                default:
+                    console.log("Invalid Option")
+                    addcartrc();
+
+            }
+
+
+        }
+    }
+    if (userlogin===false&&guestlogin===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
     itemchoiceview1();
@@ -1307,7 +1685,7 @@ function othercategory(){
                 console.log("Invalid Option");
                 itemchoiceview1()
         }
-    }
+    }}
 }
 function viewotherdescription(){
     retryother();
@@ -1342,6 +1720,154 @@ function viewotherdescription(){
         }
 
     }
+}
+
+
+function viewpromotiondescription(){
+    retryother();
+    function retryother() {
+        seeitem5 = input.questionInt("Which item do you want to see: ");
+        if (seeitem5>food[4].length-1 || seeitem5<0){
+            console.log("Invalid Option");
+            retryother();
+
+        }
+
+        process.stdout.write('\033c')
+        console.log("*****************************************************\n");
+        console.log("      The NiceMeal Restaurant Ordering System          ");
+        console.log("              Quality you can taste.\n                 ");
+        console.log("Item description for "+food[4][seeitem5].item_name +":")   ;
+        console.log(food[4][seeitem5].item_description+"\n");
+        console.log("            [1]Back to previous screen ");
+        console.log("*****************************************************\n");
+        backto();
+        function backto(){
+            var choice=input.questionInt("Choice: ")
+            switch (choice){
+                case 1:
+                    promotioncategory();
+                    break
+                default:
+                    console.log("Invalid Option");
+                    backto();
+                    break;
+            }
+        }
+
+    }
+}
+function promotioncategory(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("       The NiceMeal Restaurant Ordering System        ");
+    console.log("               Quality you can taste.                 ");
+    console.log("                    Promotion Category\n")
+    for (var r=0;r<food[4].length;r++){
+        console.log(r+". "+food[4][r].item_code+". " + food[4][r].item_name+"==>"+"$ "+food[4][r].item_price.toFixed(2))
+    }
+    console.log("\n")
+    if (userlogin===true || guestlogin===true){
+        console.log("[1] View an item's description [2] Add to cart [3]Return back ");
+        console.log("*****************************************************\n")
+        addcartrc();
+        function addcartrc(){
+
+            var choice=input.questionInt("Choice :")
+            switch (choice){
+                case 1:   viewpromotiondescription();
+                    break;
+                case 2:
+                    var cartready=input.questionInt("Which one to add to cart: ")
+                    if (cartready<0||cartready>food[4].length-1){
+                        console.log("Invalid Option")
+                        addcartrc();
+                    }
+                    if (userlogin===true){
+
+                        customer[currentlogin].cart.push((food[4].slice(cartready,cartready+1)))
+                        tempclass=customer[currentlogin].cart.length-1;
+                        quantityoforderuser();
+
+                    }
+                function quantityoforderuser(){
+                    var quantity = input.questionInt("How many do you want: ");
+                    if (quantity<0){
+                        quantityoforderuser()
+                    }
+                    customer[currentlogin].cart[tempclass][0].item_quantity=quantity
+
+                    if (customer[currentlogin].cart[tempclass][0].item_spicy===true){
+                        console.log("============")
+                        console.log("Level of spicy")
+                        console.log("[1] No spicy")
+                        console.log("[2] Abit Spicy")
+                        console.log("[3] Very Spicy")
+                        console.log("============")
+                        var spicylevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_spicy_level=spicylevel
+
+                    }
+
+                    if (customer[currentlogin].cart[tempclass][0].item_dry===true){
+                        console.log("============")
+                        console.log("Dry of with soup")
+                        console.log("[1] Dry")
+                        console.log("[2] Soup")
+                        console.log("============")
+                        var drylevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_dry_level=drylevel
+
+                    }
+
+
+
+                    if (customer[currentlogin].cart[tempclass][0].item_ice===true){
+                        console.log("============")
+                        console.log("Level of ice")
+                        console.log("[1] No ice")
+                        console.log("[2] Abit ice")
+                        console.log("[3] Alot of ice")
+                        console.log("============")
+                        var icelevel=input.questionInt("Choice:")
+                        customer[currentlogin].cart[tempclass][0].item_ice_level=icelevel
+
+                    }
+
+                    console.log("Added to cart!!");
+                    wait(3000)
+                    promotioncategory();
+
+
+                }
+
+                    break;
+                case 3:
+                    category_item();
+                    break
+                default:
+                    console.log("Invalid Option")
+                    addcartrc();
+
+            }
+
+
+        }
+    }
+    if (userlogin===false&&guestlogin===false){
+        console.log("[1] View an item's description [2]Back to previous screen ");
+        console.log("*****************************************************\n")
+        itemchoiceview1();
+        function itemchoiceview1() {
+            var itemchoicedes = input.questionInt("Choice: ")
+            switch (itemchoicedes) {
+                case 1:viewpromotiondescription();break;
+                case 2:category_item();break;
+                default:
+                    console.log("Invalid Option");
+                    itemchoiceview1()
+            }
+        }}
 }
 var temporder=false;
 var finalcall=false
