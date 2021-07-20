@@ -2,7 +2,7 @@
 This program is written by CHEN ZHUOFAN | P2100746 | Singapore Polytechnic
 Used for ST0502 Fundamental of Programming CA2 Assignment
 All commits can be found at https://github.com/zhuofan-16/ST0502_Javascript-CA2
-Shall you have any question about this program ,please email me at zhuofan.21@ichat.sp.edu.sg
+Shall you have any question about this program ,please email me at zhuofan@jiahan16.onmicrosoft.com(Preferred) or zhuofan.21@ichat.sp.edu.sg
  */
 var input =require('readline-sync');
 var currentlogin=0;
@@ -910,6 +910,108 @@ function view_all(){
             foodcount++;
         }
     console.log("\n");
+
+        if (guestlogin===true||userlogin===true){
+            console.log("[1] View item's description [2] Add to cart [3] Return back \n")
+            console.log("*****************************************************\n")
+            addcartall();
+            function addcartall(){
+                var choice =input.questionInt("Choice: ");
+                switch ( choice){
+                    case 1: viewitemdescription();break;
+                    case 2:
+                        var seeitem=input.questionInt('Which one to add to cart? :');
+                        if (seeitem<0||seeitem>foodcount){
+                            console.log("Invalid Option");
+                            addcartall();
+                        }
+                        category_number=0;
+                        if (seeitem>=a){
+                            seeitem -= a;
+                            category_number=1;
+                            if (seeitem>=b){
+                                seeitem -= b;
+
+                                category_number=2;
+                                if (seeitem>=c){
+                                    seeitem -= c;
+                                    category_number=3;
+                                }
+                            }
+                        }
+                        console.log(category_number+seeitem)
+                        if (userlogin===true){
+                            customer[currentlogin].cart.push((food[category_number].slice(seeitem,seeitem+1)))
+                            tempclass=customer[currentlogin].cart.length-1;
+                            quantityoforderuser();
+                            function quantityoforderuser(){
+                                var quantity = input.questionInt("How many do you want: ");
+                                if (quantity<0){
+                                    quantityoforderuser()
+                                }
+                                customer[currentlogin].cart[tempclass][0].item_quantity=quantity
+                                if (customer[currentlogin].cart[tempclass][0].item_spicy===true){
+                                    console.log("============")
+                                    console.log("Level of spicy")
+                                    console.log("[1] No spicy")
+                                    console.log("[2] Abit Spicy")
+                                    console.log("[3] Very Spicy")
+                                    console.log("============")
+                                    var spicylevel=input.questionInt("Choice:")
+                                    customer[currentlogin].cart[tempclass][0].item_spicy_level=spicylevel
+
+                                }
+
+                                if (customer[currentlogin].cart[tempclass][0].item_dry===true){
+                                    console.log("============")
+                                    console.log("Dry of with soup")
+                                    console.log("[1] Dry")
+                                    console.log("[2] Soup")
+                                    console.log("============")
+                                    var drylevel=input.questionInt("Choice:")
+                                    customer[currentlogin].cart[tempclass][0].item_dry_level=drylevel
+
+                                }
+
+
+
+                                if (customer[currentlogin].cart[tempclass][0].item_ice===true){
+                                    console.log("============")
+                                    console.log("Level of ice")
+                                    console.log("[1] No ice")
+                                    console.log("[2] Abit ice")
+                                    console.log("[3] Alot of ice")
+                                    console.log("============")
+                                    var icelevel=input.questionInt("Choice:")
+                                    customer[currentlogin].cart[tempclass][0].item_ice_level=icelevel
+
+                                }
+                                console.log("Added to cart!!");
+                                wait(3000);
+                                order_menu()
+
+
+
+
+                            }
+
+                        }
+
+
+
+
+
+                        break;
+                    case 3:order_menu();break;
+                    default:console.log("Invalid Option");
+                    addcartall();
+                    break;
+                }
+            }
+        }
+
+
+        if (guestlogin===false&&userlogin===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
     itemchoiceview();
@@ -923,7 +1025,7 @@ function view_all(){
                 itemchoiceview()
         }
     }
-}
+}}
 var category_number=0;
 
 var seeitem;
