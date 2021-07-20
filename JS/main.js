@@ -5,6 +5,7 @@ All commits can be found at https://github.com/zhuofan-16/ST0502_Javascript-CA2
 Shall you have any question about this program ,please email me at zhuofan@jiahan16.onmicrosoft.com(Preferred) or zhuofan.21@ichat.sp.edu.sg
  */
 var input =require('readline-sync');
+const {questionInt} = require("readline-sync");
 var currentlogin=0;
 const passwordrequire=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
 var search="NA"
@@ -553,6 +554,100 @@ function customer_login(){
 verify_password()
 }
  choiceselectioncoupon=10;
+
+function change_particular(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("         The NiceMeal Restaurant User System        ");
+    console.log("         What would you like to update today\n")
+    console.log("           Name: " +customer[currentlogin].lastname+" "+customer[currentlogin].firstname)
+    console.log("           Phone: " +customer[currentlogin].contact)
+    console.log("           Email: " +customer[currentlogin].email)
+    console.log("           Member ID: " +customer[currentlogin].memberno+"\n")
+    console.log("        [1] Contact Number  [2] Email Address")
+    console.log("        [3] Passwords       [4] Return to previous screen\n")
+    console.log("*****************************************************\n")
+    changeparticularchoice();
+    function changeparticularchoice(){
+        var choice=input.questionInt("Choice: ");
+        switch (choice){
+            case 1:
+                var choice=input.questionInt("New phone number: ");
+                customer[currentlogin].contact=choice;
+                order_screen()
+                break;
+            case 2:
+                var tempchangeemail=input.question("Your new email address:")
+                customer[currentlogin].email=tempchangeemail;
+                console.log("Change is successful,going back ...");
+                wait(3000);
+                order_screen();
+                break;
+            case 3:
+                currentpass()
+                function currentpass(){
+                var currentemppw=input.question("Current password: ");
+                if (currentemppw===customer[currentlogin].password) {
+                    process.stdout.write('\033c')
+                    console.log("*****************************************************\n")
+                    console.log("         The NiceMeal Restaurant User System        ");
+                    console.log("              Verification is successful!")
+                    console.log("*****************************************************\n")
+                    retrypassword();
+
+                    function retrypassword()
+                    {
+                    var tempnewpass = input.question("New password: ");
+                    var tempnewconfirmpass = input.question("Re-enter password: ");
+                    if (tempnewconfirmpass === tempnewpass) {
+                        customer[currentlogin].password = tempnewconfirmpass;
+                        console.log("Change is successful");
+                        wait(3000);
+                        order_screen()
+                    } else {
+                        console.log("*****************************************************\n")
+                        console.log("         The NiceMeal Restaurant User System        ");
+                        console.log("              2 password does not match")
+                        console.log("               [1] Retry [2] Go back ")
+                        console.log("*****************************************************\n")
+                        repeatchoice()
+                        function repeatchoice() {
+                            var choice = input.questionInt("Choice: ");
+                            switch (choice){
+                                case 1:
+                                    retrypassword();break;
+                                case 2:
+                                    order_screen();break;
+                                default:
+                                    console.log("Invalid Option");
+                                    repeatchoice();
+                            }
+                        }
+                    }
+                }
+                }
+                else{
+                    process.stdout.write('\033c')
+                    console.log("*****************************************************\n")
+                    console.log("         The NiceMeal Restaurant User System        ");
+                    console.log("                Verification failed ")
+                    console.log("               [1] Retry [2] Go back")
+                    console.log("*****************************************************\n")
+                    var choice1=input.questionInt("Choice: ")
+                    switch (choice1){
+                        case 1: currentpass();break;
+                        case 2:order_screen();break;
+                    }
+                }}
+                break;
+            case 4:order_screen();break;
+            default:console.log("Invalid Option");
+            changeparticularchoice();break;
+
+        }
+
+    }
+}
 function order_screen(){
     totalcost=0;
     usecoupon=false;
