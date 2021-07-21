@@ -377,6 +377,68 @@ function admin_control(){
             }
     }
 }
+function user_password_reset(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("Which user's password do you want to reset ?")
+    for ( var usercount=0;usercount<customer.length;usercount++){
+        console.log(usercount+".       "+customer[usercount].memberno+"       "+customer[usercount].lastname+" "+customer[usercount].firstname +"        "+ customer[usercount].contact+"       " +customer[usercount].email)
+    }
+    console.log("         [1] Select user [2] Return")
+    console.log("*****************************************************\n")
+    reset_password();
+    function reset_password(){
+        var choice =input.question("Choice: ")
+        switch (choice){
+            case 1:
+                selectionuser();
+                function selectionuser(){
+                    var select=questionInt("User: ")
+                    if (select<0||select>=customer.length){
+                        console.log("Invalid Option");
+                        reset_password();
+                    }
+                    confirmation_message();
+                    function confirmation_message() {
+                        var confirmation = input.question("Are you sure you want to reset password of user " + customer[select].memberno+"(Y/N): ");
+                        switch (confirmation){
+                            case 'Y':
+                                console.log("*****************************************************\n")
+                                console.log("      The NiceMeal Restaurant Admin System        ");
+                                console.log("                 Resetting....")
+                                console.log("*****************************************************\n")
+                                customer[select].password="password"+customer[select].memberno;
+                                wait(3000);
+                                process.stdout.write('\033c')
+                                console.log("*****************************************************\n")
+                                console.log("      The NiceMeal Restaurant Admin System        ");
+                                console.log("               Reset successful!")
+                                console.log("New password for user "+customer[select].memberno +"is now :"+customer[select].password)
+                                console.log("                  Returning...")
+                                console.log("*****************************************************\n")
+                                wait(5000);
+                                user_password_reset();
+                                break;
+                            case 'N':
+                                user_password_reset();
+                                break;
+                            default:console.log("Invalid Option");
+                            confirmation_message();
+
+                        }
+                    }
+                }
+                break;
+            case 2:
+                admin_control();
+                break;
+            default:
+                console.log("Invalid Option");
+                user_password_reset()
+        }
+    }
+}
 function user_control(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -468,7 +530,7 @@ function user_control(){
                                 console.log("You are changing the users name");
                                 console.log("Press 0 to exit");
                                 var templast=input.question("New last name");
-                                if (tempnumber==="0"){
+                                if (templast==="0"){
                                     useredtion();
                                 }
 
