@@ -322,6 +322,8 @@ function admin_login() {
     temp_admin_password= input.question("Password: ");
     if (adminloginstatus!==true){
         console.log("Wrong admin ID or password,going back to main menu");
+        adminlogin=0;
+        adminloginstatus=false;
         wait(3000)
         main_screen();
     }
@@ -348,15 +350,25 @@ function admin_control(){
     console.log("      [2] User password reset   ")
     console.log("      [3] Menu Control (View,Edit,Add,Remove)  ")
     console.log("      [4] Coupon Control (View,Edit,Distribute)  ")
-    console.log("      [5] Add new admin   [6] Update particulars ")
+    console.log("      [5] Add new admin   [6] Update password ")
     console.log("      [6] Today's Sale    [7] Logout ")
-    console.log("                    [8]Exit")
+    console.log("                    [8]Exit\n")
+    if (adminloginc===true&&admin[adminlogin].staffid===10001){
+        console.log("          [22] Delete an admin\n")
+    }
     console.log("*****************************************************\n")
     admincontrolchoice();
     function admincontrolchoice(){
 
             var choice = input.questionInt("Choice: ");
             switch (choice){
+                case 22:if (adminloginc===false||admin[adminlogin].staffid!==10001){
+                    console.log("Unauthorised action!");
+                    admin_control();
+                }
+                deleteadmin();
+                break;
+
                 case 1:user_control();break;
                 case 2:user_password_reset();break;
                 case 3:menu_control();break;
@@ -367,6 +379,7 @@ function admin_control(){
                     adminloginc=false;
                     adminloginstatus=false;
                     adminlogin=0;
+                    main_screen();
                     break;
                 case 8:
                     process.exit(0);
@@ -376,6 +389,155 @@ function admin_control(){
                     admincontrolchoice();
             }
     }
+}
+var tempadminstaff;
+function deleteadmin(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System       \n ");
+    for (var o=0;o<admin.length;o++){
+        if (admin[o].staffid===10001){
+            continue;
+        }
+        console.log(o+". "+admin[o].staffid +"   "+admin[o].lastname+" "+admin[o].firstname);
+    }
+    console.log("\n")
+    console.log("             [1] Delete [2] Return\n")
+    console.log("*****************************************************\n")
+    optiondelete();
+    function optiondelete(){
+        var choice=input.questionInt("Choice: ");
+        switch (choice){
+            case 1:
+                var delte=input.questionInt("Which admin do you want to delete?: ")
+                confirmation();
+                function confirmation(){
+                    var deletedconfirmation=input.question("Are you sure you want to delete "+admin[delte].staffid+" ?(Y/N): ")
+                    switch (deletedconfirmation){
+                        case 'Y':
+                            admin.splice(delte,1);
+                            deleteadmin()
+                            break;
+                        case 'N':
+                            deleteadmin();
+                            break
+                        default:
+                            console.log("Invalid Option");
+                            confirmation()
+                            break;
+                    }
+                }
+
+                break;
+            case 2:
+                admin_control();
+                break;
+            default:
+                console.log("Invalid Option");
+                optiondelete();
+        }
+    }
+}
+function changeparticular_admin(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("*****************************************************\n")
+    var temppassword=input.question("Enter your existing password(Enter 1 if you want to return):  ")
+    if (temppassword==="1"){
+        admin_control();
+    }
+    verifymatch();
+    function verifymatch() {
+        if (temppassword === admin[adminlogin].password) {
+            var newpassadmin = input.question("Enter your new password: ");
+            var confirm = input.question("Confirm your new password");
+            if (newpassadmin === confirm) {
+                admin[adminlogin].password = confirm;
+            } else {
+                console.log("2 Password does not match")
+                verifymatch();
+            }
+        }else{
+            console.log("Wrong password,returning...");
+            wait(3000)
+            admin_control();
+        }
+    }
+}
+function addnewadmin(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("      WARNING!!! ONLY ADD TRUSTABLE ADMINS")
+    console.log("   FAILURE TO FOLLOW INSTRUCTION CAN LEAD TO")
+    console.log("   THE FAILURE OF SYSTEM AND CAUSE A DOWNFALL\n")
+    console.log("      ARE YOU SURE YOU WANT TO CONTINUE?\n")
+    console.log("            [1] Continue [2] Return\n")
+    console.log("*****************************************************\n")
+    choicenewadmin()
+    function choicenewadmin(){
+        var choice =input.questionInt("Choice: ");
+        switch (choice){
+            case 1:
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("                 Add new admin")
+                console.log("*****************************************************\n")
+                var tempadminlast=input.question("Input new admin's last name: ")
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("                 Add new admin")
+                console.log("*****************************************************\n")
+                var tempadminfirst=input.question("Input new admin's first name: ")
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("                 Add new admin")
+                console.log("*****************************************************\n")
+                var tempadmincontact=input.question("Input new admin's contact number: ")
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("                 Add new admin")
+                console.log("*****************************************************\n")
+                staffidcheck();
+                function staffidcheck(){
+                     tempadminstaff=input.question("Input new admin's staff id: ");
+                    for (var adminloginid=0;adminloginid<admin.length;adminloginid++){
+                        if (tempadminstaff===admin[adminloginid].staffid){
+                            console.log("Staff ID Conflict !!");
+                            staffidcheck();
+                        }
+                    }
+                }
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("                 Add new admin")
+                console.log("*****************************************************\n")
+                var tempadminspassword=input.question("Input new admin's password: ");
+                process.stdout.write('\033c')
+                admin[admin.length]=new Admin(tempadminlast,tempadminfirst,0,tempadmincontact,tempadminstaff,tempadminspassword);
+
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("                 Operation success")
+                console.log("*****************************************************\n")
+                admin_control();
+                break;
+            case 2:
+                admin_control();
+                break;
+            default:
+                console.log("Invalid Option");
+                addnewadmin();
+                break;
+        }
+    }
+
 }
 function user_password_reset(){
     process.stdout.write('\033c')
