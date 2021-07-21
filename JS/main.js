@@ -421,7 +421,108 @@ function user_control(){
                 }
                 break;
             case 2:
+                useredtion();
+                function useredtion(){
+                var editchoice=input.questionInt("Which one to edit?: ");
+                if (editchoice<0||editchoice>=customer.length){
+                    console.log("Invalid Option");
+                    useredtion();
+                    }
+                    process.stdout.write('\033c')
+                    console.log("*****************************************************\n")
+                    console.log("      The NiceMeal Restaurant Admin System        ");
+                    console.log("What would you want to edit for this user "+customer[editchoice].memberno);
+                    console.log("           [1] Member No.   [2] Name")
+                    console.log("           [3] Phone Number [4] Email")
+                    console.log("                     [5] Return\n")
+                    console.log("*****************************************************\n")
+                    edituser();
+                    function edituser(){
+                        var choice =input.questionInt("Choice: ")
+                        switch (choice){
+                            case 1:
+                                console.log("Changing membership number may lead to some conflicts.\nPlease consider twice");
+                                console.log("Enter 0 to exit ,or enter the new membership number");
+                                var tempid=input.questionInt("Choice: ");
+                                if (tempid===0){
+                                    useredtion();
+                                }else {
+                                    for (var g=0;g<customer.length;g++){
+                                        if (customer[g].memberno===tempid){
+                                            conflict=1
+                                        }else{conflict=0;}
+                                    }
+                                    if (conflict===0){
+                                        customer[editchoice].memberno=tempid;
+                                        console.log("Change is successful,returning...")
+                                        wait(3000)
+                                        useredtion();
+                                    }else if (conflict===1){
+                                        console.log("Member ID conflict.ERROR 1020");
+                                        wait(1000);
+                                        useredtion();
+                                    }
+                                }
+                                break;
+                            case 2:
+                                console.log("You are changing the users name");
+                                console.log("Press 0 to exit");
+                                var templast=input.question("New last name");
+                                if (tempnumber==="0"){
+                                    useredtion();
+                                }
+
+                                else{
+                                    var tempfirst=input.question("New first name");
+                                    customer[editchoice].lastname=templast;
+                                    customer[editchoice].firstname=tempfirst;
+                                    console.log("Change is successful.Returning...");
+                                    wait (3000);
+                                    useredtion();
+
+                                }
+                                break;
+                            case 3:
+                                console.log("You are changing the users phone number");
+                                console.log("Press 0 to exit");
+                                var tempnumber=input.questionInt("New phone number");
+                                if (tempnumber===0){
+                                    useredtion();
+                                }
+                                else{
+                                    customer[editchoice].contact=tempnumber;
+                                    console.log("Change is successful.Returning...");
+                                    wait (3000);
+                                    useredtion();
+
+                                }
+                                break;
+                            case 4:
+                                console.log("You are changing the users email");
+                                console.log("Press 0 to exit");
+                                var tempemail1=input.question("New email address");
+                                if (tempemail1==='0'){
+                                    useredtion();
+                                }
+                                else{
+                                    customer[editchoice].email=tempemail1;
+                                    console.log("Change is successful.Returning...");
+                                    wait (3000);
+                                    useredtion();
+
+                                }
+                                break;
+                            default:
+                                console.log("Invalid Option");
+                                edituser();break;
+                        }
+                    }
+                }
+
+                break;
             case 3:
+                break;
+
             case 4:admin_control();break;
             default: console.log("Invalid Choice ")
                 usermanagementchoice()
@@ -430,7 +531,7 @@ function user_control(){
         }
     }
 }
-
+var tempmno=0;
 function customer_register(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -466,7 +567,21 @@ function customer_register(){
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
     console.log("*****************************************************\n")
     var temp_contact=input.questionInt("Your Contact Number: ");
-    process.stdout.write('\033c')
+    process.stdout.write('\033c');
+    phonecheck()
+    function phonecheck(){
+    for (var j=0;j<customer.length;j++){
+        if (temp_contact===customer[j].contact){
+            conflict=1;
+            console.log("Mobile number conflict.Please enter a new one")
+            temp_contact=input.questionInt("Your Contact Number: ");
+            phonecheck();
+        }else {
+            conflict=0;
+        }
+    }}
+
+
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System        ");
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
@@ -496,8 +611,19 @@ function customer_register(){
     }
     passwordtype();
 
-
-    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,temp_password,600000+i,temp_email);
+tempmno=600000+i;
+membercheck();
+    function membercheck(){
+        for (var j=0;j<customer.length;j++){
+            if (tempmno===customer[j].memberno){
+                conflict=1;
+         tempmno++;
+                membercheck();
+            }else {
+                conflict=0;
+            }
+        }}
+    customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,temp_password,tempmno,temp_email);
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System    \n    ");
