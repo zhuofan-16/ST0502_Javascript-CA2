@@ -343,7 +343,7 @@ function admin_control(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Admin System        ");
-    console.log("            "+time_identify()+"Admin"+admin[adminlogin].lastname+"\n");
+    console.log("            "+time_identify()+"Admin "+admin[adminlogin].lastname+"\n");
     console.log("      [1] User control (View,Edit,Add,Remove)   ")
     console.log("      [2] User password reset   ")
     console.log("      [3] Menu Control (View,Edit,Add,Remove)  ")
@@ -375,6 +375,59 @@ function admin_control(){
                     console.log("Invalid Option ");
                     admincontrolchoice();
             }
+    }
+}
+function user_control(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("               User Management\n\n")
+    for ( var usercount=0;usercount<customer.length;usercount++){
+    console.log(usercount+".       "+customer[usercount].memberno+"       "+customer[usercount].lastname+" "+customer[usercount].firstname +"        "+ customer[usercount].contact+"       " +customer[usercount].email)
+    }
+    console.log("\n")
+    console.log("    [1] Delete [2] Edit [3] Add [4] Return")
+    console.log("*****************************************************\n")
+    usermanagementchoice();
+    function usermanagementchoice(){
+        var choice=input.questionInt("Choice: ");
+        switch(choice){
+            case 1:
+                var deltechoice=input.questionInt("Which one to delete?: ");
+                if (deltechoice<0||deltechoice>=customer.length){
+                    console.log("Invalid Option");
+                    usermanagementchoice();
+                }
+                confirmationdelteuser();
+                function confirmationdelteuser(){
+                    var confirmation=input.question("Are you sure you want to delete "+customer[deltechoice].memberno+" ?(Y/N): ")
+                    switch (confirmation)
+                    {
+                        case 'Y':
+                            customer.splice(deltechoice ,1);
+                            console.log("User have been deleted...Returning...")
+                            wait(1000);
+                            user_control();
+
+                            break;
+                        case "N":
+                            user_control();
+                            break;
+
+                        default:
+                            console.log("Invalid Option");
+                            confirmationdelteuser();
+                    }
+                }
+                break;
+            case 2:
+            case 3:
+            case 4:admin_control();break;
+            default: console.log("Invalid Choice ")
+                usermanagementchoice()
+
+
+        }
     }
 }
 
