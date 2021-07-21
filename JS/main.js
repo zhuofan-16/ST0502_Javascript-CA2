@@ -297,6 +297,7 @@ var temp_admin_login;
 var temp_admin_password;
 var adminlogin;
 var adminloginstatus;
+var adminloginc;
 function admin_login() {
     process.stdout.write('\033c')
     console.log("*****************************************************\n");
@@ -325,6 +326,7 @@ function admin_login() {
         main_screen();
     }
     if (temp_admin_password===admin[adminlogin].password){
+        adminloginc=true;
         admin_control();
     }else {
         console.log("Wrong admin ID or password,going back to main menu");
@@ -349,7 +351,31 @@ function admin_control(){
     console.log("      [5] Add new admin   [6] Update particulars ")
     console.log("      [6] Today's Sale    [7] Logout ")
     console.log("                    [8]Exit")
+    console.log("*****************************************************\n")
+    admincontrolchoice();
+    function admincontrolchoice(){
 
+            var choice = input.questionInt("Choice: ");
+            switch (choice){
+                case 1:user_control();break;
+                case 2:user_password_reset();break;
+                case 3:menu_control();break;
+                case 4:coupon_control();break;
+                case 5:addnewadmin();break;
+                case 6:changeparticular_admin();break;
+                case 7:
+                    adminloginc=false;
+                    adminloginstatus=false;
+                    adminlogin=0;
+                    break;
+                case 8:
+                    process.exit(0);
+                    break;
+                default:
+                    console.log("Invalid Option ");
+                    admincontrolchoice();
+            }
+    }
 }
 
 function customer_register(){
