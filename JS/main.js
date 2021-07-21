@@ -521,6 +521,7 @@ function user_control(){
 
                 break;
             case 3:
+                customer_register();
                 break;
 
             case 4:admin_control();break;
@@ -630,6 +631,13 @@ membercheck();
     console.log("       Processing your registration,please wait...     \n");
     console.log("*****************************************************\n")
     wait(2000);
+    if (adminloginc===true){
+        console.log("Success.Returning...")
+        customer[i].coupon[0]=new coupon("New User Welcome Gift",10001,"S",8)
+        i++;
+        wait(2000);
+        user_control()
+    }
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System    \n    ");
