@@ -415,6 +415,7 @@ function menu_control(){
                 break
             case 4:
                 admin_control();
+                break
             default:
                 console.log("Invalid Option")
                 menuchoice();
