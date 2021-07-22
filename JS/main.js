@@ -109,6 +109,8 @@ class coupon{
         this.coupon_price=coupon_price;
     }
 }
+var couponstore= new Array();
+couponstore[0]=new coupon("New User Welcome Gift",10001,"S",8)
 var customer=new Array();
 var admin=new Array();
 admin[0]=new Admin("admin","admin","","",10001,"admin")
@@ -266,7 +268,7 @@ function guest_login(){
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-     guest_phone=input.question("Your Contact Number: ");
+     guest_phone=input.questionInt("Your Contact Number: ");
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
@@ -389,6 +391,15 @@ function admin_control(){
                     admincontrolchoice();
             }
     }
+}
+function coupon_control(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("               Coupon Management")
+    console.log("         [1] Coupon Store [2] Return\n")
+    console.log("*****************************************************\n")
+
 }
 var tempadminstaff;
 function menu_control(){
