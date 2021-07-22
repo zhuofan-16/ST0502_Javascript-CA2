@@ -408,7 +408,7 @@ function menu_control(){
                 adddish();
                 break;
             case 2:
-                editdish();
+                category_item()
                 break;
             case 3:
                category_item()
@@ -2618,7 +2618,7 @@ function noodlecategory(){
         }
     }}
     if (adminloginc===true){
-        console.log("[1] Remove an item [2]Return back ");
+        console.log("[1] Remove an item [2]Return back [3] Edit item");
         console.log("*****************************************************\n")
         adminchoicenoodle();
         function adminchoicenoodle(){
@@ -2657,6 +2657,132 @@ function noodlecategory(){
                     break;
                 case 2:
                     admin_control();
+                    break;
+                case 3:
+                    process.stdout.write('\033c')
+                    console.log("*****************************************************\n")
+                    console.log("       The NiceMeal Restaurant Admin System        ");
+                    console.log("                   Item edit")
+                    console.log("You are warn that changes will only be applied to future order")
+
+                    for (var r=0;r<food[0].length;r++){
+                        console.log(r+". "+food[0][r].item_code+". " + food[0][r].item_name+"==>"+"$ "+food[0][r].item_price.toFixed(2))
+                    }
+
+                    console.log("\n")
+                    console.log("                [0] Edit [2] Return")
+                    console.log("*****************************************************\n")
+                    editchoice()
+                function editchoice() {
+                    var choiceedit = input.questionInt("Choice: ")
+                    switch (choiceedit){
+                        case 1:
+                            var choiceediter=input.questionInt("Which one do you want to edit")
+                            if (choiceediter < 0 || choiceediter > food[0].length) {
+                                console.log("Invalid Option");
+                                adminchoicerice();
+                            }
+                            edititem();
+                        function edititem(){
+                            process.stdout.write('\033c')
+                            console.log("*****************************************************\n")
+                            console.log("       The NiceMeal Restaurant Admin System        ");
+                            console.log("Edit for item : "+food[0][choiceediter].item_name+"\n")
+                            console.log("         [0] Item Name [2] Item Code")
+                            console.log("         [3] Item Description [4] Item Cost")
+                            console.log("                 [5] Return")
+                            console.log("*****************************************************\n")
+                            editfunction();
+                            function editfunction(){
+                                var choice=input.questionInt("Choice: ");
+                                switch (choice){
+                                    case 1:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Name: "+food[0][choiceeditor].item_name+"\n")
+                                        console.log("*****************************************************\n")
+                                        var itemname=input.question("Enter a new item name: ")
+                                        food[0][choiceeditor].item_name=itemname;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 2:   process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Price: "+food[0][choiceeditor].item_code+"\n")
+                                        console.log("*****************************************************\n")
+                                        var code=input.questionInt("Enter a new code: ")
+                                        for (var b=0;b<food.length;b++){
+                                            for (var q=0;q<food[b].length;q++ ){
+                                                if (code===food[b][q].item_code){
+                                                    console.log("Conflict item NO. !!! ")
+                                                    console.log("Undoing change")
+                                                    wait(3000)
+                                                    edititem()
+                                                }
+                                            }
+                                        }
+                                        food[0][choiceeditor].item_code=code;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 3:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Description: "+food[0][choiceeditor].item_description+"\n")
+                                        console.log("*****************************************************\n")
+                                        var text=input.question("Enter a new description: ")
+                                        food[0][choiceeditor].item_description=text;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 4:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Price: "+food[0][choiceeditor].item_price+"\n")
+                                        console.log("*****************************************************\n")
+                                        var cost=input.questionInt("Enter a new price: ")
+                                        food[0][choiceeditor].item_price=cost;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 5:admin_control();break;
+                                    default:
+                                        console.log("Invalid Option")
+                                        editfunction()
+                                        break
+                                }
+                            }}
+                            break;
+
+
+                        case 2:admin_control();
+                            break;
+                        default:
+                            console.log("Invalid Options");
+                            editchoice()
+                    }
+                }
+
                     break;
                 default:
                     console.log("Invalid Option")
@@ -2871,7 +2997,7 @@ function drinkcategory(){
     }}
 
     if (adminloginc===true){
-        console.log("[1] Remove an item [2]Return back ");
+        console.log("[1] Remove an item [2]Return back [3] Edit item");
         console.log("*****************************************************\n")
         adminchoicedrink();
         function adminchoicedrink(){
@@ -2910,6 +3036,132 @@ function drinkcategory(){
                     break;
                 case 2:
                     admin_control();
+                    break;
+                case 3:
+                    process.stdout.write('\033c')
+                    console.log("*****************************************************\n")
+                    console.log("       The NiceMeal Restaurant Admin System        ");
+                    console.log("                   Item edit")
+                    console.log("You are warn that changes will only be applied to future order")
+
+                    for (var r=0;r<food[2].length;r++){
+                        console.log(r+". "+food[2][r].item_code+". " + food[2][r].item_name+"==>"+"$ "+food[2][r].item_price.toFixed(2))
+                    }
+
+                    console.log("\n")
+                    console.log("                [2] Edit [2] Return")
+                    console.log("*****************************************************\n")
+                    editchoice()
+                function editchoice() {
+                    var choiceedit = input.questionInt("Choice: ")
+                    switch (choiceedit){
+                        case 1:
+                            var choiceediter=input.questionInt("Which one do you want to edit")
+                            if (choiceediter < 0 || choiceediter > food[2].length) {
+                                console.log("Invalid Option");
+                                adminchoicerice();
+                            }
+                            edititem();
+                        function edititem(){
+                            process.stdout.write('\033c')
+                            console.log("*****************************************************\n")
+                            console.log("       The NiceMeal Restaurant Admin System        ");
+                            console.log("Edit for item : "+food[2][choiceediter].item_name+"\n")
+                            console.log("         [2] Item Name [2] Item Code")
+                            console.log("         [3] Item Description [4] Item Cost")
+                            console.log("                 [5] Return")
+                            console.log("*****************************************************\n")
+                            editfunction();
+                            function editfunction(){
+                                var choice=input.questionInt("Choice: ");
+                                switch (choice){
+                                    case 1:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Name: "+food[2][choiceeditor].item_name+"\n")
+                                        console.log("*****************************************************\n")
+                                        var itemname=input.question("Enter a new item name: ")
+                                        food[2][choiceeditor].item_name=itemname;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 2:   process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Price: "+food[2][choiceeditor].item_code+"\n")
+                                        console.log("*****************************************************\n")
+                                        var code=input.questionInt("Enter a new code: ")
+                                        for (var b=0;b<food.length;b++){
+                                            for (var q=0;q<food[b].length;q++ ){
+                                                if (code===food[b][q].item_code){
+                                                    console.log("Conflict item NO. !!! ")
+                                                    console.log("Undoing change")
+                                                    wait(3000)
+                                                    edititem()
+                                                }
+                                            }
+                                        }
+                                        food[2][choiceeditor].item_code=code;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 3:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Description: "+food[2][choiceeditor].item_description+"\n")
+                                        console.log("*****************************************************\n")
+                                        var text=input.question("Enter a new description: ")
+                                        food[2][choiceeditor].item_description=text;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 4:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Price: "+food[2][choiceeditor].item_price+"\n")
+                                        console.log("*****************************************************\n")
+                                        var cost=input.questionInt("Enter a new price: ")
+                                        food[2][choiceeditor].item_price=cost;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 5:admin_control();break;
+                                    default:
+                                        console.log("Invalid Option")
+                                        editfunction()
+                                        break
+                                }
+                            }}
+                            break;
+
+
+                        case 2:admin_control();
+                            break;
+                        default:
+                            console.log("Invalid Options");
+                            editchoice()
+                    }
+                }
+
                     break;
                 default:
                     console.log("Invalid Option")
@@ -3127,7 +3379,7 @@ function othercategory(){
         }
     }}
 }    if (adminloginc===true){
-    console.log("[1] Remove an item [2]Return back ");
+    console.log("[1] Remove an item [2]Return back [3] Edit item");
     console.log("*****************************************************\n")
     adminchoiceother();
     function adminchoiceother(){
@@ -3166,6 +3418,132 @@ function othercategory(){
                 break;
             case 2:
                 admin_control();
+                break;
+            case 3:
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("       The NiceMeal Restaurant Admin System        ");
+                console.log("                   Item edit")
+                console.log("You are warn that changes will only be applied to future order")
+
+                for (var r=0;r<food[3].length;r++){
+                    console.log(r+". "+food[3][r].item_code+". " + food[3][r].item_name+"==>"+"$ "+food[3][r].item_price.toFixed(2))
+                }
+
+                console.log("\n")
+                console.log("                [3] Edit [2] Return")
+                console.log("*****************************************************\n")
+                editchoice()
+            function editchoice() {
+                var choiceedit = input.questionInt("Choice: ")
+                switch (choiceedit){
+                    case 1:
+                        var choiceediter=input.questionInt("Which one do you want to edit")
+                        if (choiceediter < 0 || choiceediter > food[3].length) {
+                            console.log("Invalid Option");
+                            adminchoicerice();
+                        }
+                        edititem();
+                    function edititem(){
+                        process.stdout.write('\033c')
+                        console.log("*****************************************************\n")
+                        console.log("       The NiceMeal Restaurant Admin System        ");
+                        console.log("Edit for item : "+food[3][choiceediter].item_name+"\n")
+                        console.log("         [3] Item Name [2] Item Code")
+                        console.log("         [3] Item Description [4] Item Cost")
+                        console.log("                 [5] Return")
+                        console.log("*****************************************************\n")
+                        editfunction();
+                        function editfunction(){
+                            var choice=input.questionInt("Choice: ");
+                            switch (choice){
+                                case 1:
+                                    process.stdout.write('\033c')
+                                    console.log("*****************************************************\n")
+                                    console.log("Current Name: "+food[3][choiceeditor].item_name+"\n")
+                                    console.log("*****************************************************\n")
+                                    var itemname=input.question("Enter a new item name: ")
+                                    food[3][choiceeditor].item_name=itemname;
+                                    process.stdout.write('\033c')
+                                    console.log("*****************************************************\n")
+                                    console.log("       The NiceMeal Restaurant Admin System        ");
+                                    console.log("          Change is successful.Returning...")
+                                    console.log("*****************************************************\n")
+                                    wait(3000);
+                                    edititem();
+                                    break;
+                                case 2:   process.stdout.write('\033c')
+                                    console.log("*****************************************************\n")
+                                    console.log("Current Price: "+food[3][choiceeditor].item_code+"\n")
+                                    console.log("*****************************************************\n")
+                                    var code=input.questionInt("Enter a new code: ")
+                                    for (var b=0;b<food.length;b++){
+                                        for (var q=0;q<food[b].length;q++ ){
+                                            if (code===food[b][q].item_code){
+                                                console.log("Conflict item NO. !!! ")
+                                                console.log("Undoing change")
+                                                wait(3000)
+                                                edititem()
+                                            }
+                                        }
+                                    }
+                                    food[3][choiceeditor].item_code=code;
+                                    process.stdout.write('\033c')
+                                    console.log("*****************************************************\n")
+                                    console.log("       The NiceMeal Restaurant Admin System        ");
+                                    console.log("          Change is successful.Returning...")
+                                    console.log("*****************************************************\n")
+                                    wait(3000);
+                                    edititem();
+                                    break;
+                                case 3:
+                                    process.stdout.write('\033c')
+                                    console.log("*****************************************************\n")
+                                    console.log("Current Description: "+food[3][choiceeditor].item_description+"\n")
+                                    console.log("*****************************************************\n")
+                                    var text=input.question("Enter a new description: ")
+                                    food[3][choiceeditor].item_description=text;
+                                    process.stdout.write('\033c')
+                                    console.log("*****************************************************\n")
+                                    console.log("       The NiceMeal Restaurant Admin System        ");
+                                    console.log("          Change is successful.Returning...")
+                                    console.log("*****************************************************\n")
+                                    wait(3000);
+                                    edititem();
+                                    break;
+                                case 4:
+                                    process.stdout.write('\033c')
+                                    console.log("*****************************************************\n")
+                                    console.log("Current Price: "+food[3][choiceeditor].item_price+"\n")
+                                    console.log("*****************************************************\n")
+                                    var cost=input.questionInt("Enter a new price: ")
+                                    food[3][choiceeditor].item_price=cost;
+                                    process.stdout.write('\033c')
+                                    console.log("*****************************************************\n")
+                                    console.log("       The NiceMeal Restaurant Admin System        ");
+                                    console.log("          Change is successful.Returning...")
+                                    console.log("*****************************************************\n")
+                                    wait(3000);
+                                    edititem();
+                                    break;
+                                case 5:admin_control();break;
+                                default:
+                                    console.log("Invalid Option")
+                                    editfunction()
+                                    break
+                            }
+                        }}
+                        break;
+
+
+                    case 2:admin_control();
+                        break;
+                    default:
+                        console.log("Invalid Options");
+                        editchoice()
+                }
+            }
+
                 break;
             default:
                 console.log("Invalid Option")
@@ -3416,7 +3794,7 @@ function promotioncategory(){
             }
         }}
     if (adminloginc===true){
-        console.log("[1] Remove an item [2]Return back ");
+        console.log("[1] Remove an item [2]Return back [3] Edit item");
         console.log("*****************************************************\n")
         adminchoicepromotion();
         function adminchoicepromotion(){
@@ -3455,6 +3833,132 @@ function promotioncategory(){
                     break;
                 case 2:
                     admin_control();
+                    break;
+                case 3:
+                    process.stdout.write('\033c')
+                    console.log("*****************************************************\n")
+                    console.log("       The NiceMeal Restaurant Admin System        ");
+                    console.log("                   Item edit")
+                    console.log("You are warn that changes will only be applied to future order")
+
+                    for (var r=0;r<food[4].length;r++){
+                        console.log(r+". "+food[4][r].item_code+". " + food[4][r].item_name+"==>"+"$ "+food[4][r].item_price.toFixed(2))
+                    }
+
+                    console.log("\n")
+                    console.log("                [4] Edit [2] Return")
+                    console.log("*****************************************************\n")
+                    editchoice()
+                function editchoice() {
+                    var choiceedit = input.questionInt("Choice: ")
+                    switch (choiceedit){
+                        case 1:
+                            var choiceediter=input.questionInt("Which one do you want to edit")
+                            if (choiceediter < 0 || choiceediter > food[4].length) {
+                                console.log("Invalid Option");
+                                adminchoicerice();
+                            }
+                            edititem();
+                        function edititem(){
+                            process.stdout.write('\033c')
+                            console.log("*****************************************************\n")
+                            console.log("       The NiceMeal Restaurant Admin System        ");
+                            console.log("Edit for item : "+food[4][choiceediter].item_name+"\n")
+                            console.log("         [4] Item Name [2] Item Code")
+                            console.log("         [3] Item Description [4] Item Cost")
+                            console.log("                 [5] Return")
+                            console.log("*****************************************************\n")
+                            editfunction();
+                            function editfunction(){
+                                var choice=input.questionInt("Choice: ");
+                                switch (choice){
+                                    case 1:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Name: "+food[4][choiceeditor].item_name+"\n")
+                                        console.log("*****************************************************\n")
+                                        var itemname=input.question("Enter a new item name: ")
+                                        food[4][choiceeditor].item_name=itemname;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 2:   process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Price: "+food[4][choiceeditor].item_code+"\n")
+                                        console.log("*****************************************************\n")
+                                        var code=input.questionInt("Enter a new code: ")
+                                        for (var b=0;b<food.length;b++){
+                                            for (var q=0;q<food[b].length;q++ ){
+                                                if (code===food[b][q].item_code){
+                                                    console.log("Conflict item NO. !!! ")
+                                                    console.log("Undoing change")
+                                                    wait(3000)
+                                                    edititem()
+                                                }
+                                            }
+                                        }
+                                        food[4][choiceeditor].item_code=code;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 3:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Description: "+food[4][choiceeditor].item_description+"\n")
+                                        console.log("*****************************************************\n")
+                                        var text=input.question("Enter a new description: ")
+                                        food[4][choiceeditor].item_description=text;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 4:
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("Current Price: "+food[4][choiceeditor].item_price+"\n")
+                                        console.log("*****************************************************\n")
+                                        var cost=input.questionInt("Enter a new price: ")
+                                        food[4][choiceeditor].item_price=cost;
+                                        process.stdout.write('\033c')
+                                        console.log("*****************************************************\n")
+                                        console.log("       The NiceMeal Restaurant Admin System        ");
+                                        console.log("          Change is successful.Returning...")
+                                        console.log("*****************************************************\n")
+                                        wait(3000);
+                                        edititem();
+                                        break;
+                                    case 5:admin_control();break;
+                                    default:
+                                        console.log("Invalid Option")
+                                        editfunction()
+                                        break
+                                }
+                            }}
+                            break;
+
+
+                        case 2:admin_control();
+                            break;
+                        default:
+                            console.log("Invalid Options");
+                            editchoice()
+                    }
+                }
+
                     break;
                 default:
                     console.log("Invalid Option")
