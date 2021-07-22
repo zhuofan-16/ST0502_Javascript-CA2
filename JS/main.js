@@ -391,6 +391,36 @@ function admin_control(){
     }
 }
 var tempadminstaff;
+function menu_control(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("                [1] Add a dish")
+    console.log("                [2] Edit a dish")
+    console.log("                [3] Remove a dish")
+    console.log("                [4] Return back \n")
+    console.log("*****************************************************\n")
+    menuchoice();
+    function menuchoice(){
+        var choice=input.questionInt("Choice: ");
+        switch (choice){
+            case 1:
+                adddish();
+                break;
+            case 2:
+                editdish();
+                break;
+            case 3:
+                removedish();
+                break
+            case 4:
+                admin_control();
+            default:
+                console.log("Invalid Option")
+                menuchoice();
+        }
+    }
+}
 function deleteadmin(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
