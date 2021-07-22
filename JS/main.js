@@ -411,7 +411,7 @@ function menu_control(){
                 editdish();
                 break;
             case 3:
-                removedish();
+               category_item()
                 break
             case 4:
                 admin_control();
@@ -421,6 +421,182 @@ function menu_control(){
                 menuchoice();
         }
     }
+}
+
+function adddish(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("      Are you sure you want to add a dish ?\n")
+    console.log("               [1] Exit [2] Yes")
+    console.log("*****************************************************\n")
+    decision();
+    function decision(){
+        var choice=input.questionInt("Choice: ")
+        switch (choice){
+            case 1:
+                admin_control();break;
+            case 2:
+                break;
+            default: console.log("Invalid Option");
+            decision();
+        }
+    }
+    categorychoic()
+    function categorychoic() {
+        process.stdout.write('\033c')
+        console.log("*****************************************************\n")
+        console.log("      The NiceMeal Restaurant Admin System  \n      ");
+        console.log("                Dish Category")
+        console.log("                [0] Noodle ")
+        console.log("                [1] Rice")
+        console.log("                [2] Drink ")
+        console.log("                [3] Other")
+        console.log("                [4] Promotion")
+        console.log("                [5] Return back")
+        console.log("*****************************************************\n")
+        var choice1 =input.questionInt("Choice: ")
+        if (choice1===5){
+            admin_control();
+        }
+        if (choice1>4||choice1<0){
+            console.log("Invalid Option")
+            wait (2000);
+            categorychoic();
+        }else {
+            dishname();
+            function dishname() {
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System   \n     ");
+                console.log("             Enter a dish name ")
+                console.log("      [1] Return back to previous screen")
+                console.log("*****************************************************\n")
+                 dishname1  = input.question("Dish Name: ")
+                if (dishname==="1"){
+                    admin_control()
+                }
+            }
+            console.log("*****************************************************\n")
+            console.log("      The NiceMeal Restaurant Admin System   \n     ");
+            console.log("       Enter a description for "+dishname1)
+            console.log("Wrong Name? Enter 2 to return back to previous screen")
+            console.log("*****************************************************\n")
+            var description=input.question("Description: ")
+            if (description==="2"){
+                dishname();
+            }
+            console.log("*****************************************************\n")
+            console.log("      The NiceMeal Restaurant Admin System   \n     ");
+            console.log("       Enter a cost for "+dishname1)
+            console.log("*****************************************************\n")
+            var costtemp=input.questionInt("Cost:")
+            foodprefer();
+            function foodprefer() {
+                if (choice1 === 0 || choice1 === 1) {
+                    var spicy = input.questionInt("Allow user to choose spicy(1 for yes,0 for no) ?: ")
+                    if (spicy !== 1 && spicy !== 0) {
+                        console.log("Invalid Option");
+    foodprefer();
+                    }
+                if (spicy===1){
+                    spicytemp=true;
+                }else{
+                    spicytemp=false
+                }
+
+                if (choice1===0){
+                    var dry = input.questionInt("Allow user to choose dry/soup (1 for yes,0 for no) ?: ")
+                    if (dry !== 1 && dry !== 0) {
+                        console.log("Invalid Option");
+                        foodprefer();
+                    }
+                    if (dry===1){
+                        drytemp=true;
+                    }else{
+                        drytemp=false
+                    }
+                }
+                }
+                if (choice1===2){
+                    var ice = input.questionInt("Allow user to choose ice(1 for yes,0 for no) ?: ")
+                    if (ice !== 1 && ice !== 0) {
+                        console.log("Invalid Option");
+                        foodprefer();
+                    }
+                    if (ice===1){
+                        icetemp=true;
+                    }else{
+                        icetemp=false
+                    }
+
+                }
+
+
+                if (choice1===3||choice1===4){
+                    var ice = input.questionInt("Allow user to choose ice(1 for yes,0 for no) ?: ")
+                    if (ice !== 1 && ice !== 0) {
+                        console.log("Invalid Option");
+                        foodprefer();
+                    }
+                    if (ice===1){
+                        icetemp=true;
+                    }else{
+                        icetemp=false
+                    }
+
+
+                    var spicy = input.questionInt("Allow user to choose spicy(1 for yes,0 for no) ?: ")
+                    if (spicy !== 1 && spicy !== 0) {
+                        console.log("Invalid Option");
+                        foodprefer();
+                    }
+                    if (spicy===1){
+                        spicytemp=true;
+                    }else{
+                        spicytemp=false
+                    }
+
+                    if (choice1===0){
+                        var dry = input.questionInt("Allow user to choose dry/soup (1 for yes,0 for no) ?: ")
+                        if (dry !== 1 && dry !== 0) {
+                            console.log("Invalid Option");
+                            foodprefer();
+                        }
+                        if (dry===1){
+                            drytemp=true;
+                        }else{
+                            drytemp=false
+                        }
+                    }
+
+
+
+                }
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System   \n     ");
+                console.log("                    Item code")
+                console.log("*****************************************************\n")
+                var itemcode=input.questionInt("Item code: ")
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System   \n     ");
+                console.log("               Processing dish...")
+                console.log("*****************************************************\n")
+                wait(3000)
+                food[choice1][food[choice1].length]=new item(dishname1,"SL",itemcode,costtemp,description,"F",0,drytemp,spicytemp,icetemp)
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System   \n     ");
+                console.log("               Success...Going back...")
+                console.log("*****************************************************\n")
+                wait(1000)
+                admin_control();
+            }
+        }
+    }
+
+    var dishname1
+
+
+
 }
 function deleteadmin(){
     process.stdout.write('\033c')
@@ -1875,6 +2051,10 @@ function category_item(){
                     order_screen();break;
                 }if (userlogin===false&&guestlogin===false){
                 main_screen();break;}
+                if (adminloginc===true){
+                    admin_control();break;
+                }
+                break;
             default:
                 console.log("Invalid option");
                 categorychoice();
@@ -2055,6 +2235,53 @@ function ricecategory(){
                 default:
                     console.log("Invalid Option");
                     itemchoiceview1()
+            }
+        }
+    }
+    if (adminloginc===true){
+        console.log("[1] Remove an item [2]Return back ");
+        console.log("*****************************************************\n")
+        adminchoicerice();
+        function adminchoicerice(){
+            var choice=input.question("Choice: ")
+            switch (choice){
+                case 1:
+
+                    var deleteoption=input.questionInt("Which item you want to delete? : ");
+                    if (deleteoption<0||deleteoption>food[1].length){
+                        console.log("Invalid Option")
+                        ricecategory();
+                    }
+                    confirmationdelete();
+                    function confirmationdelete() {
+
+
+                        var confirmation = input.question("Are you sure you want to delete " + food[1][deleteoption].item_name+"?: ");
+                        switch (confirmation){
+                            case "Y": food[1].splice(deleteoption,1);
+                            console.log("Delete Successful,returning...")
+                                wait(3000)
+                                ricecategory();
+                            break;
+                            case "N":
+                                admin_control();
+                                break;
+                            default:
+                                console.log("Invalid option")
+                                wait(300)
+                                ricecategory();
+                                break;
+                        }
+
+                    }
+
+                    break;
+                case 2:
+                    admin_control();
+                    break;
+                default:
+                    console.log("Invalid Option")
+                    admin_control();
             }
         }
     }
