@@ -2491,6 +2491,53 @@ function noodlecategory(){
                 itemchoiceview1()
         }
     }}
+    if (adminloginc===true){
+        console.log("[1] Remove an item [2]Return back ");
+        console.log("*****************************************************\n")
+        adminchoicenoodle();
+        function adminchoicenoodle(){
+            var choice=input.question("Choice: ")
+            switch (choice){
+                case 1:
+
+                    var deleteoption=input.questionInt("Which item you want to delete? : ");
+                    if (deleteoption<0||deleteoption>food[0].length){
+                        console.log("Invalid Option")
+                        noodlecategory();
+                    }
+                    confirmationdelete();
+                function confirmationdelete() {
+
+
+                    var confirmation = input.question("Are you sure you want to delete " + food[0][deleteoption].item_name+"?: ");
+                    switch (confirmation){
+                        case "Y": food[0].splice(deleteoption,1);
+                            console.log("Delete Successful,returning...")
+                            wait(3000)
+                            noodlecategory();
+                            break;
+                        case "N":
+                            admin_control();
+                            break;
+                        default:
+                            console.log("Invalid option")
+                            wait(300)
+                            noodlecategory();
+                            break;
+                    }
+
+                }
+
+                    break;
+                case 2:
+                    admin_control();
+                    break;
+                default:
+                    console.log("Invalid Option")
+                    admin_control();
+            }
+        }
+    }
 }
 function viewnoodledescription(){
     retrynoodle();
@@ -2696,6 +2743,54 @@ function drinkcategory(){
                 itemchoiceview1()
         }
     }}
+
+    if (adminloginc===true){
+        console.log("[1] Remove an item [2]Return back ");
+        console.log("*****************************************************\n")
+        adminchoicedrink();
+        function adminchoicedrink(){
+            var choice=input.question("Choice: ")
+            switch (choice){
+                case 1:
+
+                    var deleteoption=input.questionInt("Which item you want to delete? : ");
+                    if (deleteoption<0||deleteoption>food[2].length){
+                        console.log("Invalid Option")
+                        drinkcategory();
+                    }
+                    confirmationdelete();
+                function confirmationdelete() {
+
+
+                    var confirmation = input.question("Are you sure you want to delete " + food[2][deleteoption].item_name+"?: ");
+                    switch (confirmation){
+                        case "Y": food[2].splice(deleteoption,1);
+                            console.log("Delete Successful,returning...")
+                            wait(3000)
+                            drinkcategory();
+                            break;
+                        case "N":
+                            admin_control();
+                            break;
+                        default:
+                            console.log("Invalid option")
+                            wait(300)
+                            drinkcategory();
+                            break;
+                    }
+
+                }
+
+                    break;
+                case 2:
+                    admin_control();
+                    break;
+                default:
+                    console.log("Invalid Option")
+                    admin_control();
+            }
+        }
+    }
 
 
 
@@ -2905,6 +3000,52 @@ function othercategory(){
                 itemchoiceview1()
         }
     }}
+}    if (adminloginc===true){
+    console.log("[1] Remove an item [2]Return back ");
+    console.log("*****************************************************\n")
+    adminchoiceother();
+    function adminchoiceother(){
+        var choice=input.question("Choice: ")
+        switch (choice){
+            case 1:
+
+                var deleteoption=input.questionInt("Which item you want to delete? : ");
+                if (deleteoption<0||deleteoption>food[3].length){
+                    console.log("Invalid Option")
+                    othercategory();
+                }
+                confirmationdelete();
+            function confirmationdelete() {
+
+
+                var confirmation = input.question("Are you sure you want to delete " + food[3][deleteoption].item_name+"?: ");
+                switch (confirmation){
+                    case "Y": food[3].splice(deleteoption,1);
+                        console.log("Delete Successful,returning...")
+                        wait(3000)
+                        othercategory();
+                        break;
+                    case "N":
+                        admin_control();
+                        break;
+                    default:
+                        console.log("Invalid option")
+                        wait(300)
+                        othercategory();
+                        break;
+                }
+
+            }
+
+                break;
+            case 2:
+                admin_control();
+                break;
+            default:
+                console.log("Invalid Option")
+                admin_control();
+        }
+    }
 }
 function viewotherdescription(){
     retryother();
@@ -3148,6 +3289,53 @@ function promotioncategory(){
                     itemchoiceview1()
             }
         }}
+    if (adminloginc===true){
+        console.log("[1] Remove an item [2]Return back ");
+        console.log("*****************************************************\n")
+        adminchoicepromotion();
+        function adminchoicepromotion(){
+            var choice=input.question("Choice: ")
+            switch (choice){
+                case 1:
+
+                    var deleteoption=input.questionInt("Which item you want to delete? : ");
+                    if (deleteoption<0||deleteoption>food[4].length){
+                        console.log("Invalid Option")
+                        promotioncategory();
+                    }
+                    confirmationdelete();
+                function confirmationdelete() {
+
+
+                    var confirmation = input.question("Are you sure you want to delete " + food[4][deleteoption].item_name+"?: ");
+                    switch (confirmation){
+                        case "Y": food[4].splice(deleteoption,1);
+                            console.log("Delete Successful,returning...")
+                            wait(3000)
+                            promotioncategory();
+                            break;
+                        case "N":
+                            admin_control();
+                            break;
+                        default:
+                            console.log("Invalid option")
+                            wait(300)
+                            promotioncategory();
+                            break;
+                    }
+
+                }
+
+                    break;
+                case 2:
+                    admin_control();
+                    break;
+                default:
+                    console.log("Invalid Option")
+                    admin_control();
+            }
+        }
+    }
 }
 var temporder=false;
 var finalcall=false
