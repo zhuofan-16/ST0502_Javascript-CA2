@@ -10,6 +10,7 @@
 | Specifications | Detail                                                  |
 | ------------------- | ------------------------------------------- |
 | Project Name | The NiceMeal Restaurant Ordering System |
+| Project Deadline | 01 /08 / 2021 |
 | Objective | To develop a command prompt text-based application to digitalise ordering system of a restaurant |
 | Features:
 | Admin Management | Admin Login,Add new admin,manage user ,edit menu,control order status,coupon management |
