@@ -444,6 +444,184 @@ function coupon_store(){
         }
     }
 }
+function editcoupon(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("           Current registered coupons\n")
+    for (var w=0;w<couponstore.length;w++){
+        console.log(w+". "+couponstore[w].coupon_code+". "+couponstore[w].coupon_name+"==>"+couponstore[w].coupon_price)
+    }
+
+    console.log("        [1] Change Price [2] Return")
+    console.log("*****************************************************\n")
+    editcoupon_choice()
+    function editcoupon_choice(){
+        var choice=input.questionInt("Choice: ")
+        switch (choice){
+            case 1:
+                var editprice_coupon=input.questionInt("Which coupon do you want to edit: ");
+                if (editprice_coupon<0||editprice_coupon>=couponstore.length){
+                    console.log("Invalid Option");
+                    editcoupon_choice();
+                }
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("             Current price: "+ couponstore[editprice_coupon].coupon_price.toFixed(2))
+                console.log("*****************************************************\n")
+                var tempnewprice=input.questionInt("New price: ");
+                couponstore[editprice_coupon].coupon_price=tempnewprice;
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("        Change successfully..Returning..")
+                console.log("*****************************************************\n")
+                wait(3000)
+                coupon_store();
+                break;
+            case 2:
+                coupon_store();break;
+            default:
+                console.log("Invalid Choice");
+                editcoupon_choice();
+        }
+
+    }
+
+}
+function removecoupon(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("           Current registered coupons\n")
+    for (var w=0;w<couponstore.length;w++){
+        console.log(w+". "+couponstore[w].coupon_code+". "+couponstore[w].coupon_name+"==>"+couponstore[w].coupon_price)
+    }
+    console.log("       [1] Select to delete [2] Return")
+    console.log("*****************************************************\n")
+    removecoupon_choice()
+    function removecoupon_choice(){
+    var choice=input.questionInt("Choice: ")
+    switch (choice){
+        case 1:var deletedcoupon=input.questionInt("Which one to delete?: ")
+            if (deletedcoupon<0||deletedcoupon>=couponstore.length){
+                console.log("Invalid Option")
+                removecoupon_choice();
+            }
+            confirmationmess()
+            function confirmationmess() {
+                var inputconfirmation = input.question("Are you sure you want to delete " + coupon[deletedcoupon].coupon_name + " ?(Y/N): ")
+                switch (inputconfirmation){
+                    case 'Y':
+                        process.stdout.write('\033c')
+                        console.log("*****************************************************\n")
+                        console.log("      The NiceMeal Restaurant Admin System        ");
+                        console.log("                   Deleting...")
+                        console.log("*****************************************************\n")
+                        wait(3000);
+                        couponstore.splice(deletedcoupon,1);
+                        removecoupon()
+                        break;
+                    case 'N':removecoupon();break;
+                    default:
+                        console.log("Invalid Option")
+                        confirmationmess();
+                }
+            }
+            break;
+        case 2: coupon_control();
+        break;
+        default:console.log("Invalid Option");removecoupon_choice()
+    }
+    }
+}
+function distributecoupon(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("           Current registered coupons\n")
+    for (var w=0;w<couponstore.length;w++){
+        console.log(w+". "+couponstore[w].coupon_code+". "+couponstore[w].coupon_name+"==>"+couponstore[w].coupon_price)
+    }
+    console.log("        [1]Select a coupon [2] Return ")
+    console.log("*****************************************************\n")
+    distributechoice()
+    function distributechoice(){
+        var choice=input.questionInt("Choice: ")
+        switch (choice){
+            case 1:
+                var choose_coupon=input.questionInt("Which coupon do you want to distribute: ");
+                if (choose_coupon<0||choose_coupon>=couponstore.length){
+                    console.log("Invalid Option");
+                    distributechoice();
+                }
+                process.stdout.write('\033c')
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("          Select a user to distribute")
+                for (var u=0;u<customer.length;u++){
+                    console.log(u+". "+customer[u].memberno+". "+customer[u].lastname +" "+customer[u].firstname +" "+customer[u].coupon.length+" coupons")
+                }
+                console.log("*****************************************************\n")
+                selectuser();
+                function selectuser(){
+                    var userdistribute=input.questionInt("Choice: ");
+                    if (userdistribute>=customer.length ||userdistribute<0){
+                        console.log("Invalid Option");
+                        selectuser()
+
+                    }
+                    customer[userdistribute].coupon.push(couponstore.slice(choose_coupon,choose_coupon+1))
+                    process.stdout.write('\033c')
+                    console.log("*****************************************************\n")
+                    console.log("      The NiceMeal Restaurant Admin System        ");
+                    console.log("       Operation is successful ,returning...")
+                    console.log("*****************************************************\n")
+                    wait(3000)
+                    coupon_store();
+                }
+
+
+                break;
+            case 2:coupon_store();break
+            default:console.log("Invalid Option")
+                distributechoice()
+                break;
+        }
+    }
+}
+function addcoupon(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("              Creating coupon ")
+    console.log("*****************************************************\n")
+    var tempcouponname=input.question("Coupon Name: ")
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("              Creating coupon ")
+    console.log("*****************************************************\n")
+    var tempcouponcode=input.questionInt("Coupon Code: ");
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("              Creating coupon ")
+    console.log("*****************************************************\n")
+    var tempcouponprice=input.questionInt("Coupon Price: ")
+    couponstore[couponstore.length]=new coupon(tempcouponname,tempcouponcode,"F",tempcouponprice)
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("              Processing coupon... ")
+    console.log("*****************************************************\n")
+    wait(3000)
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("           Coupon created successfully ")
+    console.log("*****************************************************\n")
+    coupon_control();
+}
 function coupon_remove(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1324,7 +1502,6 @@ function customer_login(){
 verify_password()
 }
  choiceselectioncoupon=10;
-
 function change_particular(){
     if (guestlogin===true){
         process.stdout.write('\033c')
