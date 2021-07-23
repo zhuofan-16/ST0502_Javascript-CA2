@@ -396,9 +396,124 @@ function coupon_control(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Admin System        ");
-    console.log("               Coupon Management")
-    console.log("         [1] Coupon Store [2] Return\n")
+    console.log("               Coupon Management\n")
+    console.log("       [1] Coupon Store [2] Remove a coupon from user")
+    console.log("                 [3] Return\n")
     console.log("*****************************************************\n")
+coupon_management_choice();
+    function coupon_management_choice(){
+        var choice=input.questionInt("Choice: ")
+        switch (choice){
+            case 1: coupon_store();break;
+            case 2: coupon_remove();break;
+            case 3:admin_control();break;
+            default:console.log("Invalid Option");
+            coupon_management_choice();
+        }
+    }
+}
+function coupon_store(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("           Current registered coupons\n")
+    for (var w=0;w<couponstore.length;w++){
+        console.log(w+". "+couponstore[w].coupon_code+". "+couponstore[w].coupon_name+"==>"+couponstore[w].coupon_price)
+    }
+    console.log("[1] Add coupon [2] Remove Coupon [3] Edit Coupon");
+    console.log("       [4] Allocate Coupon [5] Return\n ")
+    console.log("*****************************************************\n")
+    coupon_store_choice();
+    function coupon_store_choice(){
+        var choice =input.questionInt("Choice: ")
+        switch (choice){
+            case 1:
+                addcoupon();break;
+            case 2:
+                removecoupon();break;
+            case 3:
+                editcoupon();
+                break;
+            case 4:distributecoupon();break;
+            case 5:
+                coupon_control();
+                break;
+            default:
+                console.log("Invalid Option");
+                coupon_store_choice();break;
+        }
+    }
+}
+function coupon_remove(){
+    process.stdout.write('\033c')
+    console.log("*****************************************************\n")
+    console.log("      The NiceMeal Restaurant Admin System        ");
+    console.log("   You are going to remove coupon from a user")
+    console.log(" You are warned to consider twice before removing")
+    for (var q=0;q<customer.length;q++){
+        console.log(q+". "+customer[q].memberno+". "+customer[q].lastname +" "+customer[q].firstname +" "+customer[q].coupon.length+" coupons")
+    }
+    console.log("             [1] Select [2] Return")
+    console.log("*****************************************************\n")
+     couponremove_choice();
+    function couponremove_choice(){
+        var choice=input.questionInt("Choice: ")
+        switch (choice){
+            case 1:
+                var userselected=input.questionInt("Choose an user: ")
+                if (userselected>=customer.length ||userselected<0){
+                    console.log("Invalid Option");
+                    couponremove_choice();
+
+                }else{
+
+                    process.stdout.write('\033c')
+                    console.log("*****************************************************\n")
+                    console.log("      The NiceMeal Restaurant Admin System        ");
+                    console.log("     Warning !!! This action is irreversible\n")
+                    console.log("User "+customer[userselected].memberno +"has "+customer[userselected].coupon.length+" coupons")
+                    for (var g=0;g<customer[userselected].coupon.length;g++){
+                        console.log(g+". "+customer[userselected].coupon[g].coupon_code+". "+customer[userselected].coupon[g].coupon_name+"===>"+customer[userselected].coupon[g].coupon_price)
+                    }
+                    console.log("      [1] Select to delete [2] Return\n")
+                    console.log("*****************************************************\n")
+                    deletecouponuser();
+                    function deletecouponuser(){
+                        var choice=input.questionInt("Choice: ")
+                        switch (choice){
+                            case 1:
+                                var optionop=input.questionInt("Which coupon to delete?: ")
+                                if (optionop<0||optionop>=customer[userselected].coupon.length){
+                                    console.log("Invalid Choice");
+                                    deletecouponuser();
+                                }
+                                customer[userselected].coupon.splice(optionop,1);
+                                console.log("Delete successfully,returning...")
+                                wait(3000);
+                                coupon_control();
+                                break;
+                            case 2:
+                                coupon_control();
+                                break;
+                            default:
+                                console.log("Invalid Option");
+                                deletecouponuser();
+                                break;
+                        }
+                    }
+
+
+                }
+
+            break;
+            case 2:
+                coupon_control()
+                break;
+            default: console.log("Invalid Option")
+                couponremove_choice();
+        }
+    }
+
 
 }
 var tempadminstaff;
