@@ -730,7 +730,7 @@ function menu_control(){
         }
     }
 }
-
+var  icetemp,drytemp,spicytemp;
 function adddish(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -751,6 +751,8 @@ function adddish(){
         }
     }
     categorychoic()
+
+
     function categorychoic() {
         process.stdout.write('\033c')
         console.log("*****************************************************\n")
@@ -804,13 +806,15 @@ function adddish(){
                     var spicy = input.questionInt("Allow user to choose spicy(1 for yes,0 for no) ?: ")
                     if (spicy !== 1 && spicy !== 0) {
                         console.log("Invalid Option");
-    foodprefer();
+                         foodprefer();
                     }
                 if (spicy===1){
                     spicytemp=true;
                 }else{
                     spicytemp=false
                 }
+                drytemp=false;
+                icetemp=false
 
                 if (choice1===0){
                     var dry = input.questionInt("Allow user to choose dry/soup (1 for yes,0 for no) ?: ")
@@ -826,6 +830,7 @@ function adddish(){
                 }
                 }
                 if (choice1===2){
+                    drytemp=0;spicytemp=0;
                     var ice = input.questionInt("Allow user to choose ice(1 for yes,0 for no) ?: ")
                     if (ice !== 1 && ice !== 0) {
                         console.log("Invalid Option");
