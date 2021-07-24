@@ -9,9 +9,13 @@ const {questionInt} = require("readline-sync");
 var currentlogin=0;
 const passwordrequire=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
 var search="NA"
+
+
+
+
 function wait(ms)
 {
-    var d = new Date();
+   var d = new Date();
     var d2 = null;
     do { d2 = new Date(); }
     while(d2-d < ms);
@@ -353,8 +357,8 @@ function admin_control(){
     console.log("      [3] Menu Control (View,Edit,Add,Remove)  ")
     console.log("      [4] Coupon Control (View,Edit,Distribute)  ")
     console.log("      [5] Add new admin   [6] Update password ")
-    console.log("      [6] Today's Sale    [7] Logout ")
-    console.log("                    [8]Exit\n")
+    console.log("      [7] Logout          [8]Exit")
+    console.log("                    \n")
     if (adminloginc===true&&admin[adminlogin].staffid===10001){
         console.log("          [22] Delete an admin\n")
     }
@@ -1062,7 +1066,7 @@ function user_password_reset(){
     console.log("*****************************************************\n")
     reset_password();
     function reset_password(){
-        var choice =input.question("Choice: ")
+        var choice =input.questionInt("Choice: ")
         switch (choice){
             case 1:
                 selectionuser();
@@ -1648,6 +1652,7 @@ function order_screen(){
 }
 var temps=0
 var tempv=0;
+var mailOptions;
 function order_menu(){
     process.stdout.write('\033c')
     counterfind=0;
@@ -1796,6 +1801,7 @@ if (usecoupon===false){
                             console.log("             Your order number is "+temporderno)
                             console.log("        A email receipt have been sent to you!")
                             console.log("*****************************************************\n");
+
                             wait(4000)
                             order_screen();
 
@@ -2035,7 +2041,8 @@ function coupon_view(){
         var choice =input.questionInt("Choice: ")
         switch (choice){
             case 1: order_screen();break
-            default:console.log("Invalid Option");coupon_view_choice()
+            default:console.log("Invalid Option"); wait(3000)
+                coupon_view_choice()
         }
     }
 }
@@ -2106,6 +2113,7 @@ function view_all(){
                         var seeitem=input.questionInt('Which one to add to cart? :');
                         if (seeitem<0||seeitem>foodcount){
                             console.log("Invalid Option");
+                            wait(3000)
                             addcartall();
                         }
                         category_number=0;
@@ -2245,7 +2253,8 @@ function view_all(){
 
                         break;
                     case 3:order_menu();break;
-                    default:console.log("Invalid Option");
+                    default:console.log("Invalid Option")
+                        wait(3000)
                     addcartall();
                     break;
                 }
@@ -2264,6 +2273,7 @@ function view_all(){
             case 2:food_menu();break;
             default:
                 console.log("Invalid Option");
+                wait(3000)
                 itemchoiceview()
         }
     }
@@ -2360,6 +2370,7 @@ function category_item(){
                 break;
             default:
                 console.log("Invalid option");
+                wait(3000)
                 categorychoice();
                 break;
         }
@@ -2521,7 +2532,7 @@ function ricecategory(){
 
         }
     }
-    if (userlogin===false&&guestlogin===false) {
+    if (userlogin===false&&guestlogin===false&&adminloginc===false) {
         console.log("[1] View an item's description [2]Back to previous screen ");
         console.log("*****************************************************\n")
         itemchoiceview1();
@@ -2537,6 +2548,7 @@ function ricecategory(){
                     break;
                 default:
                     console.log("Invalid Option");
+                    wait(3000)
                     itemchoiceview1()
             }
         }
@@ -2546,12 +2558,12 @@ function ricecategory(){
         console.log("*****************************************************\n")
         adminchoicerice();
         function adminchoicerice(){
-            var choice=input.question("Choice: ")
+            var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
 
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
-                    if (deleteoption<0||deleteoption>food[1].length){
+                    if (deleteoption<0||deleteoption>=food[1].length){
                         console.log("Invalid Option")
                         ricecategory();
                     }
@@ -2601,9 +2613,10 @@ function ricecategory(){
                         var choiceedit = input.questionInt("Choice: ")
 switch (choiceedit){
     case 1:
-        var choiceediter=input.questionInt("Which one do you want to edit")
-        if (choiceediter < 0 || choiceediter > food[1].length) {
+      var  choiceediter=input.questionInt("Which one do you want to edit: ")
+        if (choiceediter < 0 || choiceediter >= food[1].length) {
             console.log("Invalid Option");
+            wait(3000)
             adminchoicerice();
         }
                     edititem();
@@ -2623,10 +2636,10 @@ switch (choiceedit){
                 case 1:
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
-                    console.log("Current Name: "+food[1][choiceeditor].item_name+"\n")
+                    console.log("Current Name: "+food[1][choiceediter].item_name+"\n")
                     console.log("*****************************************************\n")
                     var itemname=input.question("Enter a new item name: ")
-                    food[1][choiceeditor].item_name=itemname;
+                    food[1][choiceediter].item_name=itemname;
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
                     console.log("       The NiceMeal Restaurant Admin System        ");
@@ -2637,7 +2650,7 @@ switch (choiceedit){
                     break;
                 case 2:   process.stdout.write('\033c')
                     console.log("*****************************************************\n")
-                    console.log("Current Price: "+food[1][choiceeditor].item_code+"\n")
+                    console.log("Current Price: "+food[1][choiceediter].item_code+"\n")
                     console.log("*****************************************************\n")
                     var code=input.questionInt("Enter a new code: ")
                     for (var b=0;b<food.length;b++){
@@ -2650,7 +2663,7 @@ switch (choiceedit){
                             }
                         }
                     }
-                    food[1][choiceeditor].item_code=code;
+                    food[1][choiceediter].item_code=code;
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
                     console.log("       The NiceMeal Restaurant Admin System        ");
@@ -2662,10 +2675,10 @@ switch (choiceedit){
                 case 3:
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
-                    console.log("Current Description: "+food[1][choiceeditor].item_description+"\n")
+                    console.log("Current Description: "+food[1][choiceediter].item_description+"\n")
                     console.log("*****************************************************\n")
                     var text=input.question("Enter a new description: ")
-                    food[1][choiceeditor].item_description=text;
+                    food[1][choiceediter].item_description=text;
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
                     console.log("       The NiceMeal Restaurant Admin System        ");
@@ -2677,10 +2690,10 @@ switch (choiceedit){
                 case 4:
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
-                    console.log("Current Price: "+food[1][choiceeditor].item_price+"\n")
+                    console.log("Current Price: "+food[1][choiceediter].item_price+"\n")
                     console.log("*****************************************************\n")
                     var cost=input.questionInt("Enter a new price: ")
-                    food[1][choiceeditor].item_price=cost;
+                    food[1][choiceediter].item_price=cost;
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
                     console.log("       The NiceMeal Restaurant Admin System        ");
@@ -2722,6 +2735,7 @@ function viewricedescription(){
         seeitem1 = input.questionInt("Which item do you want to see: ");
         if (seeitem1>food[1].length-1 || seeitem1<0){
             console.log("Invalid Option");
+            wait(3000)
             retryrice();
 
         }
@@ -2906,7 +2920,7 @@ function noodlecategory(){
 
         }
     }
-    if (userlogin===false&&guestlogin===false){
+    if (userlogin===false&&guestlogin===false&&adminloginc===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
     itemchoiceview1();
@@ -2917,6 +2931,7 @@ function noodlecategory(){
             case 2:category_item();break;
             default:
                 console.log("Invalid Option");
+                wait(3000)
                 itemchoiceview1()
         }
     }}
@@ -2925,12 +2940,12 @@ function noodlecategory(){
         console.log("*****************************************************\n")
         adminchoicenoodle();
         function adminchoicenoodle(){
-            var choice=input.question("Choice: ")
+            var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
 
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
-                    if (deleteoption<0||deleteoption>food[0].length){
+                    if (deleteoption<0||deleteoption>=food[0].length){
                         console.log("Invalid Option")
                         noodlecategory();
                     }
@@ -2938,7 +2953,7 @@ function noodlecategory(){
                 function confirmationdelete() {
 
 
-                    var confirmation = input.question("Are you sure you want to delete " + food[0][deleteoption].item_name+"?: ");
+                    var confirmation = input.question("Are you sure you want to delete " + food[0][deleteoption].item_name+"?(Y/N): ");
                     switch (confirmation){
                         case "Y": food[0].splice(deleteoption,1);
                             console.log("Delete Successful,returning...")
@@ -2973,17 +2988,18 @@ function noodlecategory(){
                     }
 
                     console.log("\n")
-                    console.log("                [0] Edit [2] Return")
+                    console.log("                [1] Edit [2] Return")
                     console.log("*****************************************************\n")
                     editchoice()
                 function editchoice() {
                     var choiceedit = input.questionInt("Choice: ")
                     switch (choiceedit){
                         case 1:
-                            var choiceediter=input.questionInt("Which one do you want to edit")
-                            if (choiceediter < 0 || choiceediter > food[0].length) {
+                            var choiceediter=input.questionInt("Which one do you want to edit: ")
+                            if (choiceediter < 0 || choiceediter >= food[0].length) {
                                 console.log("Invalid Option");
-                                adminchoicerice();
+                                wait(3000)
+                                adminchoicenoodle();
                             }
                             edititem();
                         function edititem(){
@@ -2991,7 +3007,7 @@ function noodlecategory(){
                             console.log("*****************************************************\n")
                             console.log("       The NiceMeal Restaurant Admin System        ");
                             console.log("Edit for item : "+food[0][choiceediter].item_name+"\n")
-                            console.log("         [0] Item Name [2] Item Code")
+                            console.log("         [1] Item Name [2] Item Code")
                             console.log("         [3] Item Description [4] Item Cost")
                             console.log("                 [5] Return")
                             console.log("*****************************************************\n")
@@ -3002,10 +3018,10 @@ function noodlecategory(){
                                     case 1:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Name: "+food[0][choiceeditor].item_name+"\n")
+                                        console.log("Current Name: "+food[0][choiceediter].item_name+"\n")
                                         console.log("*****************************************************\n")
                                         var itemname=input.question("Enter a new item name: ")
-                                        food[0][choiceeditor].item_name=itemname;
+                                        food[0][choiceediter].item_name=itemname;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3016,7 +3032,7 @@ function noodlecategory(){
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Price: "+food[0][choiceeditor].item_code+"\n")
+                                        console.log("Current Price: "+food[0][choiceediter].item_code+"\n")
                                         console.log("*****************************************************\n")
                                         var code=input.questionInt("Enter a new code: ")
                                         for (var b=0;b<food.length;b++){
@@ -3029,7 +3045,7 @@ function noodlecategory(){
                                                 }
                                             }
                                         }
-                                        food[0][choiceeditor].item_code=code;
+                                        food[0][choiceediter].item_code=code;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3041,10 +3057,10 @@ function noodlecategory(){
                                     case 3:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Description: "+food[0][choiceeditor].item_description+"\n")
+                                        console.log("Current Description: "+food[0][choiceediter].item_description+"\n")
                                         console.log("*****************************************************\n")
                                         var text=input.question("Enter a new description: ")
-                                        food[0][choiceeditor].item_description=text;
+                                        food[0][choiceediter].item_description=text;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3056,10 +3072,10 @@ function noodlecategory(){
                                     case 4:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Price: "+food[0][choiceeditor].item_price+"\n")
+                                        console.log("Current Price: "+food[0][choiceediter].item_price+"\n")
                                         console.log("*****************************************************\n")
                                         var cost=input.questionInt("Enter a new price: ")
-                                        food[0][choiceeditor].item_price=cost;
+                                        food[0][choiceediter].item_price=cost;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3100,6 +3116,7 @@ function viewnoodledescription(){
         seeitem2 = input.questionInt("Which item do you want to see: ");
         if (seeitem2>food[0].length-1 || seeitem2<0){
             console.log("Invalid Option");
+            wait(3000)
             retrynoodle();
 
         }
@@ -3284,7 +3301,7 @@ function drinkcategory(){
 
         }
     }
-    if (userlogin===false&&guestlogin===false){
+    if (userlogin===false&&guestlogin===false&&adminloginc===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
     itemchoiceview1();
@@ -3304,12 +3321,12 @@ function drinkcategory(){
         console.log("*****************************************************\n")
         adminchoicedrink();
         function adminchoicedrink(){
-            var choice=input.question("Choice: ")
+            var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
 
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
-                    if (deleteoption<0||deleteoption>food[2].length){
+                    if (deleteoption<0||deleteoption>=food[2].length){
                         console.log("Invalid Option")
                         drinkcategory();
                     }
@@ -3317,7 +3334,7 @@ function drinkcategory(){
                 function confirmationdelete() {
 
 
-                    var confirmation = input.question("Are you sure you want to delete " + food[2][deleteoption].item_name+"?: ");
+                    var confirmation = input.question("Are you sure you want to delete " + food[2][deleteoption].item_name+"?(Y/N): ");
                     switch (confirmation){
                         case "Y": food[2].splice(deleteoption,1);
                             console.log("Delete Successful,returning...")
@@ -3352,17 +3369,18 @@ function drinkcategory(){
                     }
 
                     console.log("\n")
-                    console.log("                [2] Edit [2] Return")
+                    console.log("                [1] Edit [2] Return")
                     console.log("*****************************************************\n")
                     editchoice()
                 function editchoice() {
                     var choiceedit = input.questionInt("Choice: ")
                     switch (choiceedit){
                         case 1:
-                            var choiceediter=input.questionInt("Which one do you want to edit")
-                            if (choiceediter < 0 || choiceediter > food[2].length) {
+                            var choiceediter=input.questionInt("Which one do you want to edit: ")
+                            if (choiceediter < 0 || choiceediter >=food[2].length) {
                                 console.log("Invalid Option");
-                                adminchoicerice();
+                                wait(3000)
+                                adminchoicedrink();
                             }
                             edititem();
                         function edititem(){
@@ -3370,7 +3388,7 @@ function drinkcategory(){
                             console.log("*****************************************************\n")
                             console.log("       The NiceMeal Restaurant Admin System        ");
                             console.log("Edit for item : "+food[2][choiceediter].item_name+"\n")
-                            console.log("         [2] Item Name [2] Item Code")
+                            console.log("         [1] Item Name [2] Item Code")
                             console.log("         [3] Item Description [4] Item Cost")
                             console.log("                 [5] Return")
                             console.log("*****************************************************\n")
@@ -3381,10 +3399,10 @@ function drinkcategory(){
                                     case 1:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Name: "+food[2][choiceeditor].item_name+"\n")
+                                        console.log("Current Name: "+food[2][choiceediter].item_name+"\n")
                                         console.log("*****************************************************\n")
                                         var itemname=input.question("Enter a new item name: ")
-                                        food[2][choiceeditor].item_name=itemname;
+                                        food[2][choiceediter].item_name=itemname;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3395,7 +3413,7 @@ function drinkcategory(){
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Price: "+food[2][choiceeditor].item_code+"\n")
+                                        console.log("Current Price: "+food[2][choiceediter].item_code+"\n")
                                         console.log("*****************************************************\n")
                                         var code=input.questionInt("Enter a new code: ")
                                         for (var b=0;b<food.length;b++){
@@ -3408,7 +3426,7 @@ function drinkcategory(){
                                                 }
                                             }
                                         }
-                                        food[2][choiceeditor].item_code=code;
+                                        food[2][choiceediter].item_code=code;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3420,10 +3438,10 @@ function drinkcategory(){
                                     case 3:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Description: "+food[2][choiceeditor].item_description+"\n")
+                                        console.log("Current Description: "+food[2][choiceediter].item_description+"\n")
                                         console.log("*****************************************************\n")
                                         var text=input.question("Enter a new description: ")
-                                        food[2][choiceeditor].item_description=text;
+                                        food[2][choiceediter].item_description=text;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3435,10 +3453,10 @@ function drinkcategory(){
                                     case 4:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Price: "+food[2][choiceeditor].item_price+"\n")
+                                        console.log("Current Price: "+food[2][choiceediter].item_price+"\n")
                                         console.log("*****************************************************\n")
                                         var cost=input.questionInt("Enter a new price: ")
-                                        food[2][choiceeditor].item_price=cost;
+                                        food[2][choiceediter].item_price=cost;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3667,7 +3685,7 @@ function othercategory(){
 
         }
     }
-    if (userlogin===false&&guestlogin===false){
+    if (userlogin===false&&guestlogin===false&&adminloginc===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
     itemchoiceview1();
@@ -3686,12 +3704,12 @@ function othercategory(){
     console.log("*****************************************************\n")
     adminchoiceother();
     function adminchoiceother(){
-        var choice=input.question("Choice: ")
+        var choice=input.questionInt("Choice: ")
         switch (choice){
             case 1:
 
                 var deleteoption=input.questionInt("Which item you want to delete? : ");
-                if (deleteoption<0||deleteoption>food[3].length){
+                if (deleteoption<0||deleteoption>=food[3].length){
                     console.log("Invalid Option")
                     othercategory();
                 }
@@ -3699,7 +3717,7 @@ function othercategory(){
             function confirmationdelete() {
 
 
-                var confirmation = input.question("Are you sure you want to delete " + food[3][deleteoption].item_name+"?: ");
+                var confirmation = input.question("Are you sure you want to delete " + food[3][deleteoption].item_name+"?(Y/N): ");
                 switch (confirmation){
                     case "Y": food[3].splice(deleteoption,1);
                         console.log("Delete Successful,returning...")
@@ -3734,17 +3752,18 @@ function othercategory(){
                 }
 
                 console.log("\n")
-                console.log("                [3] Edit [2] Return")
+                console.log("                [1] Edit [2] Return")
                 console.log("*****************************************************\n")
                 editchoice()
             function editchoice() {
                 var choiceedit = input.questionInt("Choice: ")
                 switch (choiceedit){
                     case 1:
-                        var choiceediter=input.questionInt("Which one do you want to edit")
-                        if (choiceediter < 0 || choiceediter > food[3].length) {
+                        var choiceediter=input.questionInt("Which one do you want to edit: ")
+                        if (choiceediter < 0 || choiceediter >= food[3].length) {
                             console.log("Invalid Option");
-                            adminchoicerice();
+                            wait(3000)
+                            adminchoiceother();
                         }
                         edititem();
                     function edititem(){
@@ -3752,7 +3771,7 @@ function othercategory(){
                         console.log("*****************************************************\n")
                         console.log("       The NiceMeal Restaurant Admin System        ");
                         console.log("Edit for item : "+food[3][choiceediter].item_name+"\n")
-                        console.log("         [3] Item Name [2] Item Code")
+                        console.log("         [1] Item Name [2] Item Code")
                         console.log("         [3] Item Description [4] Item Cost")
                         console.log("                 [5] Return")
                         console.log("*****************************************************\n")
@@ -3763,10 +3782,10 @@ function othercategory(){
                                 case 1:
                                     process.stdout.write('\033c')
                                     console.log("*****************************************************\n")
-                                    console.log("Current Name: "+food[3][choiceeditor].item_name+"\n")
+                                    console.log("Current Name: "+food[3][choiceediter].item_name+"\n")
                                     console.log("*****************************************************\n")
                                     var itemname=input.question("Enter a new item name: ")
-                                    food[3][choiceeditor].item_name=itemname;
+                                    food[3][choiceediter].item_name=itemname;
                                     process.stdout.write('\033c')
                                     console.log("*****************************************************\n")
                                     console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3777,7 +3796,7 @@ function othercategory(){
                                     break;
                                 case 2:   process.stdout.write('\033c')
                                     console.log("*****************************************************\n")
-                                    console.log("Current Price: "+food[3][choiceeditor].item_code+"\n")
+                                    console.log("Current Price: "+food[3][choiceediter].item_code+"\n")
                                     console.log("*****************************************************\n")
                                     var code=input.questionInt("Enter a new code: ")
                                     for (var b=0;b<food.length;b++){
@@ -3790,7 +3809,7 @@ function othercategory(){
                                             }
                                         }
                                     }
-                                    food[3][choiceeditor].item_code=code;
+                                    food[3][choiceediter].item_code=code;
                                     process.stdout.write('\033c')
                                     console.log("*****************************************************\n")
                                     console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3802,10 +3821,10 @@ function othercategory(){
                                 case 3:
                                     process.stdout.write('\033c')
                                     console.log("*****************************************************\n")
-                                    console.log("Current Description: "+food[3][choiceeditor].item_description+"\n")
+                                    console.log("Current Description: "+food[3][choiceediter].item_description+"\n")
                                     console.log("*****************************************************\n")
                                     var text=input.question("Enter a new description: ")
-                                    food[3][choiceeditor].item_description=text;
+                                    food[3][choiceediter].item_description=text;
                                     process.stdout.write('\033c')
                                     console.log("*****************************************************\n")
                                     console.log("       The NiceMeal Restaurant Admin System        ");
@@ -3817,10 +3836,10 @@ function othercategory(){
                                 case 4:
                                     process.stdout.write('\033c')
                                     console.log("*****************************************************\n")
-                                    console.log("Current Price: "+food[3][choiceeditor].item_price+"\n")
+                                    console.log("Current Price: "+food[3][choiceediter].item_price+"\n")
                                     console.log("*****************************************************\n")
                                     var cost=input.questionInt("Enter a new price: ")
-                                    food[3][choiceeditor].item_price=cost;
+                                    food[3][choiceediter].item_price=cost;
                                     process.stdout.write('\033c')
                                     console.log("*****************************************************\n")
                                     console.log("       The NiceMeal Restaurant Admin System        ");
@@ -4082,7 +4101,7 @@ function promotioncategory(){
 
         }
     }
-    if (userlogin===false&&guestlogin===false){
+    if (userlogin===false&&guestlogin===false&&adminloginc===false){
         console.log("[1] View an item's description [2]Back to previous screen ");
         console.log("*****************************************************\n")
         itemchoiceview1();
@@ -4101,12 +4120,12 @@ function promotioncategory(){
         console.log("*****************************************************\n")
         adminchoicepromotion();
         function adminchoicepromotion(){
-            var choice=input.question("Choice: ")
+            var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
 
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
-                    if (deleteoption<0||deleteoption>food[4].length){
+                    if (deleteoption<0||deleteoption>=food[4].length){
                         console.log("Invalid Option")
                         promotioncategory();
                     }
@@ -4114,7 +4133,7 @@ function promotioncategory(){
                 function confirmationdelete() {
 
 
-                    var confirmation = input.question("Are you sure you want to delete " + food[4][deleteoption].item_name+"?: ");
+                    var confirmation = input.question("Are you sure you want to delete " + food[4][deleteoption].item_name+"?（Y/N): ");
                     switch (confirmation){
                         case "Y": food[4].splice(deleteoption,1);
                             console.log("Delete Successful,returning...")
@@ -4149,17 +4168,18 @@ function promotioncategory(){
                     }
 
                     console.log("\n")
-                    console.log("                [4] Edit [2] Return")
+                    console.log("                [1] Edit [2] Return")
                     console.log("*****************************************************\n")
                     editchoice()
                 function editchoice() {
                     var choiceedit = input.questionInt("Choice: ")
                     switch (choiceedit){
                         case 1:
-                            var choiceediter=input.questionInt("Which one do you want to edit")
-                            if (choiceediter < 0 || choiceediter > food[4].length) {
+                            var choiceediter=input.questionInt("Which one do you want to edit: ")
+                            if (choiceediter < 0 || choiceediter >= food[4].length) {
                                 console.log("Invalid Option");
-                                adminchoicerice();
+                                wait(3000)
+                                adminchoicepromotion();
                             }
                             edititem();
                         function edititem(){
@@ -4167,7 +4187,7 @@ function promotioncategory(){
                             console.log("*****************************************************\n")
                             console.log("       The NiceMeal Restaurant Admin System        ");
                             console.log("Edit for item : "+food[4][choiceediter].item_name+"\n")
-                            console.log("         [4] Item Name [2] Item Code")
+                            console.log("         [1] Item Name [2] Item Code")
                             console.log("         [3] Item Description [4] Item Cost")
                             console.log("                 [5] Return")
                             console.log("*****************************************************\n")
@@ -4178,10 +4198,10 @@ function promotioncategory(){
                                     case 1:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Name: "+food[4][choiceeditor].item_name+"\n")
+                                        console.log("Current Name: "+food[4][choiceediter].item_name+"\n")
                                         console.log("*****************************************************\n")
                                         var itemname=input.question("Enter a new item name: ")
-                                        food[4][choiceeditor].item_name=itemname;
+                                        food[4][choiceediter].item_name=itemname;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -4192,7 +4212,7 @@ function promotioncategory(){
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Price: "+food[4][choiceeditor].item_code+"\n")
+                                        console.log("Current Price: "+food[4][choiceediter].item_code+"\n")
                                         console.log("*****************************************************\n")
                                         var code=input.questionInt("Enter a new code: ")
                                         for (var b=0;b<food.length;b++){
@@ -4205,7 +4225,7 @@ function promotioncategory(){
                                                 }
                                             }
                                         }
-                                        food[4][choiceeditor].item_code=code;
+                                        food[4][choiceediter].item_code=code;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -4217,10 +4237,10 @@ function promotioncategory(){
                                     case 3:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Description: "+food[4][choiceeditor].item_description+"\n")
+                                        console.log("Current Description: "+food[4][choiceediter].item_description+"\n")
                                         console.log("*****************************************************\n")
                                         var text=input.question("Enter a new description: ")
-                                        food[4][choiceeditor].item_description=text;
+                                        food[4][choiceediter].item_description=text;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -4232,10 +4252,10 @@ function promotioncategory(){
                                     case 4:
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
-                                        console.log("Current Price: "+food[4][choiceeditor].item_price+"\n")
+                                        console.log("Current Price: "+food[4][choiceediter].item_price+"\n")
                                         console.log("*****************************************************\n")
                                         var cost=input.questionInt("Enter a new price: ")
-                                        food[4][choiceeditor].item_price=cost;
+                                        food[4][choiceediter].item_price=cost;
                                         process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
@@ -4340,6 +4360,7 @@ order_screen();
                         break;}
                     default:
                         console.log("Invalid Option");
+                        wait(3000)
                         notfound404();
 
                 }
@@ -4654,6 +4675,7 @@ function help(){
 }
 var guestlogin;
 function main_screen(){
+
     guestlogin=false;
     customerloginstatus=false;
     userlogin=false;
@@ -4711,4 +4733,3 @@ function main_screen(){
 
 start_up();
 main_screen();
-
