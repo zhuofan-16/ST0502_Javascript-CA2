@@ -494,13 +494,14 @@ function editcoupon(){
     }
 
 }
+var deletedcoupon;
 function removecoupon(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Admin System        ");
     console.log("           Current registered coupons\n")
     for (var w=0;w<couponstore.length;w++){
-        console.log(w+". "+couponstore[w].coupon_code+". "+couponstore[w].coupon_name+"==>"+couponstore[w].coupon_price)
+        console.log(w+". "+couponstore[w].coupon_code+". "+couponstore[w].coupon_name+"==>"+couponstore[w].coupon_price.toFixed(2))
     }
     console.log("       [1] Select to delete [2] Return")
     console.log("*****************************************************\n")
@@ -508,14 +509,15 @@ function removecoupon(){
     function removecoupon_choice(){
     var choice=input.questionInt("Choice: ")
     switch (choice){
-        case 1:var deletedcoupon=input.questionInt("Which one to delete?: ")
+        case 1:
+             deletedcoupon=input.questionInt("Which one to delete?: ")
             if (deletedcoupon<0||deletedcoupon>=couponstore.length){
                 console.log("Invalid Option")
                 removecoupon_choice();
             }
             confirmationmess()
             function confirmationmess() {
-                var inputconfirmation = input.question("Are you sure you want to delete " + coupon[deletedcoupon].coupon_name + " ?(Y/N): ")
+                var inputconfirmation = input.question("Are you sure you want to delete " + couponstore[deletedcoupon].coupon_name + " ?(Y/N): ")
                 switch (inputconfirmation){
                     case 'Y':
                         process.stdout.write('\033c')
