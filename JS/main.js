@@ -578,7 +578,8 @@ function distributecoupon(){
                         selectuser()
 
                     }
-                    customer[userdistribute].coupon.push(couponstore.slice(choose_coupon,choose_coupon+1))
+                    customer[userdistribute].coupon[customer[userdistribute].coupon.length]= couponstore.slice(choose_coupon,choose_coupon+1)[0]
+
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
                     console.log("      The NiceMeal Restaurant Admin System        ");
