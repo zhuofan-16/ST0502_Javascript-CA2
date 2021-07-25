@@ -1200,7 +1200,7 @@ function user_control(){
                                         customer[editchoice].memberno=tempid;
                                         console.log("Change is successful,returning...")
                                         wait(3000)
-                                        useredtion();
+                                        user_control();
                                     }else if (conflict===1){
                                         console.log("Member ID conflict.ERROR 1020");
                                         wait(1000);
@@ -1211,25 +1211,25 @@ function user_control(){
                             case 2:
                                 console.log("You are changing the users name");
                                 console.log("Press 0 to exit");
-                                var templast=input.question("New last name");
+                                var templast=input.question("New last name: ");
                                 if (templast==="0"){
                                     useredtion();
                                 }
 
                                 else{
-                                    var tempfirst=input.question("New first name");
+                                    var tempfirst=input.question("New first name: ");
                                     customer[editchoice].lastname=templast;
                                     customer[editchoice].firstname=tempfirst;
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
-                                    useredtion();
+                                    user_control();
 
                                 }
                                 break;
                             case 3:
                                 console.log("You are changing the users phone number");
                                 console.log("Press 0 to exit");
-                                var tempnumber=input.questionInt("New phone number");
+                                var tempnumber=input.questionInt("New phone number: ");
                                 if (tempnumber===0){
                                     useredtion();
                                 }
@@ -1237,14 +1237,14 @@ function user_control(){
                                     customer[editchoice].contact=tempnumber;
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
-                                    useredtion();
+                                    user_control();
 
                                 }
                                 break;
                             case 4:
                                 console.log("You are changing the users email");
                                 console.log("Press 0 to exit");
-                                var tempemail1=input.question("New email address");
+                                var tempemail1=input.question("New email address: ");
                                 if (tempemail1==='0'){
                                     useredtion();
                                 }
@@ -1252,7 +1252,7 @@ function user_control(){
                                     customer[editchoice].email=tempemail1;
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
-                                    useredtion();
+                                    user_control();
 
                                 }
                                 break;
