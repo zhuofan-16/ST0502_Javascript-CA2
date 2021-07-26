@@ -56,71 +56,14 @@ var tempclassguest;
 var guestlogin;
 
 
-class Customer{
-    constructor(first_name,last_name,sex,contact,password,member_no,email) {
-        this.firstname=first_name;
-        this.lastname=last_name;
-        this.sex=sex;
-        this.contact=contact;
-        this.email=email;
-        this.memberno=member_no;
-        this.password=password;
-        this.order_record=new Array();
-        this.order_active=0;
-        this.wrongpassword_attempt=0;
-        this.coupon=new Array();
-        this.cart=new Array();
+var Customer=require("./customer.js")
 
-
-    }
-}
-class Admin{
-    constructor(first_name,last_name,sex,contact,staff_no,password) {
-        this.firstname=first_name;
-        this.lastname=last_name;
-        this.sex=sex;
-        this.contact=contact;
-        this.staffid=staff_no;
-        this.password=password;
-
-    }
-}
+var Admin=require("./admin.js")
 /*Default Admin*/
 admin[0]=new Admin("admin","admin","","",10001,"admin")
-class item{
-    constructor(item_name,item_catogory,item_code,item_price,item_description,item_type,item_expire,item_dry,item_spicy,item_ice) {
-        this.item_name=item_name;
-        this.item_caterogory=item_catogory
-        this.item_code=item_code;
-        this.item_description=item_description;
-        this.item_type=item_type;
-        this.item_spicy=item_spicy;
-        this.item_dry=item_dry;
-        this.item_ice=item_ice;
-        this.item_dry_level=0;
-        this.item_spicy_level=0;
-        this.item_ice_level=0;
-        this.item_price=item_price;
-        this.item_expire=item_expire;
-        this.item_quantity=0;
-    }
-}
-class order_status{
-    constructor(order_number,status,cost) {
-        this.number=order_number;
-        this.status=status;
-        this.item=new Array();
-        this.cost=cost
-    }
-}
-class coupon{
-    constructor(coupon_name,coupon_code,coupon_type,coupon_price) {
-        this.coupon_name=coupon_name;
-        this.coupon_code=coupon_code;
-        this.coupon_type=coupon_type
-        this.coupon_price=coupon_price;
-    }
-}
+var item=require("./item.js")
+var order_status=require("./order_status.js")
+var coupon=require("./coupon.js")
 
 order[0][0]=new order_status(100001,"Delivered");
 order[1][0]=new order_status(100002,"Processing")
