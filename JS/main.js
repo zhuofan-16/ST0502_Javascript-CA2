@@ -303,7 +303,7 @@ var temp_admin_login;
 var temp_admin_password;
 var adminlogin;
 var adminloginstatus;
-var adminloginc;
+var adminloginc=false;
 function admin_login() {
     process.stdout.write('\033c')
     console.log("*****************************************************\n");
@@ -2743,8 +2743,8 @@ function viewricedescription(){
         seeitem1 = input.questionInt("Which item do you want to see: ");
         if (seeitem1>food[1].length-1 || seeitem1<0){
             console.log("Invalid Option");
-            wait(3000)
-            retryrice();
+            wait(1000)
+            ricecategory();
 
         }
 
@@ -3124,8 +3124,8 @@ function viewnoodledescription(){
         seeitem2 = input.questionInt("Which item do you want to see: ");
         if (seeitem2>food[0].length-1 || seeitem2<0){
             console.log("Invalid Option");
-            wait(3000)
-            retrynoodle();
+            wait(1000)
+           noodlecategory();
 
         }
 
@@ -3508,7 +3508,8 @@ function viewdrinkdescription(){
         seeitem4 = input.questionInt("Which item do you want to see: ");
         if (seeitem4>food[0].length-1 || seeitem4<0){
             console.log("Invalid Option");
-            retrydrink();
+            wait(1000)
+            drinkcategory();
 
         }
 
@@ -3885,9 +3886,10 @@ function viewotherdescription(){
     retryother();
     function retryother() {
         seeitem3 = input.questionInt("Which item do you want to see: ");
-        if (seeitem3>food[0].length-1 || seeitem3<0){
+        if (seeitem3>food[3].length-1 || seeitem3<0){
             console.log("Invalid Option");
-            retryother();
+            wait(1000)
+            othercategory();
 
         }
 
@@ -3923,7 +3925,8 @@ function viewpromotiondescription(){
         seeitem5 = input.questionInt("Which item do you want to see: ");
         if (seeitem5>food[4].length-1 || seeitem5<0){
             console.log("Invalid Option");
-            retryother();
+            wait(1000)
+            promotioncategory();
 
         }
 
