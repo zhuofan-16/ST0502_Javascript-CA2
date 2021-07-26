@@ -24,7 +24,17 @@
 | Email System | Implement into registration and order completion receipt |
 | Saving System | To save registered info and read when program re-open |
 
-## Fundamental of programming | Bug List
+
+## Requirement/Advice as of 26/7/2021
+* 1.Indentation for ordering
+* 2.File system
+* 3.Overall UI
+* 4.Moving functions into class
+* 5.Moving class into respective js files
+* 6.Email system
+
+
+## Bug List
 
 * <strike>1.Distribute coupon to user</strike>
 * <strike>2.Delete coupon </strike>
