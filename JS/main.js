@@ -8,6 +8,7 @@ var input =require('readline-sync');
 const {questionInt} = require("readline-sync");
 var currentlogin=0;
 const passwordrequire=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+const emailrequire=/^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/
 var search="NA"
 
 
@@ -277,7 +278,17 @@ function guest_login(){
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
     console.log("*****************************************************\n")
-    guest_email=input.question("Your Email: ");
+    emailguesttype();
+    function emailguesttype(){
+        guest_email=input.question("Your Email: ");
+        if ((emailrequire.test(guest_email))===false){
+            console.log("Email does not meet standards");
+            emailguesttype()
+
+        }
+
+    }
+
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Guest System        ");
@@ -1334,7 +1345,17 @@ function customer_register(){
     console.log("      The NiceMeal Restaurant Registration System        ");
     console.log("    Become a member of The NiceMeal Restaurant today     \n");
     console.log("*****************************************************\n")
-    var temp_email=input.question("Your Email address :");
+    emailtype();
+    function emailtype(){
+        temp_email=input.question("Your Email address :");
+        if ((emailrequire.test(temp_email))===false){
+            console.log("Email does not meet standards");
+            emailtype()
+
+        }
+
+    }
+
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System        ");
