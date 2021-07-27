@@ -6,4 +6,3 @@ class coupon{
         this.coupon_price=coupon_price;
     }
 }
-module.exports=coupon;
