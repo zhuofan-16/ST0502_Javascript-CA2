@@ -5,9 +5,6 @@ class coupon{
         this.coupon_type=coupon_type
         this.coupon_price=coupon_price;
     }
-<<<<<<< HEAD
 }
-=======
-}
+
 module.exports=coupon;
->>>>>>> parent of a69a6ee... Reverts temp change to UI
