@@ -1375,7 +1375,7 @@ membercheck();
     wait(2000);
     customer[i].coupon[0]=new coupon("New User Welcome Gift",10001,"S",8)
     i++;
-    customer_login();
+    main_screen();
 
 }
 function determind_call(l){
@@ -4659,9 +4659,10 @@ function main_screen(){
     console.log("[7] Admin Login                               [8]Help");
     console.log("[9] Exit                           [10] About Program\n");
     console.log("*****************************************************\n")
+    user_selection();
     function user_selection(){
-    var choice=input.questionInt("Your Choice: ");
-    switch (choice){
+    var choice0=input.questionInt("Your Choice: ");
+    switch (choice0){
         case 1:
             customer_login();
             break;
@@ -4686,21 +4687,34 @@ function main_screen(){
         case 8:
             help();
             break;
-        case 9:
+        default:
+
             process.exit(0);
             break;
         case 10:
             about_program();
             break;
-        default: user_selection();break;
+        case 9:newd();
+        async function newd(){
+
+            await fs.writeFile('customerdetail.txt',JSON.stringify(customer))
+        }
     }
 
     }
-    user_selection();
+
 }
 
 
 //Start of program
 //Launch start up loading page and main menu screen
-start_up();
-main_screen();
+var fs=require('fs').promises;
+read();
+async function read(){
+   var temp= await fs.readFile('customerdetail.txt')
+    customer=JSON.parse(temp)
+    start_up();
+    main_screen();
+}
+
+
