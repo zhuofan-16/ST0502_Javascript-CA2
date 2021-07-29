@@ -64,7 +64,8 @@ admin[0]=new Admin("admin","admin","","",10001,"admin")
 var item=require("./item.js")
 var order_status=require("./order_status.js")
 var coupon=require("./coupon.js")
-
+var couponstore= new Array();
+couponstore[0]=new coupon("New User Welcome Gift",10001,"S",8)
 order[0][0]=new order_status(100001,"Delivered");
 order[1][0]=new order_status(100002,"Processing")
 food[0][0]=new item(" Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true,false)
@@ -395,7 +396,7 @@ function coupon_store(){
     console.log("      The NiceMeal Restaurant Admin System        ");
     console.log("           Current registered coupons\n")
     for (var w=0;w<couponstore.length;w++){
-        console.log(w+". "+couponstore[w].coupon_code+". "+couponstore[w].coupon_name+"==>"+couponstore[w].coupon_price)
+        console.log(w+". "+couponstore[w].coupon_code+". "+couponstore[w].coupon_name+"==>"+couponstore[w].coupon_price.toFixed(2))
     }
     console.log("[1] Add coupon [2] Remove Coupon [3] Edit Coupon");
     console.log("       [4] Allocate Coupon [5] Return\n ")
@@ -998,7 +999,7 @@ function addnewadmin(){
                 console.log("*****************************************************\n")
                 staffidcheck();
                 function staffidcheck(){
-                     tempadminstaff=input.question("Input new admin's staff id: ");
+                     tempadminstaff=input.questionInt("Input new admin's staff id: ");
                     for (var adminloginid=0;adminloginid<admin.length;adminloginid++){
                         if (tempadminstaff===admin[adminloginid].staffid){
                             console.log("Staff ID Conflict !!");
@@ -4698,6 +4699,10 @@ function main_screen(){
         async function newd(){
 
             await fs.writeFile('customerdetail.txt',JSON.stringify(customer))
+            await fs.writeFile('order.txt',JSON.stringify(order))
+            await fs.writeFile('admin.txt',JSON.stringify(admin))
+            await fs.writeFile('food.txt',JSON.stringify(food))
+            await fs.writeFile('coupon.txt',JSON.stringify(couponstore))
         }
     }
 
@@ -4711,8 +4716,16 @@ function main_screen(){
 var fs=require('fs').promises;
 read();
 async function read(){
-   var temp= await fs.readFile('customerdetail.txt')
-    customer=JSON.parse(temp)
+   var customerstorage= await fs.readFile('customerdetail.txt')
+    customer=JSON.parse(customerstorage)
+    var orderstorage= await fs.readFile('order.txt')
+    order=JSON.parse(orderstorage)
+    var adminstorage= await fs.readFile('admin.txt')
+    admin=JSON.parse(adminstorage)
+    var foodstorage= await fs.readFile('food.txt')
+    food=JSON.parse(foodstorage)
+    var couponstorage= await fs.readFile('coupon.txt')
+    couponstore=JSON.parse(couponstorage)
     start_up();
     main_screen();
 }
