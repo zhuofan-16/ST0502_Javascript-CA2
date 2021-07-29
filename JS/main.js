@@ -4698,11 +4698,11 @@ function main_screen(){
         case 9:newd();
         async function newd(){
 
-            await fs.writeFile('customerdetail.txt',JSON.stringify(customer))
-            await fs.writeFile('order.txt',JSON.stringify(order))
-            await fs.writeFile('admin.txt',JSON.stringify(admin))
-            await fs.writeFile('food.txt',JSON.stringify(food))
-            await fs.writeFile('coupon.txt',JSON.stringify(couponstore))
+            await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
+            await fs.writeFile('order.dat',JSON.stringify(order))
+            await fs.writeFile('admin.dat',JSON.stringify(admin))
+            await fs.writeFile('food.dat',JSON.stringify(food))
+            await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
         }
     }
 
@@ -4716,15 +4716,15 @@ function main_screen(){
 var fs=require('fs').promises;
 read();
 async function read(){
-   var customerstorage= await fs.readFile('customerdetail.txt')
+   var customerstorage= await fs.readFile('customerdetail.dat')
     customer=JSON.parse(customerstorage)
-    var orderstorage= await fs.readFile('order.txt')
+    var orderstorage= await fs.readFile('order.dat')
     order=JSON.parse(orderstorage)
-    var adminstorage= await fs.readFile('admin.txt')
+    var adminstorage= await fs.readFile('admin.dat')
     admin=JSON.parse(adminstorage)
-    var foodstorage= await fs.readFile('food.txt')
+    var foodstorage= await fs.readFile('food.dat')
     food=JSON.parse(foodstorage)
-    var couponstorage= await fs.readFile('coupon.txt')
+    var couponstorage= await fs.readFile('coupon.dat')
     couponstore=JSON.parse(couponstorage)
     start_up();
     main_screen();
