@@ -116,13 +116,13 @@ function about_program_page2(){
         var choice=input.questionInt("Your Choice: ");
         switch (choice){
             case 1:
-                main_screen();
+                main_screen();return 0;
                 break;
             case 2:
                 process.exit(0);
                 break;
             default:
-                about_useroption2();
+                about_useroption2();return 0;
                 break;
 
         }
@@ -154,29 +154,29 @@ function new_promotion(){
             console.log(food[4][customeroverview].item_description+"\n");
             console.log("            [1]Back to previous screen ");
             console.log("*****************************************************\n");
-            backto();
+            backto();return 0;
             function backto(){
             var backtooption=input.questionInt("Choice: ");
             switch (backtooption){
                 case 1:
-                    new_promotion();
+                    new_promotion();return 0;
                 break;
                 default:
                     console.log("Invalid option");
-                    backto();
+                    backto();return 0;
                     break;
             }}
             break;
         case 2:
-            main_screen();
+            main_screen();return 0;
             break
         default:
             console.log("Invalid option");
-             itemoverviewchoice();
+             itemoverviewchoice();return 0;
              break;
 
     }  }
-    itemoverviewchoice();
+    itemoverviewchoice();return 0;
 
 }
 function about_program(){
@@ -195,16 +195,16 @@ function about_program(){
         var choice=input.questionInt("Your Choice: ");
         switch (choice){
             case 1:
-                about_program_page2();
+                about_program_page2();return 0;
                 break;
             case 2:
-                main_screen();
+                main_screen();return 0;
                 break;
             case 3:
                 process.exit(0);
                 break;
             default:
-                about_useroption();
+                about_useroption();return 0;
                 break;
 
         }
@@ -266,16 +266,16 @@ function guest_login(){
         var guest_confirmation = input.question("Continue to order? (Y/N): ");
         if (guest_confirmation === "Y") {
             guestlogin=true;
-            order_screen();
+            order_screen();return 0;
 
         } else if (guest_confirmation === "N") {
-            main_screen();
+            main_screen();return 0;
         } else {
             console.log("Invalid Option");
-            guest_confirmation_prompt();
+            guest_confirmation_prompt();return 0;
         }
     }
-    guest_confirmation_prompt();
+    guest_confirmation_prompt();return 0;
 
 }
 function admin_login() {
@@ -305,15 +305,17 @@ function admin_login() {
         adminlogin=0;
         adminloginstatus=false;
         wait(3000)
-        main_screen();
+        main_screen();return 0;
     }
     if (temp_admin_password===admin[adminlogin].password){
         adminloginc=true;
-        admin_control();
+        admin_control();return 0;
+
     }else {
         console.log("Wrong admin ID or password,going back to main menu");
         wait(3000)
-        main_screen();
+        main_screen();return 0;
+
     }
 
 
@@ -337,36 +339,37 @@ function admin_control(){
         console.log("          [22] Delete an admin\n")
     }
     console.log("*****************************************************\n")
-    admincontrolchoice();
+    admincontrolchoice();return 0;
     function admincontrolchoice(){
 
             var choice = input.questionInt("Choice: ");
             switch (choice){
                 case 22:if (adminloginc===false||admin[adminlogin].staffid!==10001){
                     console.log("Unauthorised action!");
-                    admin_control();
+                    admin_control();return 0;
                 }
-                deleteadmin();
+                deleteadmin();return 0;
                 break;
 
-                case 1:user_control();break;
-                case 2:user_password_reset();break;
-                case 3:menu_control();break;
-                case 4:coupon_control();break;
-                case 5:addnewadmin();break;
-                case 6:changeparticular_admin();break;
+                case 1:user_control();return 0;break;
+                case 2:user_password_reset();return 0;break;
+                case 3:menu_control();return 0;break;
+                case 4:coupon_control();return 0;break;
+                case 5:addnewadmin();return 0;break;
+                case 6:changeparticular_admin();return 0;break;
                 case 7:
                     adminloginc=false;
                     adminloginstatus=false;
                     adminlogin=0;
                     main_screen();
+                    return 0;
                     break;
                 case 8:
                     process.exit(0);
                     break;
                 default:
                     console.log("Invalid Option ");
-                    admincontrolchoice();
+                    admincontrolchoice();return 0;
             }
     }
 }
@@ -378,15 +381,15 @@ function coupon_control(){
     console.log("       [1] Coupon Store [2] Remove a coupon from user")
     console.log("                 [3] Return\n")
     console.log("*****************************************************\n")
-coupon_management_choice();
+coupon_management_choice();return 0;
     function coupon_management_choice(){
         var choice=input.questionInt("Choice: ")
         switch (choice){
-            case 1: coupon_store();break;
-            case 2: coupon_remove();break;
-            case 3:admin_control();break;
+            case 1: coupon_store();return 0;break;
+            case 2: coupon_remove();return 0;break;
+            case 3:admin_control();return 0;break;
             default:console.log("Invalid Option");
-            coupon_management_choice();
+            coupon_management_choice();return 0;
         }
     }
 }
@@ -401,24 +404,24 @@ function coupon_store(){
     console.log("[1] Add coupon [2] Remove Coupon [3] Edit Coupon");
     console.log("       [4] Allocate Coupon [5] Return\n ")
     console.log("*****************************************************\n")
-    coupon_store_choice();
+    coupon_store_choice();return 0;
     function coupon_store_choice(){
         var choice =input.questionInt("Choice: ")
         switch (choice){
             case 1:
-                addcoupon();break;
+                addcoupon();return 0;break;
             case 2:
-                removecoupon();break;
+                removecoupon();return 0;break;
             case 3:
-                editcoupon();
+                editcoupon();return 0;
                 break;
-            case 4:distributecoupon();break;
+            case 4:distributecoupon();return 0;break;
             case 5:
-                coupon_control();
+                coupon_control();return 0;
                 break;
             default:
                 console.log("Invalid Option");
-                coupon_store_choice();break;
+                coupon_store_choice();return 0;break;
         }
     }
 }
@@ -441,7 +444,7 @@ function editcoupon(){
                 var editprice_coupon=input.questionInt("Which coupon do you want to edit: ");
                 if (editprice_coupon<0||editprice_coupon>=couponstore.length){
                     console.log("Invalid Option");
-                    editcoupon_choice();
+                    editcoupon_choice();return 0;
                 }
                 process.stdout.write('\033c')
                 console.log("*****************************************************\n")
@@ -456,13 +459,13 @@ function editcoupon(){
                 console.log("        Change successfully..Returning..")
                 console.log("*****************************************************\n")
                 wait(3000)
-                coupon_store();
+                coupon_store();return 0;
                 break;
             case 2:
-                coupon_store();break;
+                coupon_store();return 0;break;
             default:
                 console.log("Invalid Choice");
-                editcoupon_choice();
+                editcoupon_choice();return 0;
         }
 
     }
@@ -486,7 +489,7 @@ function removecoupon(){
              deletedcoupon=input.questionInt("Which one to delete?: ")
             if (deletedcoupon<0||deletedcoupon>=couponstore.length){
                 console.log("Invalid Option")
-                removecoupon_choice();
+                removecoupon_choice();return 0;
             }
             confirmationmess()
             function confirmationmess() {
@@ -502,16 +505,16 @@ function removecoupon(){
                         couponstore.splice(deletedcoupon,1);
                         removecoupon()
                         break;
-                    case 'N':removecoupon();break;
+                    case 'N':removecoupon();return 0;break;
                     default:
                         console.log("Invalid Option")
-                        confirmationmess();
+                        confirmationmess();return 0;
                 }
             }
             break;
-        case 2: coupon_control();
+        case 2: coupon_control();return 0;
         break;
-        default:console.log("Invalid Option");removecoupon_choice()
+        default:console.log("Invalid Option");removecoupon_choice();return 0;
     }
     }
 }
@@ -533,7 +536,7 @@ function distributecoupon(){
                 var choose_coupon=input.questionInt("Which coupon do you want to distribute: ");
                 if (choose_coupon<0||choose_coupon>=couponstore.length){
                     console.log("Invalid Option");
-                    distributechoice();
+                    distributechoice();return 0;
                 }
                 process.stdout.write('\033c')
                 console.log("*****************************************************\n")
@@ -543,7 +546,7 @@ function distributecoupon(){
                     console.log(u+". "+customer[u].memberno+". "+customer[u].lastname +" "+customer[u].firstname +" "+customer[u].coupon.length+" coupons")
                 }
                 console.log("*****************************************************\n")
-                selectuser();
+                selectuser();return 0;
                 function selectuser(){
                     var userdistribute=input.questionInt("Choice: ");
                     if (userdistribute>=customer.length ||userdistribute<0){
@@ -559,14 +562,14 @@ function distributecoupon(){
                     console.log("       Operation is successful ,returning...")
                     console.log("*****************************************************\n")
                     wait(3000)
-                    coupon_store();
+                    coupon_store();return 0;
                 }
 
 
                 break;
-            case 2:coupon_store();break
+            case 2:coupon_store();return 0;break
             default:console.log("Invalid Option")
-                distributechoice()
+                distributechoice(); return 0;
                 break;
         }
     }
@@ -600,7 +603,7 @@ function addcoupon(){
     console.log("      The NiceMeal Restaurant Admin System        ");
     console.log("           Coupon created successfully ")
     console.log("*****************************************************\n")
-    coupon_control();
+    coupon_control();return 0;
 }
 function coupon_remove(){
     process.stdout.write('\033c')
@@ -613,7 +616,7 @@ function coupon_remove(){
     }
     console.log("             [1] Select [2] Return")
     console.log("*****************************************************\n")
-     couponremove_choice();
+     couponremove_choice();return 0;
     function couponremove_choice(){
         var choice=input.questionInt("Choice: ")
         switch (choice){
@@ -621,7 +624,7 @@ function coupon_remove(){
                 var userselected=input.questionInt("Choose an user: ")
                 if (userselected>=customer.length ||userselected<0){
                     console.log("Invalid Option");
-                    couponremove_choice();
+                    couponremove_choice();return 0;
 
                 }else{
 
@@ -635,7 +638,7 @@ function coupon_remove(){
                     }
                     console.log("      [1] Select to delete [2] Return\n")
                     console.log("*****************************************************\n")
-                    deletecouponuser();
+                    deletecouponuser();return 0;
                     function deletecouponuser(){
                         var choice=input.questionInt("Choice: ")
                         switch (choice){
@@ -643,19 +646,19 @@ function coupon_remove(){
                                 var optionop=input.questionInt("Which coupon to delete?: ")
                                 if (optionop<0||optionop>=customer[userselected].coupon.length){
                                     console.log("Invalid Choice");
-                                    deletecouponuser();
+                                    deletecouponuser();return 0;
                                 }
                                 customer[userselected].coupon.splice(optionop,1);
                                 console.log("Delete successfully,returning...")
                                 wait(3000);
-                                coupon_control();
+                                coupon_control();return 0;
                                 break;
                             case 2:
-                                coupon_control();
+                                coupon_control();return 0;
                                 break;
                             default:
                                 console.log("Invalid Option");
-                                deletecouponuser();
+                                deletecouponuser();return 0;
                                 break;
                         }
                     }
@@ -668,7 +671,7 @@ function coupon_remove(){
                 coupon_control()
                 break;
             default: console.log("Invalid Option")
-                couponremove_choice();
+                couponremove_choice();return 0;
         }
     }
 
@@ -683,25 +686,27 @@ function menu_control(){
     console.log("                [3] Remove a dish")
     console.log("                [4] Return back \n")
     console.log("*****************************************************\n")
-    menuchoice();
+    menuchoice();return 0;
     function menuchoice(){
         var choice=input.questionInt("Choice: ");
         switch (choice){
             case 1:
-                adddish();
+                adddish();return 0;
                 break;
             case 2:
                 category_item()
+                return 0;
                 break;
             case 3:
-               category_item()
+               category_item();
+               return 0;
                 break
             case 4:
-                admin_control();
+                admin_control();return 0;
                 break
             default:
                 console.log("Invalid Option")
-                menuchoice();
+                menuchoice();return 0;
         }
     }
 }
@@ -712,19 +717,19 @@ function adddish(){
     console.log("      Are you sure you want to add a dish ?\n")
     console.log("               [1] Exit [2] Yes")
     console.log("*****************************************************\n")
-    decision();
+    decision();categorychoic();return 0;
     function decision(){
         var choice=input.questionInt("Choice: ")
         switch (choice){
             case 1:
-                admin_control();break;
+                admin_control();return 0;break;
             case 2:
                 break;
             default: console.log("Invalid Option");
-            decision();
+            decision();return 0;
         }
     }
-    categorychoic()
+
 
 
     function categorychoic() {
@@ -741,12 +746,12 @@ function adddish(){
         console.log("*****************************************************\n")
         var choice1 =input.questionInt("Choice: ")
         if (choice1===5){
-            admin_control();
+            admin_control();return 0;
         }
         if (choice1>4||choice1<0){
             console.log("Invalid Option")
             wait (2000);
-            categorychoic();
+            categorychoic();return 0;
         }else {
             dishname();
             function dishname() {
@@ -767,20 +772,20 @@ function adddish(){
             console.log("*****************************************************\n")
             var description=input.question("Description: ")
             if (description==="2"){
-                dishname();
+                dishname();return 0;
             }
             console.log("*****************************************************\n")
             console.log("      The NiceMeal Restaurant Admin System   \n     ");
             console.log("       Enter a cost for "+dishname1)
             console.log("*****************************************************\n")
             var costtemp=input.questionInt("Cost:")
-            foodprefer();
+            foodprefer();return 0;
             function foodprefer() {
                 if (choice1 === 0 || choice1 === 1) {
                     var spicy = input.questionInt("Allow user to choose spicy(1 for yes,0 for no) ?: ")
                     if (spicy !== 1 && spicy !== 0) {
                         console.log("Invalid Option");
-                         foodprefer();
+                         foodprefer();return 0;
                     }
                 if (spicy===1){
                     spicytemp=true;
@@ -794,7 +799,7 @@ function adddish(){
                     var dry = input.questionInt("Allow user to choose dry/soup (1 for yes,0 for no) ?: ")
                     if (dry !== 1 && dry !== 0) {
                         console.log("Invalid Option");
-                        foodprefer();
+                        foodprefer();return 0;
                     }
                     if (dry===1){
                         drytemp=true;
@@ -808,7 +813,7 @@ function adddish(){
                     var ice = input.questionInt("Allow user to choose ice(1 for yes,0 for no) ?: ")
                     if (ice !== 1 && ice !== 0) {
                         console.log("Invalid Option");
-                        foodprefer();
+                        foodprefer();return 0;
                     }
                     if (ice===1){
                         icetemp=true;
@@ -823,7 +828,7 @@ function adddish(){
                     var ice = input.questionInt("Allow user to choose ice(1 for yes,0 for no) ?: ")
                     if (ice !== 1 && ice !== 0) {
                         console.log("Invalid Option");
-                        foodprefer();
+                        foodprefer();return 0;
                     }
                     if (ice===1){
                         icetemp=true;
@@ -835,7 +840,7 @@ function adddish(){
                     var spicy = input.questionInt("Allow user to choose spicy(1 for yes,0 for no) ?: ")
                     if (spicy !== 1 && spicy !== 0) {
                         console.log("Invalid Option");
-                        foodprefer();
+                        foodprefer();return 0;
                     }
                     if (spicy===1){
                         spicytemp=true;
@@ -847,7 +852,7 @@ function adddish(){
                         var dry = input.questionInt("Allow user to choose dry/soup (1 for yes,0 for no) ?: ")
                         if (dry !== 1 && dry !== 0) {
                             console.log("Invalid Option");
-                            foodprefer();
+                            foodprefer();return 0;
                         }
                         if (dry===1){
                             drytemp=true;
@@ -875,16 +880,17 @@ function adddish(){
                 console.log("               Success...Going back...")
                 console.log("*****************************************************\n")
                 wait(1000)
-                admin_control();
+                admin_control();return 0;
             }
         }
     }
 
-    var dishname1
+
 
 
 
 }
+var dishname1;
 function deleteadmin(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -898,13 +904,13 @@ function deleteadmin(){
     console.log("\n")
     console.log("             [1] Delete [2] Return\n")
     console.log("*****************************************************\n")
-    optiondelete();
+    optiondelete();return 0;
     function optiondelete(){
         var choice=input.questionInt("Choice: ");
         switch (choice){
             case 1:
                 var delte=input.questionInt("Which admin do you want to delete?: ")
-                confirmation();
+                confirmation();return 0;
                 function confirmation(){
                     var deletedconfirmation=input.question("Are you sure you want to delete "+admin[delte].staffid+" ?(Y/N): ")
                     switch (deletedconfirmation){
@@ -913,7 +919,7 @@ function deleteadmin(){
                             deleteadmin()
                             break;
                         case 'N':
-                            deleteadmin();
+                            deleteadmin();return 0;
                             break
                         default:
                             console.log("Invalid Option");
@@ -924,11 +930,11 @@ function deleteadmin(){
 
                 break;
             case 2:
-                admin_control();
+                admin_control();return 0;
                 break;
             default:
                 console.log("Invalid Option");
-                optiondelete();
+                optiondelete();return 0;
         }
     }
 }
@@ -939,9 +945,9 @@ function changeparticular_admin(){
     console.log("*****************************************************\n")
     var temppassword=input.question("Enter your existing password(Enter 1 if you want to return):  ")
     if (temppassword==="1"){
-        admin_control();
+        admin_control();return 0;
     }
-    verifymatch();
+    verifymatch();return 0;
     function verifymatch() {
         if (temppassword === admin[adminlogin].password) {
             var newpassadmin = input.question("Enter your new password: ");
@@ -950,12 +956,12 @@ function changeparticular_admin(){
                 admin[adminlogin].password = confirm;
             } else {
                 console.log("2 Password does not match")
-                verifymatch();
+                verifymatch();return 0;
             }
         }else{
             console.log("Wrong password,returning...");
             wait(3000)
-            admin_control();
+            admin_control();return 0;
         }
     }
 }
@@ -1003,7 +1009,7 @@ function addnewadmin(){
                     for (var adminloginid=0;adminloginid<admin.length;adminloginid++){
                         if (tempadminstaff===admin[adminloginid].staffid){
                             console.log("Staff ID Conflict !!");
-                            staffidcheck();
+                            staffidcheck();return 0;
                         }
                     }
                 }
@@ -1020,14 +1026,14 @@ function addnewadmin(){
                 console.log("      The NiceMeal Restaurant Admin System        ");
                 console.log("                 Operation success")
                 console.log("*****************************************************\n")
-                admin_control();
+                admin_control();return 0;
                 break;
             case 2:
-                admin_control();
+                admin_control();return 0;
                 break;
             default:
                 console.log("Invalid Option");
-                addnewadmin();
+                addnewadmin();return 0;
                 break;
         }
     }
@@ -1043,19 +1049,19 @@ function user_password_reset(){
     }
     console.log("         [1] Select user [2] Return")
     console.log("*****************************************************\n")
-    reset_password();
+    reset_password();return 0;
     function reset_password(){
         var choice =input.questionInt("Choice: ")
         switch (choice){
             case 1:
-                selectionuser();
+                selectionuser();return 0;
                 function selectionuser(){
                     var select=questionInt("User: ")
                     if (select<0||select>=customer.length){
                         console.log("Invalid Option");
-                        reset_password();
+                        reset_password();return 0;
                     }
-                    confirmation_message();
+                    confirmation_message();return 0;
                     function confirmation_message() {
                         var confirmation = input.question("Are you sure you want to reset password of user " + customer[select].memberno+"(Y/N): ");
                         switch (confirmation){
@@ -1074,20 +1080,20 @@ function user_password_reset(){
                                 console.log("                  Returning...")
                                 console.log("*****************************************************\n")
                                 wait(5000);
-                                user_password_reset();
+                                user_password_reset();return 0;
                                 break;
                             case 'N':
-                                user_password_reset();
+                                user_password_reset();return 0;
                                 break;
                             default:console.log("Invalid Option");
-                            confirmation_message();
+                            confirmation_message();return 0;
 
                         }
                     }
                 }
                 break;
             case 2:
-                admin_control();
+                admin_control();return 0;
                 break;
             default:
                 console.log("Invalid Option");
@@ -1106,7 +1112,7 @@ function user_control(){
     console.log("\n")
     console.log("    [1] Delete [2] Edit [3] Add [4] Return")
     console.log("*****************************************************\n")
-    usermanagementchoice();
+    usermanagementchoice();return 0;
     function usermanagementchoice(){
         var choice=input.questionInt("Choice: ");
         switch(choice){
@@ -1114,9 +1120,9 @@ function user_control(){
                 var deltechoice=input.questionInt("Which one to delete?: ");
                 if (deltechoice<0||deltechoice>=customer.length){
                     console.log("Invalid Option");
-                    usermanagementchoice();
+                    usermanagementchoice();return 0;
                 }
-                confirmationdelteuser();
+                confirmationdelteuser();return 0;
                 function confirmationdelteuser(){
                     var confirmation=input.question("Are you sure you want to delete "+customer[deltechoice].memberno+" ?(Y/N): ")
                     switch (confirmation)
@@ -1125,26 +1131,26 @@ function user_control(){
                             customer.splice(deltechoice ,1);
                             console.log("User have been deleted...Returning...")
                             wait(1000);
-                            user_control();
+                            user_control();return 0;
 
                             break;
                         case "N":
-                            user_control();
+                            user_control();return 0;
                             break;
 
                         default:
                             console.log("Invalid Option");
-                            confirmationdelteuser();
+                            confirmationdelteuser();return 0;
                     }
                 }
                 break;
             case 2:
-                useredtion();
+                useredtion();return 0;
                 function useredtion(){
                 var editchoice=input.questionInt("Which one to edit?: ");
                 if (editchoice<0||editchoice>=customer.length){
                     console.log("Invalid Option");
-                    useredtion();
+                    useredtion();return 0;
                     }
                     process.stdout.write('\033c')
                     console.log("*****************************************************\n")
@@ -1154,7 +1160,7 @@ function user_control(){
                     console.log("           [3] Phone Number [4] Email")
                     console.log("                     [5] Return\n")
                     console.log("*****************************************************\n")
-                    edituser();
+                    edituser();return 0;
                     function edituser(){
                         var choice =input.questionInt("Choice: ")
                         switch (choice){
@@ -1163,7 +1169,7 @@ function user_control(){
                                 console.log("Enter 0 to exit ,or enter the new membership number");
                                 var tempid=input.questionInt("Choice: ");
                                 if (tempid===0){
-                                    useredtion();
+                                    useredtion();return 0;
                                 }else {
                                     for (var g=0;g<customer.length;g++){
                                         if (customer[g].memberno===tempid){
@@ -1174,11 +1180,11 @@ function user_control(){
                                         customer[editchoice].memberno=tempid;
                                         console.log("Change is successful,returning...")
                                         wait(3000)
-                                        user_control();
+                                        user_control();return 0;
                                     }else if (conflict===1){
                                         console.log("Member ID conflict.ERROR 1020");
                                         wait(1000);
-                                        useredtion();
+                                        useredtion();return 0;
                                     }
                                 }
                                 break;
@@ -1187,7 +1193,7 @@ function user_control(){
                                 console.log("Press 0 to exit");
                                 var templast=input.question("New last name: ");
                                 if (templast==="0"){
-                                    useredtion();
+                                    useredtion();return 0;
                                 }
 
                                 else{
@@ -1196,7 +1202,7 @@ function user_control(){
                                     customer[editchoice].firstname=tempfirst;
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
-                                    user_control();
+                                    user_control();return 0;
 
                                 }
                                 break;
@@ -1205,13 +1211,13 @@ function user_control(){
                                 console.log("Press 0 to exit");
                                 var tempnumber=input.questionInt("New phone number: ");
                                 if (tempnumber===0){
-                                    useredtion();
+                                    useredtion();return 0;
                                 }
                                 else{
                                     customer[editchoice].contact=tempnumber;
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
-                                    user_control();
+                                    user_control();return 0;
 
                                 }
                                 break;
@@ -1220,29 +1226,29 @@ function user_control(){
                                 console.log("Press 0 to exit");
                                 var tempemail1=input.question("New email address: ");
                                 if (tempemail1==='0'){
-                                    useredtion();
+                                    useredtion();return 0;
                                 }
                                 else{
                                     customer[editchoice].email=tempemail1;
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
-                                    user_control();
+                                    user_control();return 0;
 
                                 }
                                 break;
                             default:
                                 console.log("Invalid Option");
-                                edituser();break;
+                                edituser();return 0;break;
                         }
                     }
                 }
 
                 break;
             case 3:
-                customer_register();
+                customer_register();return 0;
                 break;
 
-            case 4:admin_control();break;
+            case 4:admin_control();return 0;break;
             default: console.log("Invalid Choice ")
                 usermanagementchoice()
 
@@ -1293,7 +1299,7 @@ function customer_register(){
             conflict=1;
             console.log("Mobile number conflict.Please enter a new one")
             temp_contact=input.questionInt("Your Contact Number: ");
-            phonecheck();
+            phonecheck();return 0;
         }else {
             conflict=0;
         }
@@ -1330,7 +1336,7 @@ function customer_register(){
      confirm_password =input.question("Confirm your password: ");
         if (temp_password!==confirm_password){
             console.log("Passwords does not match");
-            passwordtype();
+            passwordtype();return 0;
         }
      }else{
          console.log("Passwords does not meet requirement");
@@ -1346,7 +1352,7 @@ membercheck();
             if (tempmno===customer[j].memberno){
                 conflict=1;
          tempmno++;
-                membercheck();
+                membercheck();return 0;
             }else {
                 conflict=0;
             }
@@ -1363,7 +1369,17 @@ membercheck();
         customer[i].coupon[0]=new coupon("New User Welcome Gift",10001,"S",8)
         i++;
         wait(2000);
-        user_control()
+        newde();return 0;
+        async function newde(){
+
+            await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
+            await fs.writeFile('order.dat',JSON.stringify(order))
+            await fs.writeFile('admin.dat',JSON.stringify(admin))
+            await fs.writeFile('food.dat',JSON.stringify(food))
+            await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+            user_control()
+        }
+
     }
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1376,7 +1392,7 @@ membercheck();
     wait(2000);
     customer[i].coupon[0]=new coupon("New User Welcome Gift",10001,"S",8)
     i++;
-    main_screen();
+    main_screen();return 0;
 
 }
 function determind_call(l){
@@ -1398,6 +1414,7 @@ function customer_login(){
    var temploginid= input.questionInt("Please enter your contact number or membership No.: ");
    if (temploginid===1){
        main_screen()
+       return 0;
    }
    for (var k=0;k<customer.length;k++){
        if (temploginid===customer[k].memberno || temploginid===customer[k].contact ){
@@ -1419,14 +1436,15 @@ function customer_login(){
        question_notfound();
        switch (notfound_choice){
            case 1:
-               customer_login();
+               customer_login();return 0;
+               return 0;
                break;
            case 2:
-               main_screen();
+               main_screen();return 0;
                break;
            default:
                console.log("Invalid option")
-               question_notfound();
+               question_notfound();return 0;
                break;
        }
    }
@@ -1440,7 +1458,7 @@ function customer_login(){
        console.log("Password attempt above limit,please approach our staff ")
        console.log("*****************************************************\n");
        wait(3000);
-       main_screen();
+       main_screen();return 0;
    }}
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1456,7 +1474,7 @@ function customer_login(){
         if (temploginpassword===customer[currentlogin].password){
             customer[currentlogin].wrongpassword_attempt=0;
             userlogin=true;
-            order_screen();
+            order_screen();return 0;
         }
         else {
             customer[currentlogin].wrongpassword_attempt++;
@@ -1469,21 +1487,19 @@ function customer_login(){
             console.log("Your account will be locked if there is more than 3  ")
             console.log("                      attempts")
             console.log("             Current Attempt: "+customer[currentlogin].wrongpassword_attempt+"\n")
-            console.log("[1] Retry [2] Forgot Password [3] Back to previous menu")
+            console.log("       [1] Retry [2] Back to previous menu")
             console.log("*****************************************************\n");
             var wrongattemptchoice=input.questionInt("Choice: ");
             switch (wrongattemptchoice){
                 case 1:
 
-                    verify_password();
+                    verify_password();return 0;
                     break;
+
                 case 2:
-                    reset_password();
-                    break;
-                case 3:
                     temploginid=0;
                     temploginpassword=0;
-                    main_screen();
+                    main_screen();return 0;
                     break;
             }
         }
@@ -1499,7 +1515,7 @@ function change_particular(){
         console.log("       This function is not available to guest")
         console.log("*****************************************************\n")
         wait(3000);
-        order_screen();
+        order_screen();return 0;
     }
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1512,21 +1528,23 @@ function change_particular(){
     console.log("        [1] Contact Number  [2] Email Address")
     console.log("        [3] Passwords       [4] Return to previous screen\n")
     console.log("*****************************************************\n")
-    changeparticularchoice();
+    changeparticularchoice();return 0;
     function changeparticularchoice(){
         var choice=input.questionInt("Choice: ");
         switch (choice){
             case 1:
-                var choice=input.questionInt("New phone number: ");
-                customer[currentlogin].contact=choice;
+                var choicephone=input.questionInt("New phone number: ");
+                customer[currentlogin].contact=choicephone;
                 order_screen()
+                return 0;
                 break;
             case 2:
                 var tempchangeemail=input.question("Your new email address:")
                 customer[currentlogin].email=tempchangeemail;
                 console.log("Change is successful,going back ...");
                 wait(3000);
-                order_screen();
+                order_screen();return 0;
+
                 break;
             case 3:
                 currentpass()
@@ -1538,7 +1556,7 @@ function change_particular(){
                     console.log("         The NiceMeal Restaurant User System        ");
                     console.log("              Verification is successful!")
                     console.log("*****************************************************\n")
-                    retrypassword();
+                    retrypassword();return 0;
 
                     function retrypassword()
                     {
@@ -1560,12 +1578,12 @@ function change_particular(){
                             var choice = input.questionInt("Choice: ");
                             switch (choice){
                                 case 1:
-                                    retrypassword();break;
+                                    retrypassword();return 0;break;
                                 case 2:
-                                    order_screen();break;
+                                    order_screen();return 0;break;
                                 default:
                                     console.log("Invalid Option");
-                                    repeatchoice();
+                                    repeatchoice();return 0;
                             }
                         }
                     }
@@ -1580,14 +1598,14 @@ function change_particular(){
                     console.log("*****************************************************\n")
                     var choice1=input.questionInt("Choice: ")
                     switch (choice1){
-                        case 1: currentpass();break;
-                        case 2:order_screen();break;
+                        case 1: currentpass();return 0;break;
+                        case 2:order_screen();return 0;break;
                     }
                 }}
                 break;
-            case 4:order_screen();break;
+            case 4:order_screen();return 0;break;
             default:console.log("Invalid Option");
-            changeparticularchoice();break;
+            changeparticularchoice();return 0;break;
 
         }
 
@@ -1617,20 +1635,20 @@ function order_screen(){
     console.log("           [5] View Coupon  [6] Change of account detail")
     console.log("           [7] Logout        [8] Exit\n")
     console.log("*****************************************************\n")
-    order_screen_choice();
+    order_screen_choice();return 0;
     function order_screen_choice() {
         var choice = input.questionInt("Choice: ");
         switch (choice){
-            case 1: order_menu();break;
-            case 2: view_cart();break;
-            case 3: order_history();break;
-            case 4:trackorderguest();break;
-            case 5:coupon_view();break
-            case 6:change_particular();break
-            case 7:logout_now();break;
+            case 1: order_menu();return 0;break;
+            case 2: view_cart();return 0;break;
+            case 3: order_history();return 0;break;
+            case 4:trackorderguest();return 0;break;
+            case 5:coupon_view();return 0;break
+            case 6:change_particular();return 0;break
+            case 7:logout_now();return 0;break;
             case 8:process.exit(0);break;
             default:console.log("Invalid Option");
-            order_screen_choice();break;
+            order_screen_choice();return 0;break;
 
         }
     }
@@ -1651,14 +1669,14 @@ function order_menu(){
     function foodmenuoption() {
         var foodmenuchoice = input.questionInt("Choice: ");
         switch (foodmenuchoice){
-            case 1:view_all();break
-            case 2:category_item();break;
-            case 3:search_item();break;
-            case 4:order_screen();break;
+            case 1:view_all();return 0;break
+            case 2:category_item();return 0;break;
+            case 3:search_item();return 0;break;
+            case 4:order_screen();return 0;break;
 
             default:
                 console.log("Invalid Option");
-                foodmenuoption();
+                foodmenuoption();return 0;
                 break;
 
         }
@@ -1666,7 +1684,7 @@ function order_menu(){
 }
 function view_cart(){
     if (guestlogin===true){
-        view_cart_guest();
+        view_cart_guest();return 0;
     }
      totalcost=0;
     if (customer[currentlogin].cart.length<1){
@@ -1676,13 +1694,13 @@ function view_cart(){
         console.log("              You have no item in cart :(\n")
         console.log("              [1]Back to previous menu")
         console.log("*****************************************************\n")
-        nocartitem();
+        nocartitem();return 0;
         function nocartitem(){
             var choice=input.questionInt("Choice: ");
             switch (choice){
-                case 1: order_screen();break
+                case 1: order_screen();return 0;break
                 default:console.log("Invalid Choice");
-                nocartitem();
+                nocartitem();return 0;
             }
         }
     }
@@ -1738,12 +1756,12 @@ if (usecoupon===false){
                 function selectionchoice(){
                   selection=input.questionInt("Choice: ");
                   if (selection===10){
-                      view_cart();
+                      view_cart();return 0;
 
                   }
                 if (selection>=customer[currentlogin].coupon.length){
                     console.log("Invalid Option");
-                    selectionchoice();
+                    selectionchoice();return 0;
                 }
                 choiceselectioncoupon=selection;
                 usecoupon=true;
@@ -1752,7 +1770,7 @@ if (usecoupon===false){
                 }
                 break;
             case 1:
-                checkout();
+                checkout();return 0;
                 function checkout(){
                     var choice=input.question("Are you sure you want to checkout?(Y/N): ")
                     switch (choice){
@@ -1782,7 +1800,7 @@ if (usecoupon===false){
                             console.log("*****************************************************\n");
 
                             wait(4000)
-                            order_screen();
+                            order_screen();return 0;
 
 
 
@@ -1790,15 +1808,15 @@ if (usecoupon===false){
                         case "N":if (thismenu>1){
                             thismenu++;
                         }
-                            view_cart();
+                            view_cart();return 0;
                         break;
-                        default:console.log("Invalid Option");checkout();
+                        default:console.log("Invalid Option");checkout();return 0;
                     }
                 }
                 break;
             case 2:
                 var deleteitem=input.questionInt("Which item you would like to delete: ");
-                deletenow();
+                deletenow();return 0;
                 function deletenow() {
                     var confirmationdelete = input.question("Are you sure you want to remove " + customer[currentlogin].cart[deleteitem][0].item_name + " ? (Y/N): ");
                     if (confirmationdelete === "Y") {
@@ -1808,21 +1826,21 @@ if (usecoupon===false){
                         if (thismenu>1){
                             thismenu++;
                         }
-                        order_screen();
+                        order_screen();return 0;
                     } else if (confirmationdelete === "N") {
-                        choicecheckout();
+                        choicecheckout();return 0;
                     } else {
                         console.log("Invalid Option");
-                        deletenow();
+                        deletenow();return 0;
                     }
                 }
 
                 break;
             case 3:if (thismenu>1){
                 thismenu++;
-            } order_screen();break;
+            } order_screen();return 0;break;
             default: console.log("Invalid Option");
-            choicecheckout();
+            choicecheckout();return 0;
         }
     }
 }
@@ -1835,13 +1853,13 @@ function view_cart_guest(){
         console.log("              You have no item in cart :(\n")
         console.log("              [1]Back to previous menu")
         console.log("*****************************************************\n")
-        nocartitem();
+        nocartitem();return 0;
         function nocartitem(){
             var choice=input.questionInt("Choice: ");
             switch (choice){
-                case 1: order_screen();break
+                case 1: order_screen();return 0;break
                 default:console.log("Invalid Choice");
-                    nocartitem();
+                    nocartitem();return 0;
             }
         }
     }
@@ -1873,7 +1891,7 @@ function view_cart_guest(){
         var choice =input.questionInt("Choice: ");
         switch (choice){
             case 1:
-                checkout();
+                checkout();return 0;
             function checkout(){
                 var choice=input.question("Are you sure you want to checkout?(Y/N): ")
                 switch (choice){
@@ -1898,7 +1916,7 @@ function view_cart_guest(){
                         console.log("        A email receipt have been sent to you!")
                         console.log("*****************************************************\n");
                         wait(4000)
-                        order_screen();
+                        order_screen();return 0;
 
 
 
@@ -1906,15 +1924,15 @@ function view_cart_guest(){
                     case "N":if (thismenu>1){
                         thismenu++;
                     }
-                        view_cart();
+                        view_cart();return 0;
                         break;
-                    default:console.log("Invalid Option");checkout();
+                    default:console.log("Invalid Option");checkout();return 0;
                 }
             }
                 break;
             case 2:
                 var deleteitem=input.questionInt("Which item you would like to delete: ");
-                deletenow1();
+                deletenow1();return 0;
             function deletenow1() {
                 var confirmationdelete = input.question("Are you sure you want to remove " + guest_cart[deleteitem][0].item_name + " ? (Y/N): ");
                 if (confirmationdelete === "Y") {
@@ -1924,21 +1942,21 @@ function view_cart_guest(){
                     if (thismenu>1){
                         thismenu++;
                     }
-                    order_screen();
+                    order_screen();return 0;
                 } else if (confirmationdelete === "N") {
-                    choicecheckoutg();
+                    choicecheckoutg();return 0;
                 } else {
                     console.log("Invalid Option");
-                    deletenow1();
+                    deletenow1();return 0;
                 }
             }
 
                 break;
             case 3:if (thismenu>1){
                 thismenu++;
-            } order_screen();break;
+            } order_screen();return 0;break;
             default: console.log("Invalid Option");
-                choicecheckoutg();
+                choicecheckoutg();return 0;
         }
     }
 }
@@ -1970,15 +1988,15 @@ function order_history(){
         console.log("\n")
         console.log("[1] Send a email receipt for a order [2] Go back")
         console.log("*****************************************************\n");
-        tempc();
+        tempc();return 0;
         function tempc(){
             var tempchoice1=input.questionInt("Choice: ");
             switch (tempchoice1){
                 case 1:
                     console.log("Sending in progress..");break;
-                case 2: order_screen();break;
+                case 2: order_screen();return 0;break;
                 default: console.log("Invalid option");
-                    tempc();break;
+                    tempc();return 0;break;
             }
         }
     }
@@ -1986,12 +2004,12 @@ function order_history(){
     console.log("                 No order found")
     console.log("                  [1] Go back")
         console.log("*****************************************************\n");
-    tempchoice();
+    tempchoice();return 0;
     function tempchoice(){
         var tempchoice1=input.questionInt("Choice: ");
         switch (tempchoice1){
-            case 1:order_screen();break;
-            default:console.log("Invalid Option");tempchoice();break;
+            case 1:order_screen();return 0;break;
+            default:console.log("Invalid Option");tempchoice();return 0;break;
         }
     }
     }
@@ -2004,7 +2022,7 @@ function coupon_view(){
         console.log("       This function is not available to guest")
         console.log("*****************************************************\n")
         wait(3000);
-        order_screen();
+        order_screen();return 0;
     }
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -2015,11 +2033,11 @@ function coupon_view(){
     }
     console.log("             [1] Back to previous menu\n")
     console.log("*****************************************************\n")
-    coupon_view_choice();
+    coupon_view_choice();return 0;
     function coupon_view_choice(){
         var choice =input.questionInt("Choice: ")
         switch (choice){
-            case 1: order_screen();break
+            case 1: order_screen();return 0;break
             default:console.log("Invalid Option"); wait(3000)
                 coupon_view_choice()
         }
@@ -2033,7 +2051,7 @@ function logout_now(){
     console.log("*****************************************************\n")
     wait(3000)
     currentlogin=0;
-    main_screen();
+    main_screen();return 0;
 }
 function time_identify(){
     if (time.getHours()<12){
@@ -2081,17 +2099,17 @@ function view_all(){
         if (guestlogin===true||userlogin===true){
             console.log("[1] View item's description [2] Add to cart [3] Return back \n")
             console.log("*****************************************************\n")
-            addcartall();
+            addcartall();return 0;
             function addcartall(){
                 var choice =input.questionInt("Choice: ");
                 switch ( choice){
-                    case 1: viewitemdescription();break;
+                    case 1: viewitemdescription();return 0;break;
                     case 2:
                         var seeitem=input.questionInt('Which one to add to cart? :');
                         if (seeitem<0||seeitem>foodcount){
                             console.log("Invalid Option");
                             wait(3000)
-                            addcartall();
+                            addcartall();return 0;
                         }
                         category_number=0;
                         if (seeitem>=a){
@@ -2113,7 +2131,7 @@ function view_all(){
                         if (userlogin===true){
                             customer[currentlogin].cart.push((food[category_number].slice(seeitem,seeitem+1)))
                             tempclass=customer[currentlogin].cart.length-1;
-                            quantityoforderuser();
+                            quantityoforderuser();return 0;
                             function quantityoforderuser(){
                                 var quantity = input.questionInt("How many do you want: ");
                                 if (quantity<0){
@@ -2170,7 +2188,7 @@ function view_all(){
                         if (guestlogin===true){
                             guest_cart.push((food[category_number].slice(seeitem,seeitem+1)))
                             tempclass=guest_cart.length-1;
-                            quantityoforderguest();
+                            quantityoforderguest();return 0;
                             function quantityoforderguest(){
                                 var quantity = input.questionInt("How many do you want: ");
                                 if (quantity<0){
@@ -2229,10 +2247,10 @@ function view_all(){
 
 
                         break;
-                    case 3:order_menu();break;
+                    case 3:order_menu();return 0;break;
                     default:console.log("Invalid Option")
                         wait(3000)
-                    addcartall();
+                    addcartall();return 0;
                     break;
                 }
             }
@@ -2242,12 +2260,12 @@ function view_all(){
         if (guestlogin===false&&userlogin===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
-    itemchoiceview();
+    itemchoiceview();return 0;
     function itemchoiceview() {
         var itemchoicedes = input.questionInt("Choice: ")
         switch (itemchoicedes) {
-            case 1:viewitemdescription();break;
-            case 2:food_menu();break;
+            case 1:viewitemdescription();return 0;break;
+            case 2:food_menu();return 0;break;
             default:
                 console.log("Invalid Option");
                 wait(3000)
@@ -2288,16 +2306,16 @@ function viewitemdescription(){
     console.log(food[category_number][seeitem].item_description+"\n");
     console.log("            [1]Back to previous screen ");
     console.log("*****************************************************\n");
-    backto();
+    backto();return 0;
     function backto(){
         var choice=input.questionInt("Choice: ")
         switch (choice){
             case 1:
-                view_all();
+                view_all();return 0;
                 break
             default:
                 console.log("Invalid Option");
-                backto();
+                backto();return 0;
                 break;
         }
     }
@@ -2316,36 +2334,36 @@ function category_item(){
     console.log("                     [4] Others                       ")
     console.log("                     [5] Go back to previous menu                       ")
     console.log("*****************************************************\n")
-    categorychoice();
+    categorychoice();return 0;
     function categorychoice() {
         var choice = input.questionInt("Choice :");
         switch (choice){
-            case 0: promotioncategory();break;
+            case 0: promotioncategory();return 0;break;
             case 1:
                 ricecategory()
                 break;
             case 2:
-                noodlecategory();
+                noodlecategory();return 0;
                 break;
             case 3:
-                drinkcategory();
+                drinkcategory();return 0;
                 break;
             case 4:
-                othercategory();
+                othercategory();return 0;
                 break;
             case 5 :
                 if (userlogin===true||guestlogin===true){
-                    order_screen();break;
+                    order_screen();return 0;break;
                 }if (userlogin===false&&guestlogin===false){
-                main_screen();break;}
+                main_screen();return 0;break;}
                 if (adminloginc===true){
-                    admin_control();break;
+                    admin_control();return 0;break;
                 }
                 break;
             default:
                 console.log("Invalid option");
                 wait(3000)
-                categorychoice();
+                categorychoice();return 0;
                 break;
         }
     }
@@ -2363,24 +2381,24 @@ function ricecategory(){
     if (userlogin===true || guestlogin===true){
         console.log("[1] View an item's description [2] Add to cart [3]Return back ");
         console.log("*****************************************************\n")
-        addcartrc();
+        addcartrc();return 0;
         function addcartrc(){
 
             var choice=input.questionInt("Choice :")
             switch (choice){
-                case 1:   viewricedescription();
+                case 1:   viewricedescription();return 0;
                     break;
                 case 2:
     var cartready=input.questionInt("Which one to add to cart: ")
                     if (cartready<0||cartready>food[1].length-1){
                         console.log("Invalid Option")
-                        addcartrc();
+                        addcartrc();return 0;
                     }
                     if (userlogin===true){
 
                         customer[currentlogin].cart.push((food[1].slice(cartready,cartready+1)))
                         tempclass=customer[currentlogin].cart.length-1;
-                        quantityoforderuser();
+                        quantityoforderuser();return 0;
 
                     }
                     function quantityoforderuser(){
@@ -2429,7 +2447,7 @@ function ricecategory(){
 
                         console.log("Added to cart!!");
                         wait(3000)
-                        ricecategory();
+                        ricecategory();return 0;
 
 
                     }
@@ -2439,7 +2457,7 @@ function ricecategory(){
 
                         guest_cart.push((food[1].slice(cartready,cartready+1)))
                         tempclass=guest_cart.length-1;
-                        quantityoforderguest();
+                        quantityoforderguest();return 0;
 
                     }
                 function quantityoforderguest(){
@@ -2488,18 +2506,18 @@ function ricecategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    ricecategory();
+                    ricecategory();return 0;
 
 
                 }
 
                     break;
                 case 3:
-                    category_item();
+                    category_item();return 0;
                     break
                 default:
                     console.log("Invalid Option")
-                    addcartrc();
+                    addcartrc();return 0;
 
             }
 
@@ -2509,16 +2527,16 @@ function ricecategory(){
     if (userlogin===false&&guestlogin===false&&adminloginc===false) {
         console.log("[1] View an item's description [2]Back to previous screen ");
         console.log("*****************************************************\n")
-        itemchoiceview1();
+        itemchoiceview1();return 0;
 
         function itemchoiceview1() {
             var itemchoicedes = input.questionInt("Choice: ")
             switch (itemchoicedes) {
                 case 1:
-                    viewricedescription();
+                    viewricedescription();return 0;
                     break;
                 case 2:
-                    category_item();
+                    category_item();return 0;
                     break;
                 default:
                     console.log("Invalid Option");
@@ -2530,7 +2548,7 @@ function ricecategory(){
     if (adminloginc===true){
         console.log("[1] Remove an item [2]Return back [3] Edit item");
         console.log("*****************************************************\n")
-        adminchoicerice();
+        adminchoicerice();return 0;
         function adminchoicerice(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
@@ -2539,9 +2557,9 @@ function ricecategory(){
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
                     if (deleteoption<0||deleteoption>=food[1].length){
                         console.log("Invalid Option")
-                        ricecategory();
+                        ricecategory();return 0;
                     }
-                    confirmationdelete();
+                    confirmationdelete();return 0;
                     function confirmationdelete() {
 
 
@@ -2550,15 +2568,15 @@ function ricecategory(){
                             case "Y": food[1].splice(deleteoption,1);
                             console.log("Delete Successful,returning...")
                                 wait(3000)
-                                ricecategory();
+                                ricecategory();return 0;
                             break;
                             case "N":
-                                admin_control();
+                                admin_control();return 0;
                                 break;
                             default:
                                 console.log("Invalid option")
                                 wait(300)
-                                ricecategory();
+                                ricecategory();return 0;
                                 break;
                         }
 
@@ -2566,7 +2584,7 @@ function ricecategory(){
 
                     break;
                 case 2:
-                    admin_control();
+                    admin_control();return 0;
                     break;
                 case 3:
                     process.stdout.write('\033c')
@@ -2591,9 +2609,9 @@ switch (choiceedit){
         if (choiceediter < 0 || choiceediter >= food[1].length) {
             console.log("Invalid Option");
             wait(3000)
-            adminchoicerice();
+            adminchoicerice();return 0;
         }
-                    edititem();
+                    edititem();return 0;
         function edititem(){
         process.stdout.write('\033c')
         console.log("*****************************************************\n")
@@ -2603,7 +2621,7 @@ switch (choiceedit){
         console.log("         [3] Item Description [4] Item Cost")
         console.log("                 [5] Return")
         console.log("*****************************************************\n")
-        editfunction();
+        editfunction();return 0;
         function editfunction(){
             var choice=input.questionInt("Choice: ");
             switch (choice){
@@ -2620,7 +2638,7 @@ switch (choiceedit){
                     console.log("          Change is successful.Returning...")
                     console.log("*****************************************************\n")
                     wait(3000);
-                    edititem();
+                    edititem();return 0;
                     break;
                 case 2:   process.stdout.write('\033c')
                     console.log("*****************************************************\n")
@@ -2644,7 +2662,7 @@ switch (choiceedit){
                     console.log("          Change is successful.Returning...")
                     console.log("*****************************************************\n")
                     wait(3000);
-                    edititem();
+                    edititem();return 0;
                     break;
                 case 3:
                     process.stdout.write('\033c')
@@ -2659,7 +2677,7 @@ switch (choiceedit){
                     console.log("          Change is successful.Returning...")
                     console.log("*****************************************************\n")
                     wait(3000);
-                    edititem();
+                    edititem();return 0;
                     break;
                 case 4:
                     process.stdout.write('\033c')
@@ -2674,9 +2692,9 @@ switch (choiceedit){
                     console.log("          Change is successful.Returning...")
                     console.log("*****************************************************\n")
                     wait(3000);
-                    edititem();
+                    edititem();return 0;
                     break;
-                case 5:admin_control();break;
+                case 5:admin_control();return 0;break;
                 default:
                     console.log("Invalid Option")
                     editfunction()
@@ -2686,7 +2704,7 @@ switch (choiceedit){
         break;
 
 
-    case 2:admin_control();
+    case 2:admin_control();return 0;
     break;
     default:
         console.log("Invalid Options");
@@ -2697,20 +2715,20 @@ switch (choiceedit){
                     break;
                 default:
                     console.log("Invalid Option")
-                    admin_control();
+                    admin_control();return 0;
             }
         }
     }
 
 }
 function viewricedescription(){
-    retryrice();
+    retryrice();return 0;
     function retryrice() {
         seeitem1 = input.questionInt("Which item do you want to see: ");
         if (seeitem1>food[1].length-1 || seeitem1<0){
             console.log("Invalid Option");
             wait(1000)
-            ricecategory();
+            ricecategory();return 0;
 
         }
 
@@ -2722,16 +2740,16 @@ function viewricedescription(){
         console.log(food[1][seeitem1].item_description+"\n");
         console.log("            [1]Back to previous screen ");
         console.log("*****************************************************\n");
-        backto();
+        backto();return 0;
         function backto(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
-                    ricecategory();
+                    ricecategory();return 0;
                     break
                 default:
                     console.log("Invalid Option");
-                    backto();
+                    backto();return 0;
                     break;
             }
         }
@@ -2751,24 +2769,24 @@ function noodlecategory(){
     if (userlogin===true || guestlogin===true){
         console.log("[1] View an item's description [2] Add to cart [3]Return back ");
         console.log("*****************************************************\n")
-        addcartrc();
+        addcartrc();return 0;
         function addcartrc(){
 
             var choice=input.questionInt("Choice :")
             switch (choice){
-                case 1:   viewnoodledescription();
+                case 1:   viewnoodledescription();return 0;
                     break;
                 case 2:
                     var cartready=input.questionInt("Which one to add to cart: ")
                     if (cartready<0||cartready>food[0].length-1){
                         console.log("Invalid Option")
-                        addcartrc();
+                        addcartrc();return 0;
                     }
                     if (userlogin===true){
 
                         customer[currentlogin].cart.push((food[0].slice(cartready,cartready+1)))
                         tempclass=customer[currentlogin].cart.length-1;
-                        quantityoforderuser();
+                        quantityoforderuser();return 0;
 
                     }
                 function quantityoforderuser(){
@@ -2817,7 +2835,7 @@ function noodlecategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    noodlecategory();
+                    noodlecategory();return 0;
 
 
                 }
@@ -2827,7 +2845,7 @@ function noodlecategory(){
 
                         guest_cart.push((food[0].slice(cartready,cartready+1)))
                         tempclass=guest_cart.length-1;
-                        quantityoforderguest();
+                        quantityoforderguest();return 0;
 
                     }
                 function quantityoforderguest(){
@@ -2876,18 +2894,18 @@ function noodlecategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    noodlecategory();
+                    noodlecategory();return 0;
 
 
                 }
 
                     break;
                 case 3:
-                    category_item();
+                    category_item();return 0;
                     break
                 default:
                     console.log("Invalid Option")
-                    addcartrc();
+                    addcartrc();return 0;
 
             }
 
@@ -2897,12 +2915,12 @@ function noodlecategory(){
     if (userlogin===false&&guestlogin===false&&adminloginc===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
-    itemchoiceview1();
+    itemchoiceview1();return 0;
     function itemchoiceview1() {
         var itemchoicedes = input.questionInt("Choice: ")
         switch (itemchoicedes) {
-            case 1:viewnoodledescription();break;
-            case 2:category_item();break;
+            case 1:viewnoodledescription();return 0;break;
+            case 2:category_item();return 0;break;
             default:
                 console.log("Invalid Option");
                 wait(3000)
@@ -2912,7 +2930,7 @@ function noodlecategory(){
     if (adminloginc===true){
         console.log("[1] Remove an item [2]Return back [3] Edit item");
         console.log("*****************************************************\n")
-        adminchoicenoodle();
+        adminchoicenoodle();return 0;
         function adminchoicenoodle(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
@@ -2921,9 +2939,9 @@ function noodlecategory(){
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
                     if (deleteoption<0||deleteoption>=food[0].length){
                         console.log("Invalid Option")
-                        noodlecategory();
+                        noodlecategory();return 0;
                     }
-                    confirmationdelete();
+                    confirmationdelete();return 0;
                 function confirmationdelete() {
 
 
@@ -2932,15 +2950,15 @@ function noodlecategory(){
                         case "Y": food[0].splice(deleteoption,1);
                             console.log("Delete Successful,returning...")
                             wait(3000)
-                            noodlecategory();
+                            noodlecategory();return 0;
                             break;
                         case "N":
-                            admin_control();
+                            admin_control();return 0;
                             break;
                         default:
                             console.log("Invalid option")
                             wait(300)
-                            noodlecategory();
+                            noodlecategory();return 0;
                             break;
                     }
 
@@ -2948,7 +2966,7 @@ function noodlecategory(){
 
                     break;
                 case 2:
-                    admin_control();
+                    admin_control();return 0;
                     break;
                 case 3:
                     process.stdout.write('\033c')
@@ -2973,9 +2991,9 @@ function noodlecategory(){
                             if (choiceediter < 0 || choiceediter >= food[0].length) {
                                 console.log("Invalid Option");
                                 wait(3000)
-                                adminchoicenoodle();
+                                adminchoicenoodle();return 0;
                             }
-                            edititem();
+                            edititem();return 0;
                         function edititem(){
                             process.stdout.write('\033c')
                             console.log("*****************************************************\n")
@@ -2985,7 +3003,7 @@ function noodlecategory(){
                             console.log("         [3] Item Description [4] Item Cost")
                             console.log("                 [5] Return")
                             console.log("*****************************************************\n")
-                            editfunction();
+                            editfunction();return 0;
                             function editfunction(){
                                 var choice=input.questionInt("Choice: ");
                                 switch (choice){
@@ -3002,7 +3020,7 @@ function noodlecategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
@@ -3026,7 +3044,7 @@ function noodlecategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 3:
                                         process.stdout.write('\033c')
@@ -3041,7 +3059,7 @@ function noodlecategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 4:
                                         process.stdout.write('\033c')
@@ -3056,9 +3074,9 @@ function noodlecategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
-                                    case 5:admin_control();break;
+                                    case 5:admin_control();return 0;break;
                                     default:
                                         console.log("Invalid Option")
                                         editfunction()
@@ -3068,7 +3086,7 @@ function noodlecategory(){
                             break;
 
 
-                        case 2:admin_control();
+                        case 2:admin_control();return 0;
                             break;
                         default:
                             console.log("Invalid Options");
@@ -3079,19 +3097,19 @@ function noodlecategory(){
                     break;
                 default:
                     console.log("Invalid Option")
-                    admin_control();
+                    admin_control();return 0;
             }
         }
     }
 }
 function viewnoodledescription(){
-    retrynoodle();
+    retrynoodle();return 0;
     function retrynoodle() {
         seeitem2 = input.questionInt("Which item do you want to see: ");
         if (seeitem2>food[0].length-1 || seeitem2<0){
             console.log("Invalid Option");
             wait(1000)
-           noodlecategory();
+           noodlecategory();return 0;
 
         }
 
@@ -3103,16 +3121,16 @@ function viewnoodledescription(){
         console.log(food[0][seeitem2].item_description+"\n");
         console.log("            [1]Back to previous screen ");
         console.log("*****************************************************\n");
-        backto();
+        backto();return 0;
         function backto(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
-                    noodlecategory();
+                    noodlecategory();return 0;
                     break
                 default:
                     console.log("Invalid Option");
-                    backto();
+                    backto();return 0;
                     break;
             }
         }
@@ -3133,24 +3151,24 @@ function drinkcategory(){
     if (userlogin===true || guestlogin===true){
         console.log("[1] View an item's description [2] Add to cart [3]Return back ");
         console.log("*****************************************************\n")
-        addcartrc();
+        addcartrc();return 0;
         function addcartrc(){
 
             var choice=input.questionInt("Choice :")
             switch (choice){
-                case 1:   viewdrinkdescription();
+                case 1:   viewdrinkdescription();return 0;
                     break;
                 case 2:
                     var cartready=input.questionInt("Which one to add to cart: ")
                     if (cartready<0||cartready>food[2].length-1){
                         console.log("Invalid Option")
-                        addcartrc();
+                        addcartrc();return 0;
                     }
                     if (userlogin===true){
 
                         customer[currentlogin].cart.push((food[2].slice(cartready,cartready+1)))
                         tempclass=customer[currentlogin].cart.length-1;
-                        quantityoforderuser();
+                        quantityoforderuser();return 0;
 
                     }
                 function quantityoforderuser(){
@@ -3199,7 +3217,7 @@ function drinkcategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    drinkcategory();
+                    drinkcategory();return 0;
 
 
                 }
@@ -3208,7 +3226,7 @@ function drinkcategory(){
 
                         guest_cart.push((food[2].slice(cartready,cartready+1)))
                         tempclass=guest_cart.length-1;
-                        quantityoforderguest();
+                        quantityoforderguest();return 0;
 
                     }
                 function quantityoforderguest(){
@@ -3257,18 +3275,18 @@ function drinkcategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    drinkcategory();
+                    drinkcategory();return 0;
 
 
                 }
 
                     break;
                 case 3:
-                    category_item();
+                    category_item();return 0;
                     break
                 default:
                     console.log("Invalid Option")
-                    addcartrc();
+                    addcartrc();return 0;
 
             }
 
@@ -3278,12 +3296,12 @@ function drinkcategory(){
     if (userlogin===false&&guestlogin===false&&adminloginc===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
-    itemchoiceview1();
+    itemchoiceview1();return 0;
     function itemchoiceview1() {
         var itemchoicedes = input.questionInt("Choice: ")
         switch (itemchoicedes) {
-            case 1:viewdrinkdescription();break;
-            case 2:category_item();break;
+            case 1:viewdrinkdescription();return 0;break;
+            case 2:category_item();return 0;break;
             default:
                 console.log("Invalid Option");
                 itemchoiceview1()
@@ -3293,7 +3311,7 @@ function drinkcategory(){
     if (adminloginc===true){
         console.log("[1] Remove an item [2]Return back [3] Edit item");
         console.log("*****************************************************\n")
-        adminchoicedrink();
+        adminchoicedrink();return 0;
         function adminchoicedrink(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
@@ -3302,9 +3320,9 @@ function drinkcategory(){
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
                     if (deleteoption<0||deleteoption>=food[2].length){
                         console.log("Invalid Option")
-                        drinkcategory();
+                        drinkcategory();return 0;
                     }
-                    confirmationdelete();
+                    confirmationdelete();return 0;
                 function confirmationdelete() {
 
 
@@ -3313,15 +3331,15 @@ function drinkcategory(){
                         case "Y": food[2].splice(deleteoption,1);
                             console.log("Delete Successful,returning...")
                             wait(3000)
-                            drinkcategory();
+                            drinkcategory();return 0;
                             break;
                         case "N":
-                            admin_control();
+                            admin_control();return 0;
                             break;
                         default:
                             console.log("Invalid option")
                             wait(300)
-                            drinkcategory();
+                            drinkcategory();return 0;
                             break;
                     }
 
@@ -3329,7 +3347,7 @@ function drinkcategory(){
 
                     break;
                 case 2:
-                    admin_control();
+                    admin_control();return 0;
                     break;
                 case 3:
                     process.stdout.write('\033c')
@@ -3354,9 +3372,9 @@ function drinkcategory(){
                             if (choiceediter < 0 || choiceediter >=food[2].length) {
                                 console.log("Invalid Option");
                                 wait(3000)
-                                adminchoicedrink();
+                                adminchoicedrink();return 0;
                             }
-                            edititem();
+                            edititem();return 0;
                         function edititem(){
                             process.stdout.write('\033c')
                             console.log("*****************************************************\n")
@@ -3366,7 +3384,7 @@ function drinkcategory(){
                             console.log("         [3] Item Description [4] Item Cost")
                             console.log("                 [5] Return")
                             console.log("*****************************************************\n")
-                            editfunction();
+                            editfunction();return 0;
                             function editfunction(){
                                 var choice=input.questionInt("Choice: ");
                                 switch (choice){
@@ -3383,7 +3401,7 @@ function drinkcategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
@@ -3407,7 +3425,7 @@ function drinkcategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 3:
                                         process.stdout.write('\033c')
@@ -3422,7 +3440,7 @@ function drinkcategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 4:
                                         process.stdout.write('\033c')
@@ -3437,9 +3455,9 @@ function drinkcategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
-                                    case 5:admin_control();break;
+                                    case 5:admin_control();return 0;break;
                                     default:
                                         console.log("Invalid Option")
                                         editfunction()
@@ -3449,7 +3467,7 @@ function drinkcategory(){
                             break;
 
 
-                        case 2:admin_control();
+                        case 2:admin_control();return 0;
                             break;
                         default:
                             console.log("Invalid Options");
@@ -3460,7 +3478,7 @@ function drinkcategory(){
                     break;
                 default:
                     console.log("Invalid Option")
-                    admin_control();
+                    admin_control();return 0;
             }
         }
     }
@@ -3469,13 +3487,13 @@ function drinkcategory(){
 
 }
 function viewdrinkdescription(){
-    retrydrink();
+    retrydrink();return 0;
     function retrydrink() {
         seeitem4 = input.questionInt("Which item do you want to see: ");
         if (seeitem4>food[0].length-1 || seeitem4<0){
             console.log("Invalid Option");
             wait(1000)
-            drinkcategory();
+            drinkcategory();return 0;
 
         }
 
@@ -3487,16 +3505,16 @@ function viewdrinkdescription(){
         console.log(food[2][seeitem4].item_description+"\n");
         console.log("            [1]Back to previous screen ");
         console.log("*****************************************************\n");
-        backto();
+        backto();return 0;
         function backto(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
-                    noodlecategory();
+                    noodlecategory();return 0;
                     break
                 default:
                     console.log("Invalid Option");
-                    backto();
+                    backto();return 0;
                     break;
             }
         }
@@ -3516,24 +3534,24 @@ function othercategory(){
     if (userlogin===true || guestlogin===true){
         console.log("[1] View an item's description [2] Add to cart [3]Return back ");
         console.log("*****************************************************\n")
-        addcartrc();
+        addcartrc();return 0;
         function addcartrc(){
 
             var choice=input.questionInt("Choice :")
             switch (choice){
-                case 1:   viewotherdescription();
+                case 1:   viewotherdescription();return 0;
                     break;
                 case 2:
                     var cartready=input.questionInt("Which one to add to cart: ")
                     if (cartready<0||cartready>food[3].length-1){
                         console.log("Invalid Option")
-                        addcartrc();
+                        addcartrc();return 0;
                     }
                     if (userlogin===true){
 
                         customer[currentlogin].cart.push((food[3].slice(cartready,cartready+1)))
                         tempclass=customer[currentlogin].cart.length-1;
-                        quantityoforderuser();
+                        quantityoforderuser();return 0;
 
                     }
                 function quantityoforderuser(){
@@ -3582,7 +3600,7 @@ function othercategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    othercategory();
+                    othercategory();return 0;
 
 
                 }
@@ -3594,7 +3612,7 @@ function othercategory(){
 
                         guest_cart.push((food[3].slice(cartready,cartready+1)))
                         tempclass=guest_cart.length-1;
-                        quantityoforderguest();
+                        quantityoforderguest();return 0;
 
                     }
                 function quantityoforderguest(){
@@ -3643,17 +3661,17 @@ function othercategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    othercategory();
+                    othercategory();return 0;
 
 
                 }
                     break;
                 case 3:
-                    category_item();
+                    category_item();return 0;
                     break
                 default:
                     console.log("Invalid Option")
-                    addcartrc();
+                    addcartrc();return 0;
 
             }
 
@@ -3663,12 +3681,12 @@ function othercategory(){
     if (userlogin===false&&guestlogin===false&&adminloginc===false){
     console.log("[1] View an item's description [2]Back to previous screen ");
     console.log("*****************************************************\n")
-    itemchoiceview1();
+    itemchoiceview1();return 0;
     function itemchoiceview1() {
         var itemchoicedes = input.questionInt("Choice: ")
         switch (itemchoicedes) {
-            case 1:viewotherdescription();break;
-            case 2:category_item();break;
+            case 1:viewotherdescription();return 0;break;
+            case 2:category_item();return 0;break;
             default:
                 console.log("Invalid Option");
                 itemchoiceview1()
@@ -3677,7 +3695,7 @@ function othercategory(){
     if (adminloginc===true){
         console.log("[1] Remove an item [2]Return back [3] Edit item");
         console.log("*****************************************************\n")
-        adminchoiceother();
+        adminchoiceother();return 0;
         function adminchoiceother(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
@@ -3686,9 +3704,9 @@ function othercategory(){
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
                     if (deleteoption<0||deleteoption>=food[3].length){
                         console.log("Invalid Option")
-                        othercategory();
+                        othercategory();return 0;
                     }
-                    confirmationdelete();
+                    confirmationdelete();return 0;
                 function confirmationdelete() {
 
 
@@ -3697,15 +3715,15 @@ function othercategory(){
                         case "Y": food[3].splice(deleteoption,1);
                             console.log("Delete Successful,returning...")
                             wait(3000)
-                            othercategory();
+                            othercategory();return 0;
                             break;
                         case "N":
-                            admin_control();
+                            admin_control();return 0;
                             break;
                         default:
                             console.log("Invalid option")
                             wait(300)
-                            othercategory();
+                            othercategory();return 0;
                             break;
                     }
 
@@ -3713,7 +3731,7 @@ function othercategory(){
 
                     break;
                 case 2:
-                    admin_control();
+                    admin_control();return 0;
                     break;
                 case 3:
                     process.stdout.write('\033c')
@@ -3738,9 +3756,9 @@ function othercategory(){
                             if (choiceediter < 0 || choiceediter >= food[3].length) {
                                 console.log("Invalid Option");
                                 wait(3000)
-                                adminchoiceother();
+                                adminchoiceother();return 0;
                             }
-                            edititem();
+                            edititem();return 0;
                         function edititem(){
                             process.stdout.write('\033c')
                             console.log("*****************************************************\n")
@@ -3750,7 +3768,7 @@ function othercategory(){
                             console.log("         [3] Item Description [4] Item Cost")
                             console.log("                 [5] Return")
                             console.log("*****************************************************\n")
-                            editfunction();
+                            editfunction();return 0;
                             function editfunction(){
                                 var choice=input.questionInt("Choice: ");
                                 switch (choice){
@@ -3767,7 +3785,7 @@ function othercategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
@@ -3791,7 +3809,7 @@ function othercategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 3:
                                         process.stdout.write('\033c')
@@ -3806,7 +3824,7 @@ function othercategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 4:
                                         process.stdout.write('\033c')
@@ -3821,9 +3839,9 @@ function othercategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
-                                    case 5:admin_control();break;
+                                    case 5:admin_control();return 0;break;
                                     default:
                                         console.log("Invalid Option")
                                         editfunction()
@@ -3833,7 +3851,7 @@ function othercategory(){
                             break;
 
 
-                        case 2:admin_control();
+                        case 2:admin_control();return 0;
                             break;
                         default:
                             console.log("Invalid Options");
@@ -3844,19 +3862,19 @@ function othercategory(){
                     break;
                 default:
                     console.log("Invalid Option")
-                    admin_control();
+                    admin_control();return 0;
             }
         }
     }
 }
 function viewotherdescription(){
-    retryother();
+    retryother();return 0;
     function retryother() {
         seeitem3 = input.questionInt("Which item do you want to see: ");
         if (seeitem3>food[3].length-1 || seeitem3<0){
             console.log("Invalid Option");
             wait(1000)
-            othercategory();
+            othercategory();return 0;
 
         }
 
@@ -3868,16 +3886,16 @@ function viewotherdescription(){
         console.log(food[3][seeitem3].item_description+"\n");
         console.log("            [1]Back to previous screen ");
         console.log("*****************************************************\n");
-        backto();
+        backto();return 0;
         function backto(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
-                    othercategory();
+                    othercategory();return 0;
                     break
                 default:
                     console.log("Invalid Option");
-                    backto();
+                    backto();return 0;
                     break;
             }
         }
@@ -3885,13 +3903,13 @@ function viewotherdescription(){
     }
 }
 function viewpromotiondescription(){
-    retryother();
+    retryother();return 0;
     function retryother() {
         seeitem5 = input.questionInt("Which item do you want to see: ");
         if (seeitem5>food[4].length-1 || seeitem5<0){
             console.log("Invalid Option");
             wait(1000)
-            promotioncategory();
+            promotioncategory();return 0;
 
         }
 
@@ -3903,16 +3921,16 @@ function viewpromotiondescription(){
         console.log(food[4][seeitem5].item_description+"\n");
         console.log("            [1]Back to previous screen ");
         console.log("*****************************************************\n");
-        backto();
+        backto();return 0;
         function backto(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
                 case 1:
-                    promotioncategory();
+                    promotioncategory();return 0;
                     break
                 default:
                     console.log("Invalid Option");
-                    backto();
+                    backto();return 0;
                     break;
             }
         }
@@ -3932,24 +3950,24 @@ function promotioncategory(){
     if (userlogin===true || guestlogin===true){
         console.log("[1] View an item's description [2] Add to cart [3]Return back ");
         console.log("*****************************************************\n")
-        addcartrc();
+        addcartrc();return 0;
         function addcartrc(){
 
             var choice=input.questionInt("Choice :")
             switch (choice){
-                case 1:   viewpromotiondescription();
+                case 1:   viewpromotiondescription();return 0;
                     break;
                 case 2:
                     var cartready=input.questionInt("Which one to add to cart: ")
                     if (cartready<0||cartready>food[4].length-1){
                         console.log("Invalid Option")
-                        addcartrc();
+                        addcartrc();return 0;
                     }
                     if (userlogin===true){
 
                         customer[currentlogin].cart.push((food[4].slice(cartready,cartready+1)))
                         tempclass=customer[currentlogin].cart.length-1;
-                        quantityoforderuser();
+                        quantityoforderuser();return 0;
 
                     }
                 function quantityoforderuser(){
@@ -3998,7 +4016,7 @@ function promotioncategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    promotioncategory();
+                    promotioncategory();return 0;
 
 
                 }
@@ -4009,7 +4027,7 @@ function promotioncategory(){
 
                         guest_cart.push((food[4].slice(cartready,cartready+1)))
                         tempclass=guest_cart.length-1;
-                        quantityoforderguest();
+                        quantityoforderguest();return 0;
 
                     }
                 function quantityoforderguest(){
@@ -4058,7 +4076,7 @@ function promotioncategory(){
 
                     console.log("Added to cart!!");
                     wait(3000)
-                    promotioncategory();
+                    promotioncategory();return 0;
 
 
                 }
@@ -4066,11 +4084,11 @@ function promotioncategory(){
                     
                     break;
                 case 3:
-                    category_item();
+                    category_item();return 0;
                     break
                 default:
                     console.log("Invalid Option")
-                    addcartrc();
+                    addcartrc();return 0;
 
             }
 
@@ -4080,12 +4098,12 @@ function promotioncategory(){
     if (userlogin===false&&guestlogin===false&&adminloginc===false){
         console.log("[1] View an item's description [2]Back to previous screen ");
         console.log("*****************************************************\n")
-        itemchoiceview1();
+        itemchoiceview1();return 0;
         function itemchoiceview1() {
             var itemchoicedes = input.questionInt("Choice: ")
             switch (itemchoicedes) {
-                case 1:viewpromotiondescription();break;
-                case 2:category_item();break;
+                case 1:viewpromotiondescription();return 0;break;
+                case 2:category_item();return 0;break;
                 default:
                     console.log("Invalid Option");
                     itemchoiceview1()
@@ -4094,7 +4112,7 @@ function promotioncategory(){
     if (adminloginc===true){
         console.log("[1] Remove an item [2]Return back [3] Edit item");
         console.log("*****************************************************\n")
-        adminchoicepromotion();
+        adminchoicepromotion();return 0;
         function adminchoicepromotion(){
             var choice=input.questionInt("Choice: ")
             switch (choice){
@@ -4103,9 +4121,9 @@ function promotioncategory(){
                     var deleteoption=input.questionInt("Which item you want to delete? : ");
                     if (deleteoption<0||deleteoption>=food[4].length){
                         console.log("Invalid Option")
-                        promotioncategory();
+                        promotioncategory();return 0;
                     }
-                    confirmationdelete();
+                    confirmationdelete();return 0;
                 function confirmationdelete() {
 
 
@@ -4114,15 +4132,15 @@ function promotioncategory(){
                         case "Y": food[4].splice(deleteoption,1);
                             console.log("Delete Successful,returning...")
                             wait(3000)
-                            promotioncategory();
+                            promotioncategory();return 0;
                             break;
                         case "N":
-                            admin_control();
+                            admin_control();return 0;
                             break;
                         default:
                             console.log("Invalid option")
                             wait(300)
-                            promotioncategory();
+                            promotioncategory();return 0;
                             break;
                     }
 
@@ -4130,7 +4148,7 @@ function promotioncategory(){
 
                     break;
                 case 2:
-                    admin_control();
+                    admin_control();return 0;
                     break;
                 case 3:
                     process.stdout.write('\033c')
@@ -4155,9 +4173,9 @@ function promotioncategory(){
                             if (choiceediter < 0 || choiceediter >= food[4].length) {
                                 console.log("Invalid Option");
                                 wait(3000)
-                                adminchoicepromotion();
+                                adminchoicepromotion();return 0;
                             }
-                            edititem();
+                            edititem();return 0;
                         function edititem(){
                             process.stdout.write('\033c')
                             console.log("*****************************************************\n")
@@ -4167,7 +4185,7 @@ function promotioncategory(){
                             console.log("         [3] Item Description [4] Item Cost")
                             console.log("                 [5] Return")
                             console.log("*****************************************************\n")
-                            editfunction();
+                            editfunction();return 0;
                             function editfunction(){
                                 var choice=input.questionInt("Choice: ");
                                 switch (choice){
@@ -4184,7 +4202,7 @@ function promotioncategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("*****************************************************\n")
@@ -4208,7 +4226,7 @@ function promotioncategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 3:
                                         process.stdout.write('\033c')
@@ -4223,7 +4241,7 @@ function promotioncategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
                                     case 4:
                                         process.stdout.write('\033c')
@@ -4238,9 +4256,9 @@ function promotioncategory(){
                                         console.log("          Change is successful.Returning...")
                                         console.log("*****************************************************\n")
                                         wait(3000);
-                                        edititem();
+                                        edititem();return 0;
                                         break;
-                                    case 5:admin_control();break;
+                                    case 5:admin_control();return 0;break;
                                     default:
                                         console.log("Invalid Option")
                                         editfunction()
@@ -4250,7 +4268,7 @@ function promotioncategory(){
                             break;
 
 
-                        case 2:admin_control();
+                        case 2:admin_control();return 0;
                             break;
                         default:
                             console.log("Invalid Options");
@@ -4261,7 +4279,7 @@ function promotioncategory(){
                     break;
                 default:
                     console.log("Invalid Option")
-                    admin_control();
+                    admin_control();return 0;
             }
         }
     }
@@ -4280,13 +4298,13 @@ function trackorderguest(){
      trackfun=input.questionInt("Enter your phone number (only for active order) or tracking number: ");
     if (trackfun===1){
         if (userlogin===true||guestlogin===true){
-order_screen();
+order_screen();return 0;
         }
-        main_screen();
+        main_screen();return 0;
 
     }
 
-    checkstatus();
+    checkstatus();return 0;
     function checkstatus(){
         for (var t=0;t<customer.length;t++){
             if (trackfun===customer[t].phone){
@@ -4316,25 +4334,25 @@ order_screen();
             console.log("          [1] Retry [2] Back to main menu")
             console.log("*****************************************************\n");
 
-            notfound404();
+            notfound404();return 0;
 
             function notfound404() {
                 var choice = input.questionInt("Choice: ");
                 switch (choice) {
                     case 1:
-                        trackorderguest();
+                        trackorderguest();return 0;
                         break
                     case 2:
                         if (guestlogin===true||userlogin===true){
-                            order_screen();
+                            order_screen();return 0;
                             break;
                         }else {
-                        main_screen();
+                        main_screen();return 0;
                         break;}
                     default:
                         console.log("Invalid Option");
                         wait(3000)
-                        notfound404();
+                        notfound404();return 0;
 
                 }
             }
@@ -4355,15 +4373,15 @@ order_screen();
                 }
                 console.log("              [1] Back to main menu")
                 console.log("*****************************************************\n")
-                choiceback();
+                choiceback();return 0;
                 function choiceback() {
                     var choices = input.questionInt("Choice: ")
                     switch (choices){
                         case 1:
                             if (userlogin===true||guestlogin===true){
-                                order_screen();
+                                order_screen();return 0;
                             }
-                            main_screen();
+                            main_screen();return 0;
                             break;
                         default:
                             console.log("Invalid Option")
@@ -4406,7 +4424,7 @@ counterfind=0;
     if (guestlogin===true||userlogin===true){
         console.log("  [1]Add to cart [2] Another search [3] Return back \n")
         console.log("*****************************************************\n")
-        addcartop();
+        addcartop();return 0;
         function addcartop(){
 
             var choice=input.questionInt("Choice :")
@@ -4416,7 +4434,7 @@ counterfind=0;
                     var addtocrt=input.questionInt("Which one to add to cart: ")
                     if (addtocrt>=counterfind ||addtocrt<0){
                         console.log("Invalid Option")
-                        addcartop();
+                        addcartop();return 0;
                     }
                     counterfind=0;
                     for (var s=0;s<food.length;s++){
@@ -4436,13 +4454,13 @@ counterfind=0;
 
                         customer[currentlogin].cart.push((food[temps].slice(tempv,tempv+1)))
                         tempclass=customer[currentlogin].cart.length-1;
-                        quantityoforderuser();
+                        quantityoforderuser();return 0;
 
                     }
                     if (guestlogin===true){
                         guest_cart.push((food[temps].slice(tempv,tempv+1)))
                         tempclassguest=guest_cart.length-1;
-                        quantityoforderguest();
+                        quantityoforderguest();return 0;
                     }
 
 
@@ -4560,12 +4578,12 @@ counterfind=0;
 
 
                     break;
-                case 2:  search_item();
+                case 2:  search_item();return 0;
                 break;
-                case 3:order_menu();break;
+                case 3:order_menu();return 0;break;
                 default:
                     console.log("Invalid Option")
-                    addcartop();
+                    addcartop();return 0;
             }
 
         }
@@ -4582,18 +4600,18 @@ counterfind=0;
     if (guestlogin===false&&userlogin===false){
     console.log("    [1] Another search [2] Return back to main\n")
     console.log("*****************************************************\n")
-    retrysearch();}
+    retrysearch();return 0;}
 
     function retrysearch(){
     var choice=input.questionInt("Choice: ");
     switch(choice){
         case 1:
-            search_item();
+            search_item();return 0;
             break;
         case 2:
-            main_screen();break
+            main_screen();return 0;break
         default:
-            retrysearch();
+            retrysearch();return 0;
             break;
     }
 
@@ -4614,14 +4632,14 @@ function food_menu(){
     function foodmenuoption() {
         var foodmenuchoice = input.questionInt("Choice: ");
         switch (foodmenuchoice){
-            case 1:view_all();break
-            case 2:category_item();break;
-            case 3:search_item();break;
-            case 4:main_screen();break;
+            case 1:view_all();return 0;break
+            case 2:category_item();return 0;break;
+            case 3:search_item();return 0;break;
+            case 4:main_screen();return 0;break;
 
             default:
                 console.log("Invalid Option");
-                foodmenuoption();
+                foodmenuoption();return 0;
                 break;
 
         }
@@ -4635,12 +4653,12 @@ function help(){
     console.log(" Email zhuofan.21@ichat.sp.edu.sg for more assistant\n")
     console.log("          [1]Return back to main menu")
     console.log("*****************************************************\n")
-    callback();
+    callback();return 0;
     function callback(){
     var choice=input.questionInt("Choice:")
     switch (choice){
-        case 1: main_screen();break
-        default:console.log("Invalid Option");callback();break;
+        case 1: main_screen();return 0;break
+        default:console.log("Invalid Option");callback();return 0;break;
     }}
 }
 function main_screen(){
@@ -4660,42 +4678,42 @@ function main_screen(){
     console.log("[7] Admin Login                               [8]Help");
     console.log("[9] Exit                           [10] About Program\n");
     console.log("*****************************************************\n")
-    user_selection();
+    user_selection();return 0;
     function user_selection(){
     var choice0=input.questionInt("Your Choice: ");
     switch (choice0){
         case 1:
-            customer_login();
+            customer_login();return 0;
             break;
         case 2:
-            guest_login();
+            guest_login();return 0;
             break;
         case 3:
-            customer_register();
+            customer_register();return 0;
             break;
         case 4:
-            new_promotion();
+            new_promotion();return 0;
             break;
         case 5:
-            food_menu();
+            food_menu();return 0;
             break;
         case 6:
-            trackorderguest();
+            trackorderguest();return 0;
             break;
         case 7:
-            admin_login();
+            admin_login();return 0;
             break;
         case 8:
-            help();
+            help();return 0;
             break;
         default:
 
             process.exit(0);
             break;
         case 10:
-            about_program();
+            about_program();return 0;
             break;
-        case 9:newd();
+        case 9:newd();return 0;
         async function newd(){
 
             await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
@@ -4714,7 +4732,7 @@ function main_screen(){
 //Start of program
 //Launch start up loading page and main menu screen
 var fs=require('fs').promises;
-read();
+read();return 0;
 async function read(){
    var customerstorage= await fs.readFile('customerdetail.dat')
     customer=JSON.parse(customerstorage)
@@ -4726,8 +4744,9 @@ async function read(){
     food=JSON.parse(foodstorage)
     var couponstorage= await fs.readFile('coupon.dat')
     couponstore=JSON.parse(couponstorage)
-    start_up();
+    start_up()
     main_screen();
+   return 0;
 }
 
 
