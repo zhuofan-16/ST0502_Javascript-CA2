@@ -937,6 +937,10 @@ function deleteadmin(){
         switch (choice){
             case 1:
                 var delte=input.questionInt("Which admin do you want to delete?: ")
+                if (delte >=admin.length){
+                    console.log("No such admin!")
+                    optiondelete();return 0;
+                }
                 confirmation();return 0;
                 function confirmation(){
                     var deletedconfirmation=input.question("Are you sure you want to delete "+admin[delte].staffid+" ?(Y/N): ")
