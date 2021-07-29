@@ -119,7 +119,16 @@ function about_program_page2(){
                 main_screen();return 0;
                 break;
             case 2:
-                process.exit(0);
+
+                newd();return 0;
+            async function newd(){
+
+                await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('order.dat',JSON.stringify(order))
+                await fs.writeFile('admin.dat',JSON.stringify(admin))
+                await fs.writeFile('food.dat',JSON.stringify(food))
+                await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+            }
                 break;
             default:
                 about_useroption2();return 0;
@@ -201,7 +210,16 @@ function about_program(){
                 main_screen();return 0;
                 break;
             case 3:
-                process.exit(0);
+
+                newd();return 0;
+            async function newd(){
+
+                await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('order.dat',JSON.stringify(order))
+                await fs.writeFile('admin.dat',JSON.stringify(admin))
+                await fs.writeFile('food.dat',JSON.stringify(food))
+                await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+            }
                 break;
             default:
                 about_useroption();return 0;
@@ -365,7 +383,16 @@ function admin_control(){
                     return 0;
                     break;
                 case 8:
-                    process.exit(0);
+
+                    newd();return 0;
+                async function newd(){
+
+                    await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
+                    await fs.writeFile('order.dat',JSON.stringify(order))
+                    await fs.writeFile('admin.dat',JSON.stringify(admin))
+                    await fs.writeFile('food.dat',JSON.stringify(food))
+                    await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+                }
                     break;
                 default:
                     console.log("Invalid Option ");
@@ -1236,6 +1263,8 @@ function user_control(){
 
                                 }
                                 break;
+                            case 5:
+                                user_control();return 0;break;
                             default:
                                 console.log("Invalid Option");
                                 edituser();return 0;break;
@@ -1646,7 +1675,15 @@ function order_screen(){
             case 5:coupon_view();return 0;break
             case 6:change_particular();return 0;break
             case 7:logout_now();return 0;break;
-            case 8:process.exit(0);break;
+            case 8:newd();return 0;
+            async function newd(){
+
+                await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('order.dat',JSON.stringify(order))
+                await fs.writeFile('admin.dat',JSON.stringify(admin))
+                await fs.writeFile('food.dat',JSON.stringify(food))
+                await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+            }; break;
             default:console.log("Invalid Option");
             order_screen_choice();return 0;break;
 
@@ -4707,8 +4744,8 @@ function main_screen(){
             help();return 0;
             break;
         default:
-
-            process.exit(0);
+            console.log("Invalid Option")
+          main_screen();return 0;
             break;
         case 10:
             about_program();return 0;
