@@ -28,7 +28,7 @@
 ## Requirement/Advice as of 26/7/2021
 * 1.Indentation for ordering
 * 2.<strike>File system</strike>
-* 3.Overall UI
+* 3.<strike>Overall UI</strike>
 * 4.<strike>Moving class into respective js files</strike>
 * 5.Email system
 
