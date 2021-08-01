@@ -102,6 +102,9 @@ function start_up(){
        " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
        " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
        " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+    console.log("*****************************************************")
+    console.log("System starting ...")
+    console.log("*****************************************************")
     wait(3000);
 
 }
@@ -127,6 +130,7 @@ function about_program_page2(){
 
                 newd();return 0;
             async function newd(){
+                process.stdout.write('\033c')
                 console.log(
                     " _____ _            _   _ _          __  __            _ \n" +
                     " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
@@ -138,6 +142,9 @@ function about_program_page2(){
                     " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
                     " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
                     " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+                console.log("*****************************************************")
+                console.log("System exiting ...")
+                console.log("*****************************************************")
                 wait(3000);
                 await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
                 await fs.writeFile('order.dat',JSON.stringify(order))
@@ -229,6 +236,7 @@ function about_program(){
 
                 newd();return 0;
             async function newd(){
+                process.stdout.write('\033c')
                 console.log(
                     " _____ _            _   _ _          __  __            _ \n" +
                     " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
@@ -240,6 +248,10 @@ function about_program(){
                     " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
                     " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
                     " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+
+                console.log("*****************************************************")
+                console.log("System exiting ...")
+                console.log("*****************************************************")
                 wait(3000);
                 await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
                 await fs.writeFile('order.dat',JSON.stringify(order))
@@ -413,6 +425,7 @@ function admin_control(){
 
                     newd();return 0;
                 async function newd(){
+                    process.stdout.write('\033c')
                     console.log(
                         " _____ _            _   _ _          __  __            _ \n" +
                         " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
@@ -424,6 +437,7 @@ function admin_control(){
                         " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
                         " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
                         " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+
                     wait(3000);
                     await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
                     await fs.writeFile('order.dat',JSON.stringify(order))
@@ -519,6 +533,12 @@ function editcoupon(){
                 var tempnewprice=input.questionInt("New price: ");
                 couponstore[editprice_coupon].coupon_price=tempnewprice;
                 process.stdout.write('\033c')
+                console.log("  ____                             \n" +
+                    " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                    " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                    "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                    " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                    "                                   ")
                 console.log("*****************************************************\n")
                 console.log("      The NiceMeal Restaurant Admin System        ");
                 console.log("        Change successfully..Returning..")
@@ -562,6 +582,12 @@ function removecoupon(){
                 switch (inputconfirmation){
                     case 'Y':
                         process.stdout.write('\033c')
+                        console.log("  ____                             _                   \n" +
+                            " |  _ \\ _ __ ___   ___ ___ ___ ___(_)_ __   __ _       \n" +
+                            " | |_) | '__/ _ \\ / __/ _ / __/ __| | '_ \\ / _` |      \n" +
+                            " |  __/| | | (_) | (_|  __\\__ \\__ | | | | | (_| |_ _ _ \n" +
+                            " |_|   |_|  \\___/ \\___\\___|___|___|_|_| |_|\\__, (_(_(_)\n" +
+                            "                                           |___/       ")
                         console.log("*****************************************************\n")
                         console.log("      The NiceMeal Restaurant Admin System        ");
                         console.log("                   Deleting...")
@@ -622,6 +648,12 @@ function distributecoupon(){
                     customer[userdistribute].coupon[customer[userdistribute].coupon.length]= couponstore.slice(choose_coupon,choose_coupon+1)[0]
 
                     process.stdout.write('\033c')
+                    console.log("  ____                             \n" +
+                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                        "                                   ")
                     console.log("*****************************************************\n")
                     console.log("      The NiceMeal Restaurant Admin System        ");
                     console.log("       Operation is successful ,returning...")
@@ -664,6 +696,12 @@ function addcoupon(){
     console.log("              Processing coupon... ")
     console.log("*****************************************************\n")
     wait(3000)
+    console.log("  ____                             \n" +
+        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+        "                                   ")
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Admin System        ");
     console.log("           Coupon created successfully ")
@@ -714,6 +752,12 @@ function coupon_remove(){
                                     deletecouponuser();return 0;
                                 }
                                 customer[userselected].coupon.splice(optionop,1);
+                                console.log("  ____                             \n" +
+                                    " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                    " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                    "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                    " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                    "                                   ")
                                 console.log("Delete successfully,returning...")
                                 wait(3000);
                                 coupon_control();return 0;
@@ -934,12 +978,26 @@ function adddish(){
                 console.log("                    Item code")
                 console.log("*****************************************************\n")
                 var itemcode=input.questionInt("Item code: ")
+                process.stdout.write('\033c')
+                console.log("  ____                             _                   \n" +
+                    " |  _ \\ _ __ ___   ___ ___ ___ ___(_)_ __   __ _       \n" +
+                    " | |_) | '__/ _ \\ / __/ _ / __/ __| | '_ \\ / _` |      \n" +
+                    " |  __/| | | (_) | (_|  __\\__ \\__ | | | | | (_| |_ _ _ \n" +
+                    " |_|   |_|  \\___/ \\___\\___|___|___|_|_| |_|\\__, (_(_(_)\n" +
+                    "                                           |___/       ")
                 console.log("*****************************************************\n")
                 console.log("      The NiceMeal Restaurant Admin System   \n     ");
                 console.log("               Processing dish...")
                 console.log("*****************************************************\n")
                 wait(3000)
                 food[choice1][food[choice1].length]=new item(dishname1,"SL",itemcode,costtemp,description,"F",0,drytemp,spicytemp,icetemp)
+                process.stdout.write('\033c')
+               console.log("  ____                             \n" +
+                   " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                   " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                   "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                   " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                   "                                   ")
                 console.log("*****************************************************\n")
                 console.log("      The NiceMeal Restaurant Admin System   \n     ");
                 console.log("               Success...Going back...")
@@ -1090,7 +1148,12 @@ function addnewadmin(){
                 var tempadminspassword=input.question("Input new admin's password: ");
                 process.stdout.write('\033c')
                 admin[admin.length]=new Admin(tempadminlast,tempadminfirst,0,tempadmincontact,tempadminstaff,tempadminspassword);
-
+                console.log("  ____                             \n" +
+                    " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                    " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                    "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                    " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                    "                                   ")
                 console.log("*****************************************************\n")
                 console.log("      The NiceMeal Restaurant Admin System        ");
                 console.log("                 Operation success")
@@ -1135,6 +1198,12 @@ function user_password_reset(){
                         var confirmation = input.question("Are you sure you want to reset password of user " + customer[select].memberno+"(Y/N): ");
                         switch (confirmation){
                             case 'Y':
+                                console.log("  ____                             _                   \n" +
+                                    " |  _ \\ _ __ ___   ___ ___ ___ ___(_)_ __   __ _       \n" +
+                                    " | |_) | '__/ _ \\ / __/ _ / __/ __| | '_ \\ / _` |      \n" +
+                                    " |  __/| | | (_) | (_|  __\\__ \\__ | | | | | (_| |_ _ _ \n" +
+                                    " |_|   |_|  \\___/ \\___\\___|___|___|_|_| |_|\\__, (_(_(_)\n" +
+                                    "                                           |___/       ")
                                 console.log("*****************************************************\n")
                                 console.log("      The NiceMeal Restaurant Admin System        ");
                                 console.log("                 Resetting....")
@@ -1142,6 +1211,12 @@ function user_password_reset(){
                                 customer[select].password="password"+customer[select].memberno;
                                 wait(3000);
                                 process.stdout.write('\033c')
+                                console.log("  ____                             \n" +
+                                    " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                    " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                    "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                    " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                    "                                   ")
                                 console.log("*****************************************************\n")
                                 console.log("      The NiceMeal Restaurant Admin System        ");
                                 console.log("               Reset successful!")
@@ -1198,6 +1273,13 @@ function user_control(){
                     {
                         case 'Y':
                             customer.splice(deltechoice ,1);
+                            process.stdout.write('\033c')
+                            console.log("  ____                             \n" +
+                                " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                "                                   ")
                             console.log("User have been deleted...Returning...")
                             wait(1000);
                             user_control();return 0;
@@ -1247,6 +1329,12 @@ function user_control(){
                                     }
                                     if (conflict===0){
                                         customer[editchoice].memberno=tempid;
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("Change is successful,returning...")
                                         wait(3000)
                                         user_control();return 0;
@@ -1269,6 +1357,12 @@ function user_control(){
                                     var tempfirst=input.question("New first name: ");
                                     customer[editchoice].lastname=templast;
                                     customer[editchoice].firstname=tempfirst;
+                                    console.log("  ____                             \n" +
+                                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                        "                                   ")
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
                                     user_control();return 0;
@@ -1284,6 +1378,12 @@ function user_control(){
                                 }
                                 else{
                                     customer[editchoice].contact=tempnumber;
+                                    console.log("  ____                             \n" +
+                                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                        "                                   ")
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
                                     user_control();return 0;
@@ -1299,6 +1399,12 @@ function user_control(){
                                 }
                                 else{
                                     customer[editchoice].email=tempemail1;
+                                    console.log("  ____                             \n" +
+                                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                        "                                   ")
                                     console.log("Change is successful.Returning...");
                                     wait (3000);
                                     user_control();return 0;
@@ -1430,6 +1536,12 @@ membercheck();
         }}
     customer[i]=new Customer(temp_firstname,temp_lastname,temp_sex,temp_contact,temp_password,tempmno,temp_email);
     process.stdout.write('\033c')
+    console.log("  ____                             _                   \n" +
+        " |  _ \\ _ __ ___   ___ ___ ___ ___(_)_ __   __ _       \n" +
+        " | |_) | '__/ _ \\ / __/ _ / __/ __| | '_ \\ / _` |      \n" +
+        " |  __/| | | (_) | (_|  __\\__ \\__ | | | | | (_| |_ _ _ \n" +
+        " |_|   |_|  \\___/ \\___\\___|___|___|_|_| |_|\\__, (_(_(_)\n" +
+        "                                           |___/       ")
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System    \n    ");
     console.log("       Processing your registration,please wait...     \n");
@@ -1464,6 +1576,12 @@ membercheck();
 
     }
     process.stdout.write('\033c')
+    console.log("  ____                             \n" +
+        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+        "                                   ")
     console.log("*****************************************************\n")
     console.log("      The NiceMeal Restaurant Registration System    \n    ");
     console.log("            Your Registration is successful!     \n");
@@ -1591,7 +1709,14 @@ verify_password()
 }
 function change_particular(){
     if (guestlogin===true){
+
         process.stdout.write('\033c')
+        console.log("  _____                     \n" +
+            " | ____|_ __ _ __ ___  _ __ \n" +
+            " |  _| | '__| '__/ _ \\| '__|\n" +
+            " | |___| |  | | | (_) | |   \n" +
+            " |_____|_|  |_|  \\___/|_|   \n" +
+            "                            ")
         console.log("*****************************************************\n")
         console.log("         The NiceMeal Restaurant User System      \n  ");
         console.log("       This function is not available to guest")
@@ -1623,6 +1748,12 @@ function change_particular(){
             case 2:
                 var tempchangeemail=input.question("Your new email address:")
                 customer[currentlogin].email=tempchangeemail;
+                console.log("  ____                             \n" +
+                    " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                    " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                    "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                    " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                    "                                   ")
                 console.log("Change is successful,going back ...");
                 wait(3000);
                 order_screen();return 0;
@@ -1634,6 +1765,12 @@ function change_particular(){
                 var currentemppw=input.question("Current password: ");
                 if (currentemppw===customer[currentlogin].password) {
                     process.stdout.write('\033c')
+                    console.log("  ____                             \n" +
+                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                        "                                   ")
                     console.log("*****************************************************\n")
                     console.log("         The NiceMeal Restaurant User System        ");
                     console.log("              Verification is successful!")
@@ -1646,10 +1783,23 @@ function change_particular(){
                     var tempnewconfirmpass = input.question("Re-enter password: ");
                     if (tempnewconfirmpass === tempnewpass) {
                         customer[currentlogin].password = tempnewconfirmpass;
+                        console.log("  ____                             \n" +
+                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                            "                                   ")
                         console.log("Change is successful");
                         wait(3000);
                         order_screen()
                     } else {
+                        process.stdout.write('\033c')
+                        console.log("  _____                     \n" +
+                            " | ____|_ __ _ __ ___  _ __ \n" +
+                            " |  _| | '__| '__/ _ \\| '__|\n" +
+                            " | |___| |  | | | (_) | |   \n" +
+                            " |_____|_|  |_|  \\___/|_|   \n" +
+                            "                            ")
                         console.log("*****************************************************\n")
                         console.log("         The NiceMeal Restaurant User System        ");
                         console.log("              2 password does not match")
@@ -1673,6 +1823,12 @@ function change_particular(){
                 }
                 else{
                     process.stdout.write('\033c')
+                    console.log("  _____                     \n" +
+                        " | ____|_ __ _ __ ___  _ __ \n" +
+                        " |  _| | '__| '__/ _ \\| '__|\n" +
+                        " | |___| |  | | | (_) | |   \n" +
+                        " |_____|_|  |_|  \\___/|_|   \n" +
+                        "                            ")
                     console.log("*****************************************************\n")
                     console.log("         The NiceMeal Restaurant User System        ");
                     console.log("                Verification failed ")
@@ -1730,6 +1886,7 @@ function order_screen(){
             case 7:logout_now();return 0;break;
             case 8:newd();return 0;
             async function newd(){
+                process.stdout.write('\033c')
                 console.log(
                     " _____ _            _   _ _          __  __            _ \n" +
                     " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
@@ -1741,6 +1898,9 @@ function order_screen(){
                     " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
                     " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
                     " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+                console.log("*****************************************************")
+                console.log("System exiting ...")
+                console.log("*****************************************************")
                 wait(3000);
                 await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
                 await fs.writeFile('order.dat',JSON.stringify(order))
@@ -1893,6 +2053,12 @@ if (usecoupon===false){
                                customer[currentlogin].cart=[];
                                customer[currentlogin].order_active=temporderno;
                                customer[currentlogin].order_record[customer[currentlogin].order_record.length]=order[1].slice(templength,templength+1)
+                            console.log("  ____                             \n" +
+                                " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                "                                   ")
                             console.log("*****************************************************\n");
                             console.log("         The NiceMeal Restaurant Order System  \n      ");
                             console.log("                Payment is successful")
@@ -1997,6 +2163,13 @@ function view_cart_guest(){
                 var choice=input.question("Are you sure you want to checkout?(Y/N): ")
                 switch (choice){
                     case "Y":
+                        process.stdout.write('\033c')
+                        console.log("  ____                             _                   \n" +
+                            " |  _ \\ _ __ ___   ___ ___ ___ ___(_)_ __   __ _       \n" +
+                            " | |_) | '__/ _ \\ / __/ _ / __/ __| | '_ \\ / _` |      \n" +
+                            " |  __/| | | (_) | (_|  __\\__ \\__ | | | | | (_| |_ _ _ \n" +
+                            " |_|   |_|  \\___/ \\___\\___|___|___|_|_| |_|\\__, (_(_(_)\n" +
+                            "                                           |___/       ")
                         console.log("*****************************************************\n");
                         console.log("         The NiceMeal Restaurant Order System  \n      ");
                         console.log("                Payment in process...")
@@ -2009,7 +2182,13 @@ function view_cart_guest(){
                         order[1][templength].item=guest_cart.slice(0);
                         //console.log(order[1][templength].item[0][0].item_name)
                         guest_cart=[];
-
+                        process.stdout.write('\033c')
+                        console.log("  ____                             \n" +
+                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                            "                                   ")
                         console.log("*****************************************************\n");
                         console.log("         The NiceMeal Restaurant Order System  \n      ");
                         console.log("                Payment is successful")
@@ -2038,6 +2217,13 @@ function view_cart_guest(){
                 var confirmationdelete = input.question("Are you sure you want to remove " + guest_cart[deleteitem][0].item_name + " ? (Y/N): ");
                 if (confirmationdelete === "Y") {
                     guest_cart.splice(deleteitem, 1);
+                    process.stdout.write('\033c')
+                    console.log("  ____                             \n" +
+                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                        "                                   ")
                     console.log("Item is deleted,going back ");
                     wait(2000);
                     if (thismenu>1){
@@ -2064,6 +2250,12 @@ function view_cart_guest(){
 function order_history(){
     if (guestlogin===true){
         process.stdout.write('\033c')
+        console.log("  _____                     \n" +
+            " | ____|_ __ _ __ ___  _ __ \n" +
+            " |  _| | '__| '__/ _ \\| '__|\n" +
+            " | |___| |  | | | (_) | |   \n" +
+            " |_____|_|  |_|  \\___/|_|   \n" +
+            "                            ")
         console.log("*****************************************************\n");
         console.log("      The NiceMeal Restaurant Ordering System          ");
         console.log("              Quality you can taste.\n                 ");
@@ -2117,7 +2309,14 @@ function order_history(){
 }
 function coupon_view(){
     if (guestlogin===true){
+
         process.stdout.write('\033c')
+        console.log("  _____                     \n" +
+            " | ____|_ __ _ __ ___  _ __ \n" +
+            " |  _| | '__| '__/ _ \\| '__|\n" +
+            " | |___| |  | | | (_) | |   \n" +
+            " |_____|_|  |_|  \\___/|_|   \n" +
+            "                            ")
         console.log("*****************************************************\n")
         console.log("         The NiceMeal Restaurant User System     \n   ");
         console.log("       This function is not available to guest")
@@ -2746,6 +2945,12 @@ switch (choiceedit){
                     var itemname=input.question("Enter a new item name: ")
                     food[1][choiceediter].item_name=itemname;
                     process.stdout.write('\033c')
+                    console.log("  ____                             \n" +
+                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                        "                                   ")
                     console.log("*****************************************************\n")
                     console.log("       The NiceMeal Restaurant Admin System        ");
                     console.log("          Change is successful.Returning...")
@@ -2770,6 +2975,12 @@ switch (choiceedit){
                     }
                     food[1][choiceediter].item_code=code;
                     process.stdout.write('\033c')
+                    console.log("  ____                             \n" +
+                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                        "                                   ")
                     console.log("*****************************************************\n")
                     console.log("       The NiceMeal Restaurant Admin System        ");
                     console.log("          Change is successful.Returning...")
@@ -2785,6 +2996,12 @@ switch (choiceedit){
                     var text=input.question("Enter a new description: ")
                     food[1][choiceediter].item_description=text;
                     process.stdout.write('\033c')
+                    console.log("  ____                             \n" +
+                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                        "                                   ")
                     console.log("*****************************************************\n")
                     console.log("       The NiceMeal Restaurant Admin System        ");
                     console.log("          Change is successful.Returning...")
@@ -2800,6 +3017,12 @@ switch (choiceedit){
                     var cost=input.questionInt("Enter a new price: ")
                     food[1][choiceediter].item_price=cost;
                     process.stdout.write('\033c')
+                    console.log("  ____                             \n" +
+                        " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                        " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                        "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                        " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                        "                                   ")
                     console.log("*****************************************************\n")
                     console.log("       The NiceMeal Restaurant Admin System        ");
                     console.log("          Change is successful.Returning...")
@@ -3128,6 +3351,12 @@ function noodlecategory(){
                                         var itemname=input.question("Enter a new item name: ")
                                         food[0][choiceediter].item_name=itemname;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3152,6 +3381,12 @@ function noodlecategory(){
                                         }
                                         food[0][choiceediter].item_code=code;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3167,6 +3402,12 @@ function noodlecategory(){
                                         var text=input.question("Enter a new description: ")
                                         food[0][choiceediter].item_description=text;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3182,6 +3423,12 @@ function noodlecategory(){
                                         var cost=input.questionInt("Enter a new price: ")
                                         food[0][choiceediter].item_price=cost;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3509,6 +3756,12 @@ function drinkcategory(){
                                         var itemname=input.question("Enter a new item name: ")
                                         food[2][choiceediter].item_name=itemname;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3533,6 +3786,12 @@ function drinkcategory(){
                                         }
                                         food[2][choiceediter].item_code=code;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3548,6 +3807,12 @@ function drinkcategory(){
                                         var text=input.question("Enter a new description: ")
                                         food[2][choiceediter].item_description=text;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3563,6 +3828,12 @@ function drinkcategory(){
                                         var cost=input.questionInt("Enter a new price: ")
                                         food[2][choiceediter].item_price=cost;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3893,6 +4164,12 @@ function othercategory(){
                                         var itemname=input.question("Enter a new item name: ")
                                         food[3][choiceediter].item_name=itemname;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3917,6 +4194,12 @@ function othercategory(){
                                         }
                                         food[3][choiceediter].item_code=code;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3932,6 +4215,12 @@ function othercategory(){
                                         var text=input.question("Enter a new description: ")
                                         food[3][choiceediter].item_description=text;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -3947,6 +4236,12 @@ function othercategory(){
                                         var cost=input.questionInt("Enter a new price: ")
                                         food[3][choiceediter].item_price=cost;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -4310,6 +4605,12 @@ function promotioncategory(){
                                         var itemname=input.question("Enter a new item name: ")
                                         food[4][choiceediter].item_name=itemname;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -4334,6 +4635,12 @@ function promotioncategory(){
                                         }
                                         food[4][choiceediter].item_code=code;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -4349,6 +4656,12 @@ function promotioncategory(){
                                         var text=input.question("Enter a new description: ")
                                         food[4][choiceediter].item_description=text;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -4364,6 +4677,12 @@ function promotioncategory(){
                                         var cost=input.questionInt("Enter a new price: ")
                                         food[4][choiceediter].item_price=cost;
                                         process.stdout.write('\033c')
+                                        console.log("  ____                             \n" +
+                                            " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                                            " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                                            "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                                            " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                                            "                                   ")
                                         console.log("*****************************************************\n")
                                         console.log("       The NiceMeal Restaurant Admin System        ");
                                         console.log("          Change is successful.Returning...")
@@ -4828,6 +5147,7 @@ function main_screen(){
             break;
         case 9:newd();return 0;
         async function newd(){
+            process.stdout.write('\033c')
             console.log(
                 " _____ _            _   _ _          __  __            _ \n" +
                 " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
@@ -4839,6 +5159,9 @@ function main_screen(){
                 " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
                 " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
                 " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+            console.log("*****************************************************")
+            console.log("System exiting ...")
+            console.log("*****************************************************")
             wait(3000);
             await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
             await fs.writeFile('order.dat',JSON.stringify(order))
