@@ -127,7 +127,18 @@ function about_program_page2(){
 
                 newd();return 0;
             async function newd(){
-
+                console.log(
+                    " _____ _            _   _ _          __  __            _ \n" +
+                    " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
+                    "   | | | '_ \\ / _ \\ |  \\| | |/ __/ _ | |\\/| |/ _ \\/ _` | |\n" +
+                    "   | | | | | |  __/ | |\\  | | (_|  __| |  | |  __| (_| | |\n" +
+                    "   |_| |_| |_|\\___| |_| \\_|_|\\___\\___|_|  |_|\\___|\\__,_|_|\n" +
+                    "  ____          _                              _          \n" +
+                    " |  _ \\ ___ ___| |_ __ _ _   _ _ __ __ _ _ __ | |_        \n" +
+                    " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
+                    " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
+                    " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+                wait(3000);
                 await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
                 await fs.writeFile('order.dat',JSON.stringify(order))
                 await fs.writeFile('admin.dat',JSON.stringify(admin))
@@ -218,7 +229,18 @@ function about_program(){
 
                 newd();return 0;
             async function newd(){
-
+                console.log(
+                    " _____ _            _   _ _          __  __            _ \n" +
+                    " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
+                    "   | | | '_ \\ / _ \\ |  \\| | |/ __/ _ | |\\/| |/ _ \\/ _` | |\n" +
+                    "   | | | | | |  __/ | |\\  | | (_|  __| |  | |  __| (_| | |\n" +
+                    "   |_| |_| |_|\\___| |_| \\_|_|\\___\\___|_|  |_|\\___|\\__,_|_|\n" +
+                    "  ____          _                              _          \n" +
+                    " |  _ \\ ___ ___| |_ __ _ _   _ _ __ __ _ _ __ | |_        \n" +
+                    " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
+                    " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
+                    " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+                wait(3000);
                 await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
                 await fs.writeFile('order.dat',JSON.stringify(order))
                 await fs.writeFile('admin.dat',JSON.stringify(admin))
@@ -391,7 +413,18 @@ function admin_control(){
 
                     newd();return 0;
                 async function newd(){
-
+                    console.log(
+                        " _____ _            _   _ _          __  __            _ \n" +
+                        " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
+                        "   | | | '_ \\ / _ \\ |  \\| | |/ __/ _ | |\\/| |/ _ \\/ _` | |\n" +
+                        "   | | | | | |  __/ | |\\  | | (_|  __| |  | |  __| (_| | |\n" +
+                        "   |_| |_| |_|\\___| |_| \\_|_|\\___\\___|_|  |_|\\___|\\__,_|_|\n" +
+                        "  ____          _                              _          \n" +
+                        " |  _ \\ ___ ___| |_ __ _ _   _ _ __ __ _ _ __ | |_        \n" +
+                        " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
+                        " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
+                        " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+                    wait(3000);
                     await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
                     await fs.writeFile('order.dat',JSON.stringify(order))
                     await fs.writeFile('admin.dat',JSON.stringify(admin))
@@ -1409,7 +1442,18 @@ membercheck();
         wait(2000);
         newde();return 0;
         async function newde(){
-
+            console.log(
+                " _____ _            _   _ _          __  __            _ \n" +
+                " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
+                "   | | | '_ \\ / _ \\ |  \\| | |/ __/ _ | |\\/| |/ _ \\/ _` | |\n" +
+                "   | | | | | |  __/ | |\\  | | (_|  __| |  | |  __| (_| | |\n" +
+                "   |_| |_| |_|\\___| |_| \\_|_|\\___\\___|_|  |_|\\___|\\__,_|_|\n" +
+                "  ____          _                              _          \n" +
+                " |  _ \\ ___ ___| |_ __ _ _   _ _ __ __ _ _ __ | |_        \n" +
+                " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
+                " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
+                " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+            wait(3000);
             await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
             await fs.writeFile('order.dat',JSON.stringify(order))
             await fs.writeFile('admin.dat',JSON.stringify(admin))
@@ -1686,7 +1730,18 @@ function order_screen(){
             case 7:logout_now();return 0;break;
             case 8:newd();return 0;
             async function newd(){
-
+                console.log(
+                    " _____ _            _   _ _          __  __            _ \n" +
+                    " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
+                    "   | | | '_ \\ / _ \\ |  \\| | |/ __/ _ | |\\/| |/ _ \\/ _` | |\n" +
+                    "   | | | | | |  __/ | |\\  | | (_|  __| |  | |  __| (_| | |\n" +
+                    "   |_| |_| |_|\\___| |_| \\_|_|\\___\\___|_|  |_|\\___|\\__,_|_|\n" +
+                    "  ____          _                              _          \n" +
+                    " |  _ \\ ___ ___| |_ __ _ _   _ _ __ __ _ _ __ | |_        \n" +
+                    " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
+                    " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
+                    " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+                wait(3000);
                 await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
                 await fs.writeFile('order.dat',JSON.stringify(order))
                 await fs.writeFile('admin.dat',JSON.stringify(admin))
@@ -4773,7 +4828,18 @@ function main_screen(){
             break;
         case 9:newd();return 0;
         async function newd(){
-
+            console.log(
+                " _____ _            _   _ _          __  __            _ \n" +
+                " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
+                "   | | | '_ \\ / _ \\ |  \\| | |/ __/ _ | |\\/| |/ _ \\/ _` | |\n" +
+                "   | | | | | |  __/ | |\\  | | (_|  __| |  | |  __| (_| | |\n" +
+                "   |_| |_| |_|\\___| |_| \\_|_|\\___\\___|_|  |_|\\___|\\__,_|_|\n" +
+                "  ____          _                              _          \n" +
+                " |  _ \\ ___ ___| |_ __ _ _   _ _ __ __ _ _ __ | |_        \n" +
+                " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
+                " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
+                " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
+            wait(3000);
             await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
             await fs.writeFile('order.dat',JSON.stringify(order))
             await fs.writeFile('admin.dat',JSON.stringify(admin))
