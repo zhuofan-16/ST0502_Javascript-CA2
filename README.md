@@ -27,11 +27,10 @@
 
 ## Requirement/Advice as of 26/7/2021
 * 1.Indentation for ordering
-* 2.File system
+* 2.<strike>File system</strike>
 * 3.Overall UI
-* 4.Moving functions into class
-* 5.Moving class into respective js files
-* 6.Email system
+* 4.<strike>Moving class into respective js files</strike>
+* 5.Email system
 
 
 ## Bug List
