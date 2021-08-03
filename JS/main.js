@@ -60,23 +60,10 @@ var Customer=require("./customer.js")
 
 var Admin=require("./admin.js")
 /*Default Admin*/
-admin[0]=new Admin("admin","admin","","",10001,"admin")
 var item=require("./item.js")
 var order_status=require("./order_status.js")
 var coupon=require("./coupon.js")
 var couponstore= new Array();
-couponstore[0]=new coupon("New User Welcome Gift",10001,"S",8)
-order[0][0]=new order_status(100001,"Delivered");
-order[1][0]=new order_status(100002,"Processing")
-food[0][0]=new item(" Fried Egg & Chicken Meat Noodle","N","n001",5.8,"Noodle with amazing XXX","F",0,true,true,false)
-food[0][1]=new item(" Tomato Lamian","N","n002",6.8,"Noodle with amazing XXX","F",0,true,true,false)
-food[0][2]=new item(" Curry Noodle","N","n003",8.4,"Noodle with amazing XXX","F",0,false,false,false)
-food[1][0]=new item(" Fried Rice with Prawn","R","r001",6.8,"Rice with amazing XXX","F",0,false,true,false)
-food[1][1]=new item(" Fried Mix Grain Rice in Hot Stone Pot","R","r002",8.4,"Rice with amazing XXX","F",0,false,true,false)
-food[1][2]=new item(" Fried Rice with White Bait, Fish Meat and Egg White","R","r003",8.4,"Rice with amazing XXX","F",0,false,true,false)
-food[2][0]=new item(" Pepsi","D","d001",1.4,"NA","F",0,false,false,true)
-food[2][1]=new item(" 7—UP","D","d002",1.4,"NA","F",0,false,false,true)
-food[4][0]=new item(" National Day Promotion: Fried Rice with Prawn 2x ,Curry Noodle 2x ,Pepsi 4x","S","sb001",20.00,"NA","L",20210810,true,true,true)
 
 
 function wait(ms) {
@@ -146,11 +133,11 @@ function about_program_page2(){
                 console.log("System exiting ...")
                 console.log("*****************************************************")
                 wait(3000);
-                await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
-                await fs.writeFile('order.dat',JSON.stringify(order))
-                await fs.writeFile('admin.dat',JSON.stringify(admin))
-                await fs.writeFile('food.dat',JSON.stringify(food))
-                await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+                await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('../.database/order.dat',JSON.stringify(order))
+                await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
+                await fs.writeFile('../.database/food.dat',JSON.stringify(food))
+                await fs.writeFile('../.database/coupon.dat',JSON.stringify(couponstore))
             }
                 break;
             default:
@@ -253,11 +240,11 @@ function about_program(){
                 console.log("System exiting ...")
                 console.log("*****************************************************")
                 wait(3000);
-                await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
-                await fs.writeFile('order.dat',JSON.stringify(order))
-                await fs.writeFile('admin.dat',JSON.stringify(admin))
-                await fs.writeFile('food.dat',JSON.stringify(food))
-                await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+                await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('../.database/order.dat',JSON.stringify(order))
+                await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
+                await fs.writeFile('../.database/food.dat',JSON.stringify(food))
+                await fs.writeFile('../.database/coupon.dat',JSON.stringify(couponstore))
             }
                 break;
             default:
@@ -439,11 +426,11 @@ function admin_control(){
                         " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
 
                     wait(3000);
-                    await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
-                    await fs.writeFile('order.dat',JSON.stringify(order))
-                    await fs.writeFile('admin.dat',JSON.stringify(admin))
-                    await fs.writeFile('food.dat',JSON.stringify(food))
-                    await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+                    await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+                    await fs.writeFile('../.database/order.dat',JSON.stringify(order))
+                    await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
+                    await fs.writeFile('../.database/food.dat',JSON.stringify(food))
+                    await fs.writeFile('../.database/coupon.dat',JSON.stringify(couponstore))
                 }
                     break;
                 default:
@@ -1566,11 +1553,11 @@ membercheck();
                 " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
                 " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
             wait(3000);
-            await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
-            await fs.writeFile('order.dat',JSON.stringify(order))
-            await fs.writeFile('admin.dat',JSON.stringify(admin))
-            await fs.writeFile('food.dat',JSON.stringify(food))
-            await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+            await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+            await fs.writeFile('../.database/order.dat',JSON.stringify(order))
+            await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
+            await fs.writeFile('../.database/food.dat',JSON.stringify(food))
+            await fs.writeFile('../.database/coupon.dat',JSON.stringify(couponstore))
             user_control()
         }
 
@@ -1902,11 +1889,11 @@ function order_screen(){
                 console.log("System exiting ...")
                 console.log("*****************************************************")
                 wait(3000);
-                await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
-                await fs.writeFile('order.dat',JSON.stringify(order))
-                await fs.writeFile('admin.dat',JSON.stringify(admin))
-                await fs.writeFile('food.dat',JSON.stringify(food))
-                await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+                await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('../.database/order.dat',JSON.stringify(order))
+                await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
+                await fs.writeFile('../.database/food.dat',JSON.stringify(food))
+                await fs.writeFile('../.database/coupon.dat',JSON.stringify(couponstore))
             }; break;
             default:console.log("Invalid Option");
             order_screen_choice();return 0;break;
@@ -5163,11 +5150,11 @@ function main_screen(){
             console.log("System exiting ...")
             console.log("*****************************************************")
             wait(3000);
-            await fs.writeFile('customerdetail.dat',JSON.stringify(customer))
-            await fs.writeFile('order.dat',JSON.stringify(order))
-            await fs.writeFile('admin.dat',JSON.stringify(admin))
-            await fs.writeFile('food.dat',JSON.stringify(food))
-            await fs.writeFile('coupon.dat',JSON.stringify(couponstore))
+            await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+            await fs.writeFile('../.database/order.dat',JSON.stringify(order))
+            await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
+            await fs.writeFile('../.database/food.dat',JSON.stringify(food))
+            await fs.writeFile('../.database/coupon.dat',JSON.stringify(couponstore))
         }
     }
 
@@ -5177,19 +5164,22 @@ function main_screen(){
 
 
 //Start of program
+//Load existing database before program start
 //Launch start up loading page and main menu screen
 var fs=require('fs').promises;
-read();return 0;
+
+read();
+return 0;
 async function read(){
-   var customerstorage= await fs.readFile('customerdetail.dat')
+   var customerstorage=await fs.readFile('../.database/customerdetail.dat')
     customer=JSON.parse(customerstorage)
-    var orderstorage= await fs.readFile('order.dat')
+    var orderstorage= await fs.readFile('../.database/order.dat')
     order=JSON.parse(orderstorage)
-    var adminstorage= await fs.readFile('admin.dat')
+    var adminstorage= await fs.readFile('../.database/admin.dat')
     admin=JSON.parse(adminstorage)
-    var foodstorage= await fs.readFile('food.dat')
+    var foodstorage= await fs.readFile('../.database/food.dat')
     food=JSON.parse(foodstorage)
-    var couponstorage= await fs.readFile('coupon.dat')
+    var couponstorage= await fs.readFile('../.database/coupon.dat')
     couponstore=JSON.parse(couponstorage)
     start_up()
     main_screen();
