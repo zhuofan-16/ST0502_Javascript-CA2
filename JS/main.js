@@ -4,65 +4,123 @@ Used for ST0502 Fundamental of Programming CA2 Assignment
 All commits can be found at https://github.com/zhuofan-16/ST0502_Javascript-CA2
 Shall you have any question about this program ,please email me at zhuofan@jiahan16.onmicrosoft.com(Preferred) or zhuofan.21@ichat.sp.edu.sg
  */
+//Import the required modules
 var input =require('readline-sync');
+var fs=require('fs').promises;
 const {questionInt} = require("readline-sync");
-var currentlogin=0;
+
+//Set expression regex for password and email
+/*
+Password :
+Atleast 8 Character
+Consist of number
+Consist of uppercase and lowercase
+Email:
+Check via general email format like @ and etc
+*/
 const passwordrequire=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
 const emailrequire=/^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/
-var search="NA"
-var time=new Date();
-var tempclass=0;
-var food=new Array();
-food[0]=new Array();
-food[1]=new Array();
-food[2]=new Array();
-food[3]=new Array();
-food[4]=new Array();
-var order=new Array();
-order[0]=new Array()
-order[1]=new Array()
-var customer=new Array();
-var admin=new Array();
-var i=0;
-var guest_cart=new Array();
-var temp_admin_login;
-var temp_admin_password;
-var adminlogin;
-var adminloginstatus;
-var adminloginc=false;
-var deletedcoupon;
-var tempadminstaff;
-var icetemp,drytemp,spicytemp;
-var tempmno=0;
-var customerloginstatus;
-var notfound_choice;
-choiceselectioncoupon=10;
-var temps=0
-var tempv=0;
-var mailOptions;
-var totalcost=0;
-var usecoupon=false;
-var thismenu=0;
-var foodcount=0;
-var a,b,c,d,e;
-var category_number=0;
-var seeitem;
-var temporder=false;
-var finalcall=false
-var finalorder=false
-var counterfind=0;
-var foundsearch=false;
-var tempclassguest;
-var guestlogin;
 
-
+//Import classes needed
 var Customer=require("./customer.js")
-
 var Admin=require("./admin.js")
-/*Default Admin*/
 var item=require("./item.js")
 var order_status=require("./order_status.js")
 var coupon=require("./coupon.js")
+
+//Define variable
+
+//Variable to save current login user's array number
+var currentlogin=0;
+//Variable to save user-entered search keyword for fuzzy search function
+var search="NA"
+//Variable defined to show time later
+var time=new Date();
+//Variable used to save the last item added to cart so to add quantity and other information
+var tempclass=0;
+// Define food array to store food category
+var food=new Array();
+//Create a array in array to store different food item
+//Noodle
+food[0]=new Array();
+//Rice
+food[1]=new Array();
+//Drink
+food[2]=new Array();
+//Other
+food[3]=new Array();
+//Promotion
+food[4]=new Array();
+
+//Create array to store active food order and expired food order
+var order=new Array();
+//Active food order
+order[0]=new Array()
+//Expire food order(Delivered)
+order[1]=new Array()
+//Create array to store customers
+var customer=new Array();
+//Create array to store admins
+var admin=new Array();
+//i variable
+var i=0;
+//Create variable for guest cart
+var guest_cart=new Array();
+//Variable to save user input for admin username and password.This will be used to compare against the Admin array to see matching
+var temp_admin_login;
+var temp_admin_password;
+//Variable to save current login admin's array number
+var adminlogin;
+//Variable to ensure that a admin username have been entered before to prevent unauthorised operation
+var adminloginstatus;
+//Admin login status --Login or not--Default false
+var adminloginc=false;
+//Variable to save user input for coupon to be deleted
+var deletedcoupon;
+//Variable to save user input for new admin registration--StaffID
+var tempadminstaff;
+//Save user input for dish customisation like to have more ice and etc
+var icetemp,drytemp,spicytemp;
+//Variable used to calculate customer member no.
+var tempmno=0;
+//Customer login status -True or false
+var customerloginstatus;
+//User choice input when input user does not exist
+var notfound_choice;
+//Variable to keep selected coupon
+var choiceselectioncoupon=10;
+//Variables to save matched category and item array number in fuzzy search
+var temps=0
+var tempv=0;
+
+//Total cost of cart
+var totalcost=0;
+//Boolean to determind whether to reduce total cost ,if usecoupon==false ,there will be no reduce
+var usecoupon=false;
+//Variable to enable switching of coupon ,avoid bug of subtracting coupon multiple times
+var thismenu=0;
+//Used to list all food items in the view all function
+var foodcount=0;
+//Variable used to ungroup and select item in the view all item function
+var a,b,c,d,e;
+//Variable to show item's selected groups from view all
+var category_number=0;
+//User selection from list of all items
+var seeitem;
+//Generate order number
+var temporder=false;
+//Find matching result from order array to determind order
+var finalcall=false
+var finalorder=false
+//Use as index no for view all
+var counterfind=0;
+//Determind whether there is search result ,if false ,output no avaliable item --Fuzzy search function
+var foundsearch=false;
+//Variable used to save the last item added to cart so to add quantity and other information
+var tempclassguest;
+//Variable to use to determind whether user is guest login
+var guestlogin;
+//Create array to store coupon
 var couponstore= new Array();
 
 
@@ -1961,13 +2019,45 @@ function view_cart(){
        totalcost=((customer[currentlogin].cart[v][0].item_quantity)*customer[currentlogin].cart[v][0].item_price)+totalcost
         console.log("------")
         if (customer[currentlogin].cart[v][0].item_spicy===true){
-            console.log(customer[currentlogin].cart[v][0].item_spicy_level)
+           switch (customer[currentlogin].cart[v][0].item_spicy_level){
+               case 1:
+                   console.log("No Spicy")
+                   break;
+               case 2:console.log("Little Spicy")
+                   break
+               case 3:
+                   console.log("Very Spicy")
+                   break;
+               default:
+                   console.log("Original");break;
+           }
+
         }
         if (customer[currentlogin].cart[v][0].item_dry===true){
-            console.log(customer[currentlogin].cart[v][0].item_dry_level)
+            switch (customer[currentlogin].cart[v][0].item_dry_level){
+                case 1:
+                    console.log("Dry")
+                    break;
+                case 2:console.log("Soup")
+                    break
+                default:
+                    console.log("Original");break;
+            }
+
         }
         if (customer[currentlogin].cart[v][0].item_ice===true){
-            console.log(customer[currentlogin].cart[v][0].item_ice_level)
+            switch (customer[currentlogin].cart[v][0].item_ice_level){
+                case 1:
+                    console.log("No Ice")
+                    break;
+                case 2:console.log("Little Ice")
+                    break
+                case 3:
+                    console.log("Alot of Ice")
+                    break;
+                default:
+                    console.log("Original");break;
+            }
         }
         console.log("------")
     }
@@ -1977,8 +2067,11 @@ function view_cart(){
     }
     if (usecoupon!==false&&thismenu===1){
 
-
+if ((totalcost-customer[currentlogin].coupon[choiceselectioncoupon].coupon_price)>=0){
         console.log("          Total Cost: $"+(totalcost-customer[currentlogin].coupon[choiceselectioncoupon].coupon_price).toFixed(2))
+    }else if((totalcost-customer[currentlogin].coupon[choiceselectioncoupon].coupon_price)<0){
+    console.log("          Total Cost: $ 0.00")
+}
     }
 if (usecoupon===false){
     console.log("          Total Cost: $"+totalcost.toFixed(2))}
@@ -2029,7 +2122,12 @@ if (usecoupon===false){
                             console.log("*****************************************************\n");
                             wait(6000);
                             if (usecoupon===true){
+
+                                totalcost=totalcost-customer[currentlogin].coupon[choiceselectioncoupon].coupon_price;
                                 customer[currentlogin].coupon.splice(choiceselectioncoupon,1)
+                                if (totalcost<0){
+                                    totalcost=0
+                                }
                             }
 
                             templength=order[1].length
@@ -5166,7 +5264,7 @@ function main_screen(){
 //Start of program
 //Load existing database before program start
 //Launch start up loading page and main menu screen
-var fs=require('fs').promises;
+
 
 read();
 return 0;
