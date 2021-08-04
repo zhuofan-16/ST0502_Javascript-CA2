@@ -123,17 +123,19 @@ var guestlogin;
 //Create array to store coupon
 var couponstore= new Array();
 
-
+//Function to create time delay
 function wait(ms) {
     var d = new Date();
     var d2 = null;
     do { d2 = new Date(); }
     while(d2-d < ms);
 }
+//Function to show current time
 function times(){
 
     console.log("               "+time.toLocaleString("en-sg")+"\n");
 }
+//Function to show starting(Loading) screen
 function start_up(){
     process.stdout.write('\033c')
    console.log(
@@ -153,6 +155,7 @@ function start_up(){
     wait(3000);
 
 }
+//Function to show second page information for about program page
 function about_program_page2(){
     process.stdout.write('\033c')
     console.log("*****************************************************")
@@ -206,6 +209,7 @@ function about_program_page2(){
     }
     about_useroption2()
 }
+//Function to view promotion items and descriptions
 function new_promotion(){
         process.stdout.write('\033c')
         console.log("*****************************************************\n");
@@ -256,6 +260,7 @@ function new_promotion(){
     itemoverviewchoice();return 0;
 
 }
+//Function to show first page information for about program page
 function about_program(){
 
     process.stdout.write('\033c')
@@ -313,6 +318,7 @@ function about_program(){
     }
     about_useroption()
 }
+//Function to login as guest --Fill in information
 function guest_login(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -380,6 +386,7 @@ function guest_login(){
     guest_confirmation_prompt();return 0;
 
 }
+//Functions for admin login --verify and etc
 function admin_login() {
     process.stdout.write('\033c')
     console.log("*****************************************************\n");
@@ -425,6 +432,7 @@ function admin_login() {
 
 
 }
+//Main menu for admin after admin login
 function admin_control(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -497,6 +505,7 @@ function admin_control(){
             }
     }
 }
+//Secondary menu of admin control -->Coupon management : Coupon store || Delete coupon from user
 function coupon_control(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -517,6 +526,7 @@ coupon_management_choice();return 0;
         }
     }
 }
+//Menu to carry out operation like add ,delete,edit and distribute coupon to user
 function coupon_store(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -549,6 +559,7 @@ function coupon_store(){
         }
     }
 }
+//Functions to edit coupon --price
 function editcoupon(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -601,6 +612,7 @@ function editcoupon(){
     }
 
 }
+//Function to remove coupon from coupon store
 function removecoupon(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -654,6 +666,7 @@ function removecoupon(){
     }
     }
 }
+//Function to distribute coupon to user
 function distributecoupon(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -716,6 +729,7 @@ function distributecoupon(){
         }
     }
 }
+//Add a new coupon to coupon store
 function addcoupon(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -753,6 +767,7 @@ function addcoupon(){
     console.log("*****************************************************\n")
     coupon_control();return 0;
 }
+//Removal of coupon from the coupon store
 function coupon_remove(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -831,6 +846,7 @@ function coupon_remove(){
 
 
 }
+//Menu to add ,edit remove dishes
 function menu_control(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -864,6 +880,7 @@ function menu_control(){
         }
     }
 }
+//Function to add a new dish
 function adddish(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1059,6 +1076,7 @@ function adddish(){
 
 }
 var dishname1;
+//Function to delete a admin (Excluding the default admin )
 function deleteadmin(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1110,6 +1128,7 @@ function deleteadmin(){
         }
     }
 }
+//Function to edit details like contact no. of a certain admin
 function changeparticular_admin(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1137,6 +1156,7 @@ function changeparticular_admin(){
         }
     }
 }
+//Add a new admin
 function addnewadmin(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1216,6 +1236,7 @@ function addnewadmin(){
     }
 
 }
+//Function to select a user and reset its password
 function user_password_reset(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1290,6 +1311,7 @@ function user_password_reset(){
         }
     }
 }
+//Function to edit,delete and add new user
 function user_control(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1478,6 +1500,7 @@ function user_control(){
         }
     }
 }
+//Function for user to self register as member
 function customer_register(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1640,6 +1663,7 @@ membercheck();
     main_screen();return 0;
 
 }
+//Function used to determind whether user is a male or female then return Mr/Mrs
 function determind_call(l){
     if (customer[l].sex==="M"){
         return "Mr"
@@ -1648,6 +1672,7 @@ function determind_call(l){
         return "Mrs"
     }
 }
+//Function for customer to login
 function customer_login(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -1752,6 +1777,7 @@ function customer_login(){
 
 verify_password()
 }
+//Menu function for user to edit its own particular after login
 function change_particular(){
     if (guestlogin===true){
 
@@ -1894,6 +1920,7 @@ function change_particular(){
 
     }
 }
+//Main menu after user and guest login
 function order_screen(){
     totalcost=0;
     usecoupon=false;
@@ -1959,6 +1986,7 @@ function order_screen(){
         }
     }
 }
+//Menu after selecting order now: choice to select food by fuzzy search ,view all and by category
 function order_menu(){
     process.stdout.write('\033c')
     counterfind=0;
@@ -1988,6 +2016,7 @@ function order_menu(){
         }
     }
 }
+//View current cart for member
 function view_cart(){
     if (guestlogin===true){
         view_cart_guest();return 0;
@@ -2196,6 +2225,7 @@ if (usecoupon===false){
         }
     }
 }
+//View current cart for guest
 function view_cart_guest(){
     totalcost=0;
     if (guest_cart.length<1){
@@ -2332,6 +2362,7 @@ function view_cart_guest(){
         }
     }
 }
+//View order history --Only for member
 function order_history(){
     if (guestlogin===true){
         process.stdout.write('\033c')
@@ -2392,6 +2423,7 @@ function order_history(){
     }
     }
 }
+//For member to view current available coupon they have
 function coupon_view(){
     if (guestlogin===true){
 
@@ -2428,6 +2460,7 @@ function coupon_view(){
         }
     }
 }
+//For customer and guest to logout
 function logout_now(){
     process.stdout.write('\033c')
     console.log(
@@ -2450,6 +2483,7 @@ function logout_now(){
     currentlogin=0;
     main_screen();return 0;
 }
+//Function to identity current time and return corresponding greetings like good morning
 function time_identify(){
     if (time.getHours()<12){
         return "Good Morning!"
@@ -2464,6 +2498,7 @@ function time_identify(){
         return "Good Night!"
     }
 }
+//Function to view all food items
 function view_all(){
     foodcount=0;
     process.stdout.write('\033c')
@@ -2670,6 +2705,7 @@ function view_all(){
         }
     }
 }}
+//Function to see a items description from view all items function
 function viewitemdescription(){
     category_number=0;
     foodcountcheck()
@@ -2718,6 +2754,7 @@ function viewitemdescription(){
     }
 
 }
+//Menu for item to select which category item they want to see like rice category or noodle category and etc
 function category_item(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -2765,6 +2802,7 @@ function category_item(){
         }
     }
 }
+//Rice category items
 function ricecategory(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -3142,6 +3180,7 @@ switch (choiceedit){
     }
 
 }
+//View rice category items description
 function viewricedescription(){
     retryrice();return 0;
     function retryrice() {
@@ -3177,6 +3216,7 @@ function viewricedescription(){
 
     }
 }
+//Noodle category items
 function noodlecategory(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -3547,6 +3587,7 @@ function noodlecategory(){
         }
     }
 }
+//View noodle category items description
 function viewnoodledescription(){
     retrynoodle();return 0;
     function retrynoodle() {
@@ -3583,6 +3624,7 @@ function viewnoodledescription(){
     }
 
 }
+//Drink category items
 function drinkcategory(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -3955,6 +3997,7 @@ function drinkcategory(){
 
 
 }
+//View drink category items description
 function viewdrinkdescription(){
     retrydrink();return 0;
     function retrydrink() {
@@ -3990,6 +4033,7 @@ function viewdrinkdescription(){
 
     }
 }
+//Other category items
 function othercategory(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -4360,6 +4404,7 @@ function othercategory(){
         }
     }
 }
+//View other category items description
 function viewotherdescription(){
     retryother();return 0;
     function retryother() {
@@ -4395,6 +4440,7 @@ function viewotherdescription(){
 
     }
 }
+//View promotion category items description
 function viewpromotiondescription(){
     retryother();return 0;
     function retryother() {
@@ -4430,6 +4476,7 @@ function viewpromotiondescription(){
 
     }
 }
+//Promotion category items
 function promotioncategory(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -4801,6 +4848,7 @@ function promotioncategory(){
         }
     }
 }
+//Track an order when user not logon
 function trackorderguest(){
      temporder=false;
     finalcall=false
@@ -4913,6 +4961,7 @@ order_screen();return 0;
     }
 
 }
+//Function to perform fuzzy search
 function search_item(){
 counterfind=0;
     foundsearch=false;
@@ -5134,6 +5183,7 @@ counterfind=0;
 
     }
 }
+//Menu to enquire user how they want to look for a item ,by search ,by category or view all at once
 function food_menu(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -5162,6 +5212,7 @@ function food_menu(){
         }
     }
 }
+//Function to show helpdesk contact
 function help(){
     process.stdout.write('\033c')
     console.log("*****************************************************\n")
@@ -5178,6 +5229,7 @@ function help(){
         default:console.log("Invalid Option");callback();return 0;break;
     }}
 }
+//Function to show main menu after loading screen
 function main_screen(){
 
     guestlogin=false;
@@ -5264,8 +5316,6 @@ function main_screen(){
 //Start of program
 //Load existing database before program start
 //Launch start up loading page and main menu screen
-
-
 read();
 return 0;
 async function read(){
