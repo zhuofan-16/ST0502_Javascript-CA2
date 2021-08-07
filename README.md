@@ -30,7 +30,7 @@
 * 2.<strike>File system</strike>
 * 3.<strike>Overall UI</strike>
 * 4.<strike>Moving class into respective js files</strike>
-* 5.Email system
+* 5.<strike>Email system</strike>
 
 
 ## Bug List
