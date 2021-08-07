@@ -27,6 +27,7 @@ var Admin=require("./admin.js")
 var item=require("./item.js")
 var order_status=require("./order_status.js")
 var coupon=require("./coupon.js")
+const nodemailer = require("nodemailer");
 
 //Define variable
 
@@ -195,6 +196,7 @@ function about_program_page2(){
                 console.log("*****************************************************")
                 wait(3000);
                 await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('../.database/i.txt',i.toString())
                 await fs.writeFile('../.database/order.dat',JSON.stringify(order))
                 await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
                 await fs.writeFile('../.database/food.dat',JSON.stringify(food))
@@ -304,6 +306,7 @@ function about_program(){
                 console.log("*****************************************************")
                 wait(3000);
                 await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('../.database/i.txt',i.toString())
                 await fs.writeFile('../.database/order.dat',JSON.stringify(order))
                 await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
                 await fs.writeFile('../.database/food.dat',JSON.stringify(food))
@@ -418,6 +421,7 @@ function admin_login() {
     }
     if (temp_admin_password===admin[adminlogin].password){
         adminloginc=true;
+        adminnotice();
         admin_control();return 0;
 
     }else {
@@ -431,6 +435,36 @@ function admin_login() {
 
 
 
+}
+function adminnotice() {var nodemailer = require('nodemailer');
+
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: '4582h@dunearn.edu.sg',
+            pass: 'XXXXX',
+
+        }
+    });
+    mailOptions = {
+        from: '4582h@dunearn.edu.sg',
+        to: 'chzuofan@gmail.com',
+        subject: 'Login attempt detected',
+        html: '<h1>User Login</h1><br> <h3>We have detected a login to the admin system</h3><br><p>Best Regards<br> The Nicemeal Restaurant System</p>',
+
+
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            return 0;
+        } else {
+            console.log('Email sent: ' + info.response);
+            return 0;
+        }
+    });
+    return 0;
 }
 //Main menu for admin after admin login
 function admin_control(){
@@ -493,6 +527,7 @@ function admin_control(){
 
                     wait(3000);
                     await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+                    await fs.writeFile('../.database/i.txt',i.toString())
                     await fs.writeFile('../.database/order.dat',JSON.stringify(order))
                     await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
                     await fs.writeFile('../.database/food.dat',JSON.stringify(food))
@@ -1615,32 +1650,37 @@ membercheck();
     console.log("       Processing your registration,please wait...     \n");
     console.log("*****************************************************\n")
     wait(2000);
+
     if (adminloginc===true){
         console.log("Success.Returning...")
         customer[i].coupon[0]=new coupon("New User Welcome Gift",10001,"S",8)
+
+        function mail_register() {var nodemailer = require('nodemailer');
+
+            var transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: '4582h@dunearn.edu.sg',
+                    pass: 'XXXX',
+
+                }
+            });
+            mailregister = {
+                from: '4582h@dunearn.edu.sg',
+                to: customer[i].email,
+                subject: 'Your registration is successfully',
+                html: '<h1>Thanks for trusting us !:)</h1><br><p>A SGD $8.00 coupon have been credited into your account.We hope that you enjoyed our service</p><br> <h3>Thanks for choosing us!</h3><br><p>Best Regards<br>The NiceMeal Restaurant</p>',
+
+
+            };
+
+            transporter.sendMail(mailregister)
+            return 0;
+        }
+        mail_register();
         i++;
         wait(2000);
-        newde();return 0;
-        async function newde(){
-            console.log(
-                " _____ _            _   _ _          __  __            _ \n" +
-                " |_   _| |__   ___  | \\ | (_) ___ ___|  \\/  | ___  __ _| |\n" +
-                "   | | | '_ \\ / _ \\ |  \\| | |/ __/ _ | |\\/| |/ _ \\/ _` | |\n" +
-                "   | | | | | |  __/ | |\\  | | (_|  __| |  | |  __| (_| | |\n" +
-                "   |_| |_| |_|\\___| |_| \\_|_|\\___\\___|_|  |_|\\___|\\__,_|_|\n" +
-                "  ____          _                              _          \n" +
-                " |  _ \\ ___ ___| |_ __ _ _   _ _ __ __ _ _ __ | |_        \n" +
-                " | |_) / _ / __| __/ _` | | | | '__/ _` | '_ \\| __|       \n" +
-                " |  _ |  __\\__ | || (_| | |_| | | | (_| | | | | |_        \n" +
-                " |_| \\_\\___|___/\\__\\__,_|\\__,_|_|  \\__,_|_| |_|\\__|   ")
-            wait(3000);
-            await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
-            await fs.writeFile('../.database/order.dat',JSON.stringify(order))
-            await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
-            await fs.writeFile('../.database/food.dat',JSON.stringify(food))
-            await fs.writeFile('../.database/coupon.dat',JSON.stringify(couponstore))
-            user_control()
-        }
+        return 0;
 
     }
     process.stdout.write('\033c')
@@ -1659,6 +1699,29 @@ membercheck();
     console.log("*****************************************************\n");
     wait(2000);
     customer[i].coupon[0]=new coupon("New User Welcome Gift",10001,"S",8)
+    function mail_register1() {var nodemailer = require('nodemailer');
+
+        var transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: '4582h@dunearn.edu.sg',
+                pass: 'XXXXX',
+
+            }
+        });
+        mailregister = {
+            from: '4582h@dunearn.edu.sg',
+            to: customer[i].email,
+            subject: 'Your registration is successfully',
+            html: '<h1>Thanks for trusting us !:)</h1><br><p>A SGD $8.00 coupon have been credited into your account.We hope that you enjoyed our service</p><br> <h3>Thanks for choosing us!</h3><br><p>Best Regards<br>The NiceMeal Restaurant</p>',
+
+
+        };
+
+        transporter.sendMail(mailregister)
+        return 0;
+    }
+    mail_register1();
     i++;
     main_screen();return 0;
 
@@ -1975,6 +2038,7 @@ function order_screen(){
                 console.log("*****************************************************")
                 wait(3000);
                 await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+                await fs.writeFile('../.database/i.txt',i.toString())
                 await fs.writeFile('../.database/order.dat',JSON.stringify(order))
                 await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
                 await fs.writeFile('../.database/food.dat',JSON.stringify(food))
@@ -2177,7 +2241,7 @@ if (usecoupon===false){
                             console.log("         The NiceMeal Restaurant Order System  \n      ");
                             console.log("                Payment is successful")
                             console.log("             Your order number is "+temporderno)
-                            console.log("        A email receipt have been sent to you!")
+                            console.log("        You can view your order at the order history")
                             console.log("*****************************************************\n");
 
                             wait(4000)
@@ -2387,22 +2451,72 @@ function order_history(){
     console.log("                 Order History:\n")
     if (customer[currentlogin].order_record.length>0) {
         for (var q = 0; q < customer[currentlogin].order_record.length; q++) {
-            console.log("        " + q + ". " + customer[currentlogin].order_record[q][0].number + "==>" + customer[currentlogin].order_record[q][0].status+"==>"+"$ "+customer[currentlogin].order_record[q][0].cost.toFixed(2));
+            fs.appendFile('temp.txt', 'Order History:')
+            fs.appendFile('temp.txt', "        " + q + ". " + customer[currentlogin].order_record[q][0].number + "==>" + customer[currentlogin].order_record[q][0].status+"==>"+"$ "+customer[currentlogin].order_record[q][0].cost.toFixed(2))
+            fs.appendFile('temp.txt',"\n===========================================\n")
+                console.log("        " + q + ". " + customer[currentlogin].order_record[q][0].number + "==>" + customer[currentlogin].order_record[q][0].status+"==>"+"$ "+customer[currentlogin].order_record[q][0].cost.toFixed(2));
             console.log("===========================================")
             for (var g = 0; g < customer[currentlogin].order_record[q][0].item.length; g++) {
-                console.log("    "+customer[currentlogin].order_record[q][0].item[g][0].item_name)
+                fs.appendFile('temp.txt',"\n    "+customer[currentlogin].order_record[q][0].item[g][0].item_name+"\n")
+                console.log("    "+customer[currentlogin].order_record[q][0].item[g][0].item_name+"\n")
             }
+            fs.appendFile('temp.txt',"\n===========================================\n")
             console.log("===========================================")
         }
         console.log("\n")
-        console.log("[1] Send a email receipt for a order [2] Go back")
+        console.log("[1] Send a email receipt for all order [2] Go back")
         console.log("*****************************************************\n");
         tempc();return 0;
         function tempc(){
             var tempchoice1=input.questionInt("Choice: ");
             switch (tempchoice1){
                 case 1:
-                    console.log("Sending in progress..");break;
+                    console.log("Sending in progress..");
+                    console.log("You will receive your receipt after you exit the program");
+
+                function mail_history() {var nodemailer = require('nodemailer');
+
+                    var transporter = nodemailer.createTransport({
+                        service: 'Gmail',
+                        auth: {
+                            user: '4582h@dunearn.edu.sg',
+                            pass: 'XXXXX',
+
+                        }
+                    });
+                    mailorder = {
+                        from: '4582h@dunearn.edu.sg',
+                        to: customer[currentlogin].email,
+                        subject: 'Your order receipt from The NiceMeal Restaurant',
+                        html: '<h1>Your order history is attached below!</h1><br><h3>We true thank you for choosing us!</h3><br><p>Best Regards<br> The NiceMeal Restaurant</p>',
+                        attachments:[{
+                            filename:'order_history.txt',
+                            path:'./temp.txt'
+                        }]
+
+
+                    }
+
+                    transporter.sendMail(mailorder, function (error, info) {
+                        if (error) {
+                            console.log(error);
+                            fs.unlink('./temp.txt')
+                            return 0;
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                            fs.unlink('./temp.txt')
+                            return 0;
+                        }
+                    });
+                    wait(3000)
+                    return 0;
+                }
+                    mail_history();
+                    wait(3000)
+                    order_screen()
+                    return 0;
+
+                    break;
                 case 2: order_screen();return 0;break;
                 default: console.log("Invalid option");
                     tempc();return 0;break;
@@ -5300,7 +5414,9 @@ function main_screen(){
             console.log("System exiting ...")
             console.log("*****************************************************")
             wait(3000);
+
             await fs.writeFile('../.database/customerdetail.dat',JSON.stringify(customer))
+            await fs.writeFile('../.database/i.txt',i.toString())
             await fs.writeFile('../.database/order.dat',JSON.stringify(order))
             await fs.writeFile('../.database/admin.dat',JSON.stringify(admin))
             await fs.writeFile('../.database/food.dat',JSON.stringify(food))
@@ -5319,8 +5435,11 @@ function main_screen(){
 read();
 return 0;
 async function read(){
+
    var customerstorage=await fs.readFile('../.database/customerdetail.dat')
     customer=JSON.parse(customerstorage)
+    i=await fs.readFile('../.database/i.txt')
+    i=parseInt(i)
     var orderstorage= await fs.readFile('../.database/order.dat')
     order=JSON.parse(orderstorage)
     var adminstorage= await fs.readFile('../.database/admin.dat')
