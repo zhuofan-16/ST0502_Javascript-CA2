@@ -26,7 +26,7 @@
 
 
 ## Requirement/Advice as of 26/7/2021
-* 1.Indentation for ordering
+* 1.<strike>Indentation for ordering</strike>
 * 2.<strike>File system</strike>
 * 3.<strike>Overall UI</strike>
 * 4.<strike>Moving class into respective js files</strike>
