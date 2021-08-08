@@ -697,7 +697,7 @@ function removecoupon(){
             break;
         case 2: coupon_control();return 0;
         break;
-        default:console.log("Invalid Option");removecoupon_choice();return 0;
+        default:console.log("                Invalid Option");removecoupon_choice();return 0;
     }
     }
 }
@@ -910,7 +910,7 @@ function menu_control(){
                 admin_control();return 0;
                 break
             default:
-                console.log("Invalid Option")
+                console.log("        Invalid Option")
                 menuchoice();return 0;
         }
     }
@@ -1177,9 +1177,23 @@ function changeparticular_admin(){
     function verifymatch() {
         if (temppassword === admin[adminlogin].password) {
             var newpassadmin = input.question("        Enter your new password: ");
-            var confirm = input.question("        Confirm your new password");
+            var confirm = input.question("        Confirm your new password: ");
             if (newpassadmin === confirm) {
                 admin[adminlogin].password = confirm;
+                process.stdout.write('\033c')
+                console.log("  ____                             \n" +
+                    " / ___| _   _  ___ ___ ___ ___ ___ \n" +
+                    " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
+                    "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
+                    " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
+                    "                                   ")
+                console.log("*****************************************************\n")
+                console.log("      The NiceMeal Restaurant Admin System        ");
+                console.log("        Change successfully..Returning..")
+                console.log("*****************************************************\n")
+                wait(3000);
+                admin_control();
+                return 0;
             } else {
                 console.log("        2 Password does not match")
                 verifymatch();return 0;
@@ -1741,7 +1755,7 @@ function customer_login(){
     console.log("        *****************************************************\n")
     console.log("                 The NiceMeal Restaurant Login System        ");
     console.log("                        Quality you can taste.               ");
-    console.log("               "+times())
+    console.log("                       "+times())
     console.log("                      [1] Back to previous menu")
     console.log("        *****************************************************\n");
    var temploginid= input.questionInt("        Please enter your contact number or membership No.: ");
@@ -1797,7 +1811,7 @@ function customer_login(){
     console.log("        *****************************************************\n")
     console.log("                 The NiceMeal Restaurant Login System        ");
     console.log("                        Quality you can taste.               ");
-    console.log("               "+times())
+    console.log("                       "+times())
     console.log("                       "+time_identify()+" " +determind_call(currentlogin)+" " +customer[currentlogin].lastname)
     console.log("        *****************************************************\n");
     var temploginpassword;
@@ -1877,13 +1891,16 @@ function change_particular(){
                 var choicephone=input.questionInt("        New phone number: ");
                 customer[currentlogin].contact=choicephone;
                 process.stdout.write('\033c')
+
                 console.log("  ____                             \n" +
                     " / ___| _   _  ___ ___ ___ ___ ___ \n" +
                     " \\___ \\| | | |/ __/ __/ _ / __/ __|\n" +
                     "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
                     " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
                     "                                   ")
+                console.log("*****************************************************\n")
                 console.log("Change is successful,going back ...");
+                console.log("*****************************************************\n")
                 wait(3000);
                 order_screen()
                 return 0;
@@ -1898,7 +1915,9 @@ function change_particular(){
                     "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
                     " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
                     "                                   ")
+                console.log("*****************************************************\n")
                 console.log("Change is successful,going back ...");
+                console.log("*****************************************************\n")
                 wait(3000);
                 order_screen();return 0;
 
@@ -1934,7 +1953,9 @@ function change_particular(){
                             "  ___) | |_| | (_| (_|  __\\__ \\__ \\\n" +
                             " |____/ \\__,_|\\___\\___\\___|___|___/\n" +
                             "                                   ")
+                        console.log("*****************************************************\n")
                         console.log("Change is successful");
+                        console.log("*****************************************************\n")
                         wait(3000);
                         order_screen()
                     } else {
@@ -2005,15 +2026,15 @@ function order_screen(){
     if (guestlogin===false){
     console.log("                "+time_identify()+" "+determind_call(currentlogin)+" " +customer[currentlogin].lastname);
     if (customer[currentlogin].coupon.length>0){
-    console.log("   Currently you have "+customer[currentlogin].coupon.length+ " coupon that can be used" );
+    console.log("     Currently you have "+customer[currentlogin].coupon.length+ " coupon that can be used" );
     }
     }
     else {
     console.log("                 "+time_identify()+" " +"Guest "+guest_lastname)
-    console.log("    Do consider to be our member for exclusive deals")
+    console.log("     Do consider to be our member for exclusive deals")
 
     }
-    console.log("       What would you like to order today :)\n")
+    console.log("         What would you like to order today :)\n")
     console.log("           [1] Start order  [2] View Cart")
     console.log("           [3] Order History  [4] Track an order")
     console.log("           [5] View Coupon  [6] Change of account detail")
@@ -2602,7 +2623,7 @@ function coupon_view(){
     process.stdout.write('\033c')
     console.log("        *****************************************************\n")
     console.log("                 The NiceMeal Restaurant Order System        ");
-    console.log("             You currently have "+customer[currentlogin].coupon.length+" coupon")
+    console.log("                     You currently have "+customer[currentlogin].coupon.length+" coupon")
     for (var h=0;h<customer[currentlogin].coupon.length;h++){
     console.log("                 "+h+". "+customer[currentlogin].coupon[h].coupon_name+" ==>"+"$ "+customer[currentlogin].coupon[h].coupon_price.toFixed(2))
     }
@@ -2848,16 +2869,16 @@ function view_all(){
 
 
         if (guestlogin===false&&userlogin===false){
-    console.log("        [1] View an item's description [2]Back to previous screen ");
-    console.log("        *****************************************************\n")
+    console.log("                [1] View an item's description [2]Back to previous screen ");
+    console.log("                *****************************************************\n")
     itemchoiceview();return 0;
     function itemchoiceview() {
-        var itemchoicedes = input.questionInt("        Choice: ")
+        var itemchoicedes = input.questionInt("                Choice: ")
         switch (itemchoicedes) {
             case 1:viewitemdescription();return 0;break;
             case 2:food_menu();return 0;break;
             default:
-                console.log("        Invalid Option");
+                console.log("                Invalid Option");
                 wait(3000)
                 itemchoiceview()
         }
@@ -2960,7 +2981,11 @@ function category_item(){
         }
     }
 }
-//Rice category items
+/* Rice category items.This function also consist of sub functions to produce different options for
+ User,guest and non user/guest/admin and admin
+User and guest will be able to view description and add to cart but non user/guest/admin can only view description
+Admin will have a extra option to edit and remove item
+*/
 function ricecategory(){
     process.stdout.write('\033c')
     console.log("                        *****************************************************\n")
@@ -3241,7 +3266,7 @@ switch (choiceedit){
                     break;
                 case 2:   process.stdout.write('\033c')
                     console.log("                        *****************************************************\n")
-                    console.log("                        Current Price: "+food[1][choiceediter].item_code+"\n")
+                    console.log("                        Current Code: "+food[1][choiceediter].item_code+"\n")
                     console.log("                        *****************************************************\n")
                     var code=input.questionInt("                        Enter a new code: ")
                     for (var b=0;b<food.length;b++){
@@ -3293,7 +3318,7 @@ switch (choiceedit){
                 case 4:
                     process.stdout.write('\033c')
                     console.log("                        *****************************************************\n")
-                    console.log("                        Current Price: "+food[1][choiceediter].item_price+"\n")
+                    console.log("                        Current Price: "+food[1][choiceediter].item_price.toFixed(2)+"\n")
                     console.log("                        *****************************************************\n")
                     var cost=input.questionInt("                        Enter a new price: ")
                     food[1][choiceediter].item_price=cost;
@@ -3374,7 +3399,11 @@ function viewricedescription(){
 
     }
 }
-//Noodle category items
+/*Noodle category items.This function also consist of sub functions to produce different options for
+ User,guest and non user/guest/admin and admin
+User and guest will be able to view description and add to cart but non user/guest/admin can only view description
+Admin will have a extra option to edit and remove item
+*/
 function noodlecategory(){
     process.stdout.write('\033c')
     console.log("                        *****************************************************\n")
@@ -3386,8 +3415,8 @@ function noodlecategory(){
     }
     console.log("\n")
     if (userlogin===true || guestlogin===true){
-        console.log("                        [1] View an item's description [2] Add to cart [3]Return back ");
-        console.log("                        *****************************************************\n")
+    console.log("                        [1] View an item's description [2] Add to cart [3]Return back ");
+    console.log("                        *****************************************************\n")
         addcartrc();return 0;
         function addcartrc(){
 
@@ -3650,7 +3679,7 @@ function noodlecategory(){
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("                        *****************************************************\n")
-                                        console.log("                        Current Price: "+food[0][choiceediter].item_code+"\n")
+                                        console.log("                        Current Code: "+food[0][choiceediter].item_code+"\n")
                                         console.log("                        *****************************************************\n")
                                         var code=input.questionInt("Enter a new code: ")
                                         for (var b=0;b<food.length;b++){
@@ -3702,7 +3731,7 @@ function noodlecategory(){
                                     case 4:
                                         process.stdout.write('\033c')
                                         console.log("                        *****************************************************\n")
-                                        console.log("                        Current Price: "+food[0][choiceediter].item_price+"\n")
+                                        console.log("                        Current Price: "+food[0][choiceediter].item_price.toFixed(2)+"\n")
                                         console.log("                        *****************************************************\n")
                                         var cost=input.questionInt("                        Enter a new price: ")
                                         food[0][choiceediter].item_price=cost;
@@ -3783,7 +3812,11 @@ function viewnoodledescription(){
     }
 
 }
-//Drink category items
+/*Drink category items.This function also consist of sub functions to produce different options for
+ User,guest and non user/guest/admin and admin
+User and guest will be able to view description and add to cart but non user/guest/admin can only view description
+Admin will have a extra option to edit and remove item
+*/
 function drinkcategory(){
     process.stdout.write('\033c')
     console.log("                        *****************************************************\n")
@@ -4014,7 +4047,7 @@ function drinkcategory(){
                     var choiceedit = input.questionInt("                        Choice: ")
                     switch (choiceedit){
                         case 1:
-                            var choiceediter=input.questionInt("Which one do you want to edit: ")
+                            var choiceediter=input.questionInt("                        Which one do you want to edit: ")
                             if (choiceediter < 0 || choiceediter >=food[2].length) {
                                 console.log("                        Invalid Option");
                                 wait(3000)
@@ -4057,7 +4090,7 @@ function drinkcategory(){
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("                        *****************************************************\n")
-                                        console.log("                        Current Price: "+food[2][choiceediter].item_code+"\n")
+                                        console.log("                        Current Code: "+food[2][choiceediter].item_code+"\n")
                                         console.log("                        *****************************************************\n")
                                         var code=input.questionInt("                        Enter a new code: ")
                                         for (var b=0;b<food.length;b++){
@@ -4109,7 +4142,7 @@ function drinkcategory(){
                                     case 4:
                                         process.stdout.write('\033c')
                                         console.log("                        *****************************************************\n")
-                                        console.log("                        Current Price: "+food[2][choiceediter].item_price+"\n")
+                                        console.log("                        Current Price: "+food[2][choiceediter].item_price.toFixed(2)+"\n")
                                         console.log("                        *****************************************************\n")
                                         var cost=input.questionInt("                        Enter a new price: ")
                                         food[2][choiceediter].item_price=cost;
@@ -4192,7 +4225,13 @@ function viewdrinkdescription(){
 
     }
 }
-//Other category items
+
+/*Other category items .This function also consist of sub functions to produce different options for
+User,guest and non user/guest/admin and admin
+User and guest will be able to view description and add to cart but non user/guest/admin can only view description
+Admin will have a extra option to edit and remove item
+
+*/
 function othercategory(){
     process.stdout.write('\033c')
     console.log("                        *****************************************************\n")
@@ -4467,7 +4506,7 @@ function othercategory(){
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("                        *****************************************************\n")
-                                        console.log("                        Current Price: "+food[3][choiceediter].item_code+"\n")
+                                        console.log("                        Current Code: "+food[3][choiceediter].item_code+"\n")
                                         console.log("                        *****************************************************\n")
                                         var code=input.questionInt("                        Enter a new code: ")
                                         for (var b=0;b<food.length;b++){
@@ -4519,7 +4558,7 @@ function othercategory(){
                                     case 4:
                                         process.stdout.write('\033c')
                                         console.log("                        *****************************************************\n")
-                                        console.log("                        Current Price: "+food[3][choiceediter].item_price+"\n")
+                                        console.log("                        Current Price: "+food[3][choiceediter].item_price.toFixed(2)+"\n")
                                         console.log("                        *****************************************************\n")
                                         var cost=input.questionInt("                        Enter a new price: ")
                                         food[3][choiceediter].item_price=cost;
@@ -4635,7 +4674,11 @@ function viewpromotiondescription(){
 
     }
 }
-//Promotion category items
+/*Promotion category items.This function also consist of sub functions to produce different options for
+ User,guest and non user/guest/admin and admin
+User and guest will be able to view description and add to cart but non user/guest/admin can only view description
+Admin will have a extra option to edit and remove item
+*/
 function promotioncategory(){
     process.stdout.write('\033c')
     console.log("                        *****************************************************\n")
@@ -4911,7 +4954,7 @@ function promotioncategory(){
                                         break;
                                     case 2:   process.stdout.write('\033c')
                                         console.log("                        *****************************************************\n")
-                                        console.log("                        Current Price: "+food[4][choiceediter].item_code+"\n")
+                                        console.log("                        Current Code: "+food[4][choiceediter].item_code+"\n")
                                         console.log("                        *****************************************************\n")
                                         var code=input.questionInt("                        Enter a new code: ")
                                         for (var b=0;b<food.length;b++){
@@ -4963,7 +5006,7 @@ function promotioncategory(){
                                     case 4:
                                         process.stdout.write('\033c')
                                         console.log("                        *****************************************************\n")
-                                        console.log("                        Current Price: "+food[4][choiceediter].item_price+"\n")
+                                        console.log("                        Current Price: "+food[4][choiceediter].item_price.toFixed(2)+"\n")
                                         console.log("                        *****************************************************\n")
                                         var cost=input.questionInt("                        Enter a new price: ")
                                         food[4][choiceediter].item_price=cost;
@@ -5120,7 +5163,11 @@ order_screen();return 0;
     }
 
 }
-//Function to perform fuzzy search
+/*Function to perform fuzzy search.This function also consist of sub functions to produce different options for
+User,guest and non user/guest
+User and guest will be having the option to add to cart while non user/guest only can view description of items
+
+ */
 function search_item(){
 counterfind=0;
     foundsearch=false;
@@ -5140,6 +5187,7 @@ counterfind=0;
             if (food[s][v].item_name.indexOf(search)>0){
                 foundsearch=true;
                 counterfind++
+                process.stdout.write("                        ")
                 console.log("                        "+counterfind-1+". " +food[s][v].item_code+". "+food[s][v].item_name+"==>"+"$"+food[s][v].item_price.toFixed(2))
             }
         }
