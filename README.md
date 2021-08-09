@@ -3,6 +3,7 @@
 * Used for ST0502 Fundamental of Programming CA2 Assignment
 * All commits can be found at https://github.com/zhuofan-16/ST0502_Javascript-CA2
 * Shall you have any question about this program ,please email me at zhuofan@jiahan16.onmicrosoft.com (Preferred) or zhuofan.21@ichat.sp.edu.sg
+* Any act of plagiarism will not be tolerated
 
 
 ## Technical Specification/To be acheieved
